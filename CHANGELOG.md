@@ -56,3 +56,8 @@
   - Data normalization and cleaning
   - Priority standardization
   - Error handling and user feedback
+
+## [0.4.1] - Model Update
+### Changed
+- Updated OpenAI model from gpt-4 to gpt-4-0613 for more consistent and structured analysis
+- Maintained existing system prompt and temperature settings
