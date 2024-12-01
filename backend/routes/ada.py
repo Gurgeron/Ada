@@ -4,6 +4,7 @@ from os import getenv
 from database import get_db
 from models.wizard import ProductContext
 from models.data import FeatureRequestData
+import json
 
 ada_bp = Blueprint('ada', __name__)
 
@@ -18,9 +19,8 @@ You always keep the Product Manager's goals and personas in mind, referencing th
 For example, if a PM is focused on improving 'collaboration for small teams,' ensure your insights align with that goal. 
 When data is unclear or trends are weak, acknowledge this openly and suggest steps the PM can take to improve their analysis. 
 You prioritize being supportive, insightful, and solution-oriented.
-Your tone should be warm and not robotic. Don't be enthusiastic, just be professional and helpful.
-You are more of a skilled colleague than an assistant.
-Try to avoid exclation points. Try to be concise and to the point.
+Your tone should be warm and not robotic. Don't be enthusiastic or over thrilled. Be casual and easy going and helpful. 
+Try to avoid exclamation points. Try to be concise and to the point.
 More than all you role is to find the pain points of the customer by deeply understanding the feature requests. 
 """
 
@@ -56,6 +56,25 @@ def chat():
             'personas': context.user_personas
         }
 
+        # Format feature data as a readable string
+        try:
+            if isinstance(feature_data.processed_data, str):
+                processed_data = json.loads(feature_data.processed_data)
+            else:
+                processed_data = feature_data.processed_data
+
+            feature_data_str = "Feature Requests:\n"
+            for idx, item in enumerate(processed_data, 1):
+                feature_data_str += f"\n{idx}. {item.get('Feature Title', 'Untitled')}:\n"
+                feature_data_str += f"   Description: {item.get('Description', 'No description')}\n"
+                feature_data_str += f"   Priority: {item.get('Priority', 'Not set')}\n"
+                feature_data_str += f"   Status: {item.get('Status', 'Not set')}\n"
+                feature_data_str += f"   Type: {item.get('Type', 'Not set')}\n"
+                
+        except Exception as e:
+            print(f"Error formatting feature data: {str(e)}")
+            feature_data_str = str(feature_data.processed_data)
+
         # Create the conversation with context
         conversation = [
             {"role": "system", "content": SYSTEM_PROMPT},
@@ -63,10 +82,9 @@ def chat():
                 Product Context:
                 Product: {context_info['product_name']}
                 Goals: {context_info['goals']}
-                Personas: {', '.join(context_info['personas'])}
+                Personas: {', '.join(context_info['personas']) if isinstance(context_info['personas'], list) else context_info['personas']}
                 
-                Feature Request Data:
-                {feature_data.processed_data}
+                {feature_data_str}
                 
                 User Query: {query}
             """}
@@ -74,6 +92,7 @@ def chat():
 
         # Call OpenAI API
         try:
+            print("Sending request to OpenAI...")
             response = client.chat.completions.create(
                 model="gpt-4-0613",
                 messages=conversation,
@@ -81,14 +100,24 @@ def chat():
                 max_tokens=500
             )
             
-            answer = response.choices[0].message.content
-            return jsonify({
-                'response': answer,
-                'context': context_info
-            })
+            # Extract the message content safely
+            if hasattr(response, 'choices') and len(response.choices) > 0:
+                answer = response.choices[0].message.content
+                return jsonify({
+                    'response': answer,
+                    'context': context_info
+                })
+            else:
+                print("Invalid OpenAI response structure:", response)
+                return jsonify({
+                    'error': 'Invalid response from OpenAI',
+                    'details': 'Response structure was not as expected'
+                }), 500
 
         except Exception as e:
             print(f"OpenAI API Error: {str(e)}")
+            import traceback
+            traceback.print_exc()
             return jsonify({
                 'error': 'Unable to process request with OpenAI',
                 'details': str(e)
@@ -96,4 +125,21 @@ def chat():
 
     except Exception as e:
         print(f"General Error: {str(e)}")
-        return jsonify({'error': str(e)}), 500 
+        import traceback
+        traceback.print_exc()
+        return jsonify({'error': str(e)}), 500
+
+# Add error handling middleware
+@ada_bp.errorhandler(500)
+def handle_500_error(e):
+    return jsonify({
+        'error': 'Internal server error',
+        'details': str(e)
+    }), 500
+
+@ada_bp.errorhandler(Exception)
+def handle_exception(e):
+    return jsonify({
+        'error': 'Unexpected error',
+        'details': str(e)
+    }), 500 
