@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -17,17 +18,44 @@ const LandingPage = () => {
          Ada
         </h1>
         <p className="text-[#B3B3B3] text-xl mb-12">
-        Understand what’s holding your customers back with Customer Pain Contemplator—your tool for decoding feature requests.   
+            AI that GET your user  
         </p>
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => navigate('/wizard')}
-          className="bg-[#2B2B2B] text-white px-8 py-4 rounded-lg text-lg font-semibold 
-                   hover:bg-[#D4D4D4] hover:text-[#2B2B2B] transition-all duration-300"
+        <Link
+          to="/wizard"
+          className="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-[#2B2B2B] hover:bg-[#404040] rounded-lg transition-colors duration-200 shadow-sm"
         >
           Start Analysis
-        </motion.button>
+          <svg
+            className="w-4 h-4 ml-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </Link>
+        <div className="mt-12 flex justify-center">
+          <svg
+            className="w-16 h-16 text-[#2B2B2B] opacity-20"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+              d="M8 13v-1m4 1v-3m4 3V8M12 21l9-9-9-9-9 9 9 9z"
+            />
+          </svg>
+        </div>
       </motion.div>
     </div>
   );
