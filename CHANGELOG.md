@@ -1,17 +1,21 @@
 # Changelog
 
 ## [Latest]
-- Fixed pagination variables and functions in FeatureTable
-- Added proper destructuring of useTable hook values
-- Ensured all pagination controls work correctly
-- Maintained fixed header and footer functionality
+- Added tabbed interface for Analysis and Dashboard views:
+  - Created AnalysisContainer component with tab navigation
+  - Separated table and dashboard into different tabs
+  - Maintained chat interface across both views
+  - Added URL-based tab state management
+  - Used consistent styling with main color palette
 
 ## [Previous]
-- Added fixed header and footer to feature table
-- Made table body scrollable while keeping header and controls visible
-- Improved table layout with proper height calculation
-- Added subtle shadows to indicate fixed positions
-- Enhanced table responsiveness with flex layout
+- Added new Insights Dashboard feature:
+  - Created main Dashboard component with responsive layout
+  - Added InsightCard component for displaying metrics
+  - Integrated Chart.js for data visualization
+  - Implemented various card types (list, percentage, distribution, score)
+  - Added loading and error states
+  - Used consistent color palette and styling
 
 ## [1.3.1] - 2024-01-12
 
@@ -92,3 +96,32 @@
 - Added explicit key props to all mapped elements in the table
 - Updated data accessors to match the API response structure
 - Maintained color-coding for Priority levels
+
+## [Unreleased]
+
+### Added
+- Implemented insights API endpoint (`/api/insights/fetch-insights/<context_id>`)
+- Created analysis utility functions for generating insights from feature requests
+- Added Dashboard component with interactive charts and summary cards
+- Integrated Chart.js for data visualization
+- Added error handling and loading states for insights data
+
+### Fixed
+- Fixed 404 errors for insights API endpoint
+- Improved data loading in Dashboard component
+- Added proper error handling for missing or invalid data
+- Fixed boolean attribute warning by creating a CustomFileUploader component to properly handle error states
+- Improved file upload error handling with better prop management
+- Enhanced component structure for better maintainability
+- Resolved styled-components warning by implementing proper transient props ($hasError) for FileUploader styling
+- Improved component architecture with styled-components for better prop handling
+- Eliminated DOM warnings related to boolean attributes
+- Fixed insights endpoint 404 error by implementing proper data storage in feature_request_items table
+- Enhanced file upload to store data in both FeatureRequestData and FeatureRequest tables
+- Improved insights generation with detailed metrics and analysis
+- Added proper error handling and logging for insights endpoint
+
+### Changed
+- Updated app.py to register insights blueprint
+- Enhanced dashboard UI with responsive grid layout
+- Improved chart styling and interactivity
