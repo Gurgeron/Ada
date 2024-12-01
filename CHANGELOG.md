@@ -1,63 +1,74 @@
 # Changelog
 
-## [0.1.0] - Initial Project Setup
+## [1.3.0] - 2024-01-12
+
+### Fixed
+- Fixed data mapping issues where fields were misaligned after row 15
+- Fixed field name inconsistencies between API response and CSV structure
+- Fixed React key warnings in FeatureTable component
+
+### Enhanced
+- Added robust field mapping system with support for:
+  - CamelCase and snake_case field names
+  - Case-insensitive matching
+  - Fallback field resolution
+- Improved data validation and transformation:
+  - Proper empty field initialization
+  - Consistent column ordering
+  - Automatic Request ID generation
+- Added detailed logging for debugging:
+  - Raw API response data
+  - Field transformation details
+  - Problematic row information
+
+## [1.2.0] - 2024-01-12
+
 ### Added
-- Initial project structure and file organization
-- Basic configuration files:
-  - README.md with project overview and setup instructions
-  - .gitignore for version control
-  - backend/requirements.txt with Python dependencies
-  - frontend/package.json with React dependencies
-  - backend/app.py with Flask application setup
-- Project documentation setup
+- Added support for inconsistent data formats in CSV
+- Added Status column with color-coded badges
+- Added Type column
+- Added data normalization layer
 
-## [0.2.0] - Form Implementation - Latest
+### Enhanced
+- Improved data handling with fallback values
+- Added conditional rendering for optional fields
+- Updated badge colors for better visual hierarchy:
+  - Status: Blue (Open), Yellow (In Progress), Green (Completed), Purple (Planned)
+  - Type: Gray
+  - Priority: Red (High), Yellow (Medium), Green (Low)
+  - Product: Blue
+  - Request Channel: Purple
+
+### Fixed
+- Fixed missing descriptions after line 15
+- Fixed data mapping for inconsistent CSV formats
+- Added null checks for optional fields
+
+## [1.1.0] - 2024-01-12
+
 ### Added
-- Backend:
-  - Database configuration with SQLAlchemy
-  - Basic models for storing form data
-  - API routes for form submission and file upload
-- Frontend:
-  - Simple form with product details
-  - File upload with drag-and-drop
-  - Basic validation
-  - Success/error messaging
+- Added pagination to FeatureTable with configurable page sizes (10, 20, 30, 40, 50 rows)
+- Added new columns: Product and Request Channel
+- Added tooltips for truncated description text
+
+### Enhanced
+- Improved column styling with distinct colors for different fields
+- Added truncation for long description texts
+- Added hover state for table rows
+
+### Fixed
+- Fixed React key prop warnings in FeatureTable component
+- Updated column accessors to match API data structure
+- Improved table rendering for feature requests data
+
+## [1.0.0] - 2024-01-12
+
 ### Changed
-- Simplified UI to focus on core functionality
-- Removed multi-step wizard in favor of single form
-- Streamlined file upload process
+- Modified FeatureTable columns to show Feature Title, Description, and Priority
+- Updated styling for better readability
+- Simplified Description cell rendering
 
-## [0.3.0] - Form Simplification
-### Changed
-- Simplified WizardForm to a single-page form
-- Removed multi-step wizard in favor of simpler UX
-- Removed user personas step
-- Added success message after form submission
-- Improved file upload validation
-- Removed Analysis page and simplified routing
-
-### Removed
-- Analysis component and related routes
-- Multi-step form navigation
-- Google Sheets support (focusing on CSV and Excel)
-
-## [0.4.0] - File Processing Implementation
-### Added
-- Backend:
-  - FeatureRequestData model for storing processed data
-  - FileProcessor service for file validation and processing
-  - Data API routes for file operations:
-    - POST /api/data/validate - File validation
-    - POST /api/data/upload - File processing and storage
-    - GET /api/data/data/:context_id - Retrieve processed data
-- Features:
-  - File format validation (CSV, Excel)
-  - Required headers validation
-  - Data normalization and cleaning
-  - Priority standardization
-  - Error handling and user feedback
-
-## [0.4.1] - Model Update
-### Changed
-- Updated OpenAI model from gpt-4 to gpt-4-0613 for more consistent and structured analysis
-- Maintained existing system prompt and temperature settings
+### Technical Details
+- Added explicit key props to all mapped elements in the table
+- Updated data accessors to match the API response structure
+- Maintained color-coding for Priority levels
