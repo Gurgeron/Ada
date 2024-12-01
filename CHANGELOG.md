@@ -113,6 +113,13 @@
 - Implemented Google Sheets-like sticky header functionality
 - Added vertical scroll with fixed header while maintaining horizontal scroll behavior
 - Improved table header visibility with subtle background and border styling
+- Fixed table row borders to extend fully across all columns
+- Improved table cell alignment and spacing
+- Fixed table row borders by implementing proper border-collapse and full-width table
+- Improved table layout with consistent column widths and borders
+- Enhanced table cell spacing and alignment
+- Fixed Implementation Complexity column width to properly display header text
+- Added minimum width of 200px for Implementation Complexity column
 
 ### Fixed
 - Fixed 404 errors for insights API endpoint

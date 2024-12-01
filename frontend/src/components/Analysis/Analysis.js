@@ -167,6 +167,10 @@ const Analysis = () => {
             ...(header === 'Status' && {
               width: 120,
               minWidth: 120
+            }),
+            ...(header === 'Implementation Complexity' && {
+              width: 200,
+              minWidth: 200
             })
           }));
           
