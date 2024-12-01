@@ -1,15 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3002';
 
-export default function AdaChat({ contextId }) {
-  const [messages, setMessages] = useState([
-    {
-      type: 'assistant',
-      content: 'Hi! I\'m Ada, your feature request analysis assistant. How can I help you today?'
-    }
-  ]);
+const AdaChat = ({ contextId }) => {
+  const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
@@ -24,11 +19,11 @@ export default function AdaChat({ contextId }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!input.trim() || isLoading) return;
+    if (!input.trim()) return;
 
     const userMessage = input.trim();
     setInput('');
-    setMessages(prev => [...prev, { type: 'user', content: userMessage }]);
+    setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
     setIsLoading(true);
 
     try {
@@ -37,14 +32,12 @@ export default function AdaChat({ contextId }) {
         context_id: contextId
       });
 
-      setMessages(prev => [...prev, { 
-        type: 'assistant', 
-        content: response.data.response 
-      }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: response.data.response }]);
     } catch (error) {
-      setMessages(prev => [...prev, { 
-        type: 'error', 
-        content: error.response?.data?.error || 'Sorry, I encountered an error. Please try again.' 
+      console.error('Chat error:', error);
+      setMessages(prev => [...prev, {
+        role: 'error',
+        content: 'Sorry, I encountered an error processing your request.'
       }]);
     } finally {
       setIsLoading(false);
@@ -52,67 +45,73 @@ export default function AdaChat({ contextId }) {
   };
 
   return (
-    <div className="flex flex-col h-[600px] bg-white rounded-lg shadow-sm">
+    <div className="flex flex-col h-[calc(100vh-2rem)] max-h-[800px] bg-white rounded-lg shadow-lg mx-4 my-2">
       {/* Header */}
-      <div className="px-4 py-3 border-b border-gray-200">
-        <h2 className="text-lg font-medium text-[#4c9085]">Ada</h2>
-        <p className="text-sm text-gray-500">Your Feature Request Analysis Assistant</p>
+      <div className="flex items-center p-4 border-b">
+        <div>
+          <h2 className="text-xl font-semibold text-[#4c9085]">Ada</h2>
+          <p className="text-sm text-gray-500">Your Feature Request Analysis Assistant</p>
+        </div>
       </div>
 
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      {/* Messages Container */}
+      <div className="flex-1 overflow-y-auto px-6 py-4 space-y-6">
         {messages.map((message, index) => (
           <div
             key={index}
-            className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
+            className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div
-              className={`max-w-[80%] rounded-lg px-4 py-2 ${
-                message.type === 'user'
-                  ? 'bg-[#4c9085] text-white'
-                  : message.type === 'error'
-                  ? 'bg-red-50 text-red-600'
-                  : 'bg-gray-100 text-gray-800'
+              className={`max-w-3xl ${
+                message.role === 'user'
+                  ? 'text-[#4c9085] font-medium'
+                  : message.role === 'error'
+                  ? 'text-red-500'
+                  : 'text-gray-700'
               }`}
             >
-              <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+              <div className="whitespace-pre-wrap">{message.content}</div>
             </div>
           </div>
         ))}
         {isLoading && (
           <div className="flex justify-start">
-            <div className="bg-gray-100 rounded-lg px-4 py-2">
-              <div className="flex space-x-2">
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }} />
-              </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-[#4c9085] rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+              <div className="w-2 h-2 bg-[#4c9085] rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+              <div className="w-2 h-2 bg-[#4c9085] rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
             </div>
           </div>
         )}
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input */}
-      <form onSubmit={handleSubmit} className="p-4 border-t border-gray-200">
-        <div className="flex space-x-4">
+      {/* Input Form */}
+      <div className="border-t p-4">
+        <form onSubmit={handleSubmit} className="flex space-x-4">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask me about your feature requests..."
-            className="flex-1 rounded-md border-gray-300 shadow-sm focus:border-[#4c9085] focus:ring-[#4c9085] text-sm"
+            className="flex-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4c9085]"
             disabled={isLoading}
           />
           <button
             type="submit"
-            disabled={!input.trim() || isLoading}
-            className="px-4 py-2 bg-[#4c9085] text-white rounded-md text-sm font-medium hover:bg-[#3d7269] disabled:opacity-50"
+            disabled={isLoading || !input.trim()}
+            className={`px-6 py-3 rounded-lg font-medium ${
+              isLoading || !input.trim()
+                ? 'bg-gray-100 text-gray-400'
+                : 'bg-[#4c9085] text-white hover:bg-[#3d7269]'
+            } transition-colors`}
           >
             Send
           </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
-} 
+};
+
+export default AdaChat; 

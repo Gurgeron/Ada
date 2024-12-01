@@ -1,5 +1,25 @@
 # Changelog
 
+## [Latest]
+- Fixed pagination variables and functions in FeatureTable
+- Added proper destructuring of useTable hook values
+- Ensured all pagination controls work correctly
+- Maintained fixed header and footer functionality
+
+## [Previous]
+- Added fixed header and footer to feature table
+- Made table body scrollable while keeping header and controls visible
+- Improved table layout with proper height calculation
+- Added subtle shadows to indicate fixed positions
+- Enhanced table responsiveness with flex layout
+
+## [1.3.1] - 2024-01-12
+
+### Added
+- Added line numbers column to feature table for easier reference
+- Line numbers are zero-padded and monospaced for better readability
+- Line numbers persist across pagination and sorting
+
 ## [1.3.0] - 2024-01-12
 
 ### Fixed

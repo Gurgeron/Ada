@@ -1,98 +1,101 @@
-Request ID,Requested By,Request Channel,Request Date,Product,Feature Title,Type,Description,Priority,Status
-REQ-001,Product Manager,Customer Interview,2024-03-01,Peem,AI-Powered Priority Scoring,Feature,"Add automatic priority scoring for feature requests based on factors like frequency of mentions, customer segment, and alignment with product goals",High,Open
-REQ-002,UX Designer,Internal Team,2024-03-02,Peem,Custom Dashboard Layouts,UX,"Allow users to customize their dashboard layout by dragging and dropping insight cards, and saving multiple layout presets",Medium,Open
-REQ-003,Enterprise Customer,Email,2024-03-02,Peem,Jira Integration,Integration,"Add ability to sync feature requests with Jira tickets, including bi-directional status updates and comment syncing",High,In Progress
-REQ-004,Support Team,Slack,2024-03-03,Peem,Bulk Import from Zendesk,Integration,"Enable importing feature requests directly from Zendesk tickets, with automatic tagging based on ticket fields",Medium,Open
-REQ-005,Product Manager,Customer Interview,2024-03-03,Peem,Advanced Filtering Options,Feature,"Add more filtering options in the dashboard, including custom fields, date ranges, and customer segments",Medium,Open
-REQ-006,Customer Success,Email,2024-03-04,Peem,Export to PowerPoint,Feature,"Add ability to export dashboard insights and feature clusters directly to PowerPoint presentations for stakeholder meetings",Low,Open
-REQ-007,Enterprise Customer,Support Ticket,2024-03-04,Peem,Team Collaboration,Feature,"Add commenting and @mentions on feature requests and insight cards for better team collaboration",High,Open
-REQ-008,Product Manager,Internal Team,2024-03-05,Peem,Trend Analysis,Analytics,"Add trend analysis to show how feature request patterns change over time, including seasonal trends",Medium,Planned
-REQ-009,UX Designer,Customer Interview,2024-03-05,Peem,Dark Mode Support,UX,"Add dark mode theme option for better visibility and reduced eye strain during long analysis sessions",Low,Open
-REQ-010,Support Team,Slack,2024-03-06,Peem,Customer Feedback Portal,Feature,"Create a customer-facing portal where users can submit and vote on feature requests directly",High,Planned
-REQ-011,Product Manager,Internal Team,2024-03-06,Peem,Custom Fields Support,Feature,"Allow adding custom fields to feature requests to capture product-specific metadata",Medium,Open
-REQ-012,Enterprise Customer,Email,2024-03-07,Peem,Salesforce Integration,Integration,"Integrate with Salesforce to pull in customer context and opportunity data for better prioritization",High,Open
-REQ-013,Customer Success,Customer Interview,2024-03-07,Peem,Automated Insights,AI,"Use AI to automatically generate insights about emerging themes and potential priority features",Medium,Planned
-REQ-014,UX Designer,Internal Team,2024-03-08,Peem,Accessibility Improvements,UX,"Improve accessibility features including keyboard navigation, screen reader support, and high contrast mode",High,Open
-REQ-015,Product Manager,Customer Interview,2024-03-08,Peem,Multiple Product Support,Feature,"Add ability to manage and analyze feature requests across multiple products or product lines",Medium,Open
-"Add dark mode support","Users want the ability to switch between light and dark themes for better visibility in different lighting conditions","Sarah Chen",High,Open,UI/UX
-"Implement night theme","Request for a dark color scheme to reduce eye strain during nighttime usage","Mike Johnson",Medium,Planned,UI/UX
-"Export data to Excel","Add functionality to export all data and reports to Excel format","David Smith",High,In Progress,Feature
-"Export to CSV option","Need ability to download data in CSV format for external analysis","Rachel Wong",Medium,Open,Feature
-"Single sign-on integration","Implement SSO with Google and Microsoft accounts for easier login","Tom Wilson",High,Planned,Security
-"Add social login options","Enable login with Facebook and LinkedIn accounts","Emily Davis",Medium,Open,Security
-"Real-time collaboration","Allow multiple users to work on the same document simultaneously","Alex Turner",High,In Progress,Collaboration
-"Shared workspace feature","Enable team members to work together in a shared environment","James Miller",High,Open,Collaboration
-"Mobile app for iOS","Develop native iOS app for better mobile experience","Lisa Park",High,Planned,Mobile
-"Android application","Create Android version of the platform","Chris Martinez",High,Open,Mobile
-"Keyboard shortcuts","Add keyboard shortcuts for common actions to improve productivity","Nina Patel",Low,Open,UI/UX
-"Custom hotkeys","Allow users to customize keyboard shortcuts for different actions","Bob Anderson",Low,Planned,UI/UX
-"Password reset flow","Improve the password recovery process with better user guidance","Sophie Wilson",Medium,Completed,Security
-"Forgot password enhancement","Make password reset process more user-friendly with email verification","Kevin Chang",Medium,Open,Security
-"API documentation","Create comprehensive API documentation with examples","Mark Thompson",High,In Progress,Developer
-"API reference guide","Provide detailed documentation for all API endpoints with usage examples","Diana Lee",High,Open,Developer
-"Performance optimization","Improve overall system performance and reduce loading times","Ryan Cooper",High,In Progress,Technical
-"Speed improvements","Optimize application to reduce page load times and improve responsiveness","Jennifer Kim",High,Open,Technical
-"Bulk import tool","Add functionality to import multiple records at once","Sam Brown",Medium,Planned,Feature
-"Mass data import","Create tool for importing large datasets efficiently","Maria Garcia",Medium,Open,Feature
-"Custom dashboard widgets","Allow users to create and customize their own dashboard widgets","Peter Wright",Medium,In Progress,UI/UX
-"Personalized dashboards","Enable users to customize their dashboard layout and components","Amanda Taylor",Medium,Open,UI/UX
-"Two-factor authentication","Implement 2FA for additional security","John Doe",High,Completed,Security
-"Multi-factor auth","Add additional security layers with authenticator app support","Emma White",High,Open,Security
-"Automated reports","Schedule automated report generation and delivery","Michael Scott",Medium,Planned,Feature
-"Report scheduling","Allow users to schedule periodic report generation","Pam Beesly",Medium,Open,Feature
-"Integration with Slack","Add Slack integration for notifications and updates","Jim Halpert",Low,In Progress,Integration
-"Slack notifications","Send important alerts and updates to Slack channels","Dwight Schrute",Low,Open,Integration
-"User activity logs","Track and display user activity history","Oscar Martinez",Medium,Completed,Admin
-"Activity tracking","Monitor and log all user actions in the system","Angela Martin",Medium,Open,Admin
-"Role-based permissions","Implement granular role-based access control","Stanley Hudson",High,In Progress,Security
-"Custom user roles","Allow creation of custom roles with specific permissions","Phyllis Vance",High,Open,Security
-"Data backup system","Implement automated daily backups of all data","Creed Bratton",High,Completed,Technical
-"Automated backups","Create system for regular data backups and recovery","Kelly Kapoor",High,Open,Technical
-"Search functionality","Improve search with filters and advanced options","Andy Bernard",High,In Progress,Feature
-"Enhanced search","Add advanced search capabilities with multiple filters","Erin Hannon",High,Open,Feature
-"Email notifications","Send email alerts for important events and updates","Toby Flenderson",Medium,Planned,Communication
-"Notification system","Implement comprehensive notification system with email support","Meredith Palmer",Medium,Open,Communication
-"Print to PDF","Add option to export reports as PDF files","Kevin Malone",Low,In Progress,Feature
-"PDF export","Enable PDF generation for all reports and documents","Ryan Howard",Low,Open,Feature
-"Custom themes","Allow users to customize application colors and themes","Jan Levinson",Low,Planned,UI/UX
-"Theme customization","Provide options to personalize the application appearance","Holly Flax",Low,Open,UI/UX
-"Offline mode support","Enable app functionality without internet connection","Walter White",High,Planned,Feature
-"Offline access","Allow users to work offline and sync when online","Jesse Pinkman",High,Open,Feature
-"Data visualization","Add interactive charts and graphs for data analysis","Skyler White",Medium,In Progress,Analytics
-"Analytics dashboard","Create visual representations of key metrics and trends","Hank Schrader",Medium,Open,Analytics
-"Multi-language support","Add support for multiple languages and localization","Gus Fring",High,Planned,Localization
-"Language localization","Enable users to switch between different languages","Saul Goodman",High,Open,Localization
-"File attachment support","Allow users to attach files to records","Mike Ehrmantraut",Medium,In Progress,Feature
-"Document upload","Enable document uploading and management","Huell Babineaux",Medium,Open,Feature
-"Calendar integration","Add calendar sync with Google and Outlook","Ted Beneke",Low,Planned,Integration
-"Calendar sync","Implement calendar functionality with external services","Lydia Rodarte-Quayle",Low,Open,Integration
-"Audit trail","Keep detailed logs of all system changes","Steven Gomez",High,In Progress,Admin
-"Change history","Track and display history of all modifications","Tuco Salamanca",High,Open,Admin
-"Password complexity rules","Implement strong password requirements","Jane Margolis",Medium,Completed,Security
-"Password policies","Add configurable password strength requirements","Skinny Pete",Medium,Open,Security
-"Mobile responsiveness","Improve website layout on mobile devices","Badger Mayhew",High,In Progress,UI/UX
-"Responsive design","Optimize interface for different screen sizes","Brandon Mayhew",High,Open,UI/UX
-"API rate limiting","Implement rate limiting for API endpoints","Chuck McGill",Medium,Planned,Developer
-"API throttling","Add request throttling to prevent abuse","Howard Hamlin",Medium,Open,Developer
-"Automated testing","Add automated test suite for quality assurance","Kim Wexler",High,In Progress,Technical
-"Test automation","Implement comprehensive automated testing","Nacho Varga",High,Open,Technical
-"Comment system","Add ability to comment on items","Lalo Salamanca",Low,Planned,Collaboration
-"Discussion feature","Enable discussions and comments on entries","Eduardo Salamanca",Low,Open,Collaboration
-"Image optimization","Optimize image loading and compression","Don Eladio",Medium,In Progress,Performance
-"Image compression","Improve image handling and storage efficiency","Juan Bolsa",Medium,Open,Performance
-"Webhook integration","Add support for custom webhooks","Hector Salamanca",High,Planned,Integration
-"Custom webhooks","Enable integration with external systems via webhooks","Marco Salamanca",High,Open,Integration
-"Rich text editor","Add WYSIWYG editor for content creation","Leonel Salamanca",Medium,In Progress,UI/UX
-"Text formatting","Implement rich text formatting capabilities","Daniel Wormald",Medium,Open,UI/UX
-"Data encryption","Implement end-to-end encryption","Tyrus Kitt",High,Completed,Security
-"Encryption system","Add data encryption at rest and in transit","Victor",High,Open,Security
-"Batch processing","Add support for batch operations","Domingo Molina",Medium,Planned,Feature
-"Bulk operations","Enable processing of multiple items at once","Gustavo Fring",Medium,Open,Feature
-"Custom fields","Allow users to add custom data fields","Don Juan Bolsa",Low,In Progress,Feature
-"Field customization","Enable creation of custom data fields","Krazy-8",Low,Open,Feature
-"Version control","Track versions of documents and files","Werner Ziegler",High,Planned,Feature
-"Document versioning","Implement version history for documents","Kai Proctor",High,Open,Feature
-"API analytics","Track and analyze API usage patterns","Lyle",Medium,In Progress,Analytics
-"Usage analytics","Monitor and report on API utilization","Casper",Medium,Open,Analytics
-"Team collaboration","Enable team-based workflows","Gale Boetticher",High,Completed,Collaboration
-"Workflow management","Implement collaborative workflow system","Combo",High,Open,Collaboration 
+Request ID,Feature Title,Description,Product,Request Channel,Customer Type,Priority,Status,Type,Requested By,Request Date,Business Value,Implementation Complexity,Customer Impact
+FR-001,AI-Powered Priority Scoring,"Implement an AI system that automatically scores and prioritizes feature requests based on customer impact, business value, and implementation complexity",Peem,Customer Interview,Enterprise,High,Open,Feature,Product Manager,2024-01-01,High,Medium,High
+FR-002,Custom Dashboard Layouts,"Allow users to customize their dashboard layout with drag-and-drop widgets, saved layouts, and personalized metrics",Peem,Internal Team,All,Medium,In Progress,UX,UX Designer,2024-01-02,Medium,Medium,High
+FR-003,Jira Integration,"Enable bi-directional sync with Jira including automatic ticket creation, status updates, and comment synchronization",Peem,Customer Support,Enterprise,High,Planned,Integration,Technical Lead,2024-01-03,High,High,Medium
+FR-004,Advanced Analytics Dashboard,"Create a comprehensive analytics dashboard showing feature request trends, customer segment analysis, and priority distribution",Peem,Customer Interview,Enterprise,High,Open,Analytics,Product Manager,2024-01-04,High,High,High
+FR-005,Bulk Import/Export,"Add functionality to bulk import feature requests from CSV/Excel and export data in multiple formats (CSV, Excel, PDF)",Peem,Internal Team,All,Medium,In Progress,Feature,Product Manager,2024-01-05,Medium,Low,Medium
+FR-006,Custom Fields Support,"Allow teams to create and manage custom fields for feature requests with different field types (text, number, dropdown, etc.)",Peem,Customer Interview,Enterprise,High,Planned,Feature,Product Manager,2024-01-06,High,Medium,High
+FR-007,Team Collaboration Tools,"Implement @mentions, comments, and notifications for better team collaboration on feature requests",Peem,Internal Team,All,Medium,Open,Collaboration,Product Manager,2024-01-07,High,Medium,High
+FR-008,API Documentation,"Create comprehensive API documentation with interactive examples and SDK support for major programming languages",Peem,Customer Support,Developer,High,In Progress,Documentation,Technical Lead,2024-01-08,High,Medium,Medium
+FR-009,Mobile App Support,"Develop native mobile apps for iOS and Android with core feature request management capabilities",Peem,Customer Interview,All,High,Planned,Mobile,Product Manager,2024-01-09,High,High,High
+FR-010,SSO Integration,"Implement Single Sign-On (SSO) support for major providers (Google, Microsoft, Okta)",Peem,Customer Support,Enterprise,High,Open,Security,Security Team,2024-01-10,High,Medium,Medium
+FR-011,Customer Portal,"Create a customer-facing portal for submitting and tracking feature requests",Peem,Customer Interview,All,High,In Progress,Feature,Product Manager,2024-01-11,High,High,High
+FR-012,Advanced Search,"Implement advanced search functionality with filters, saved searches, and boolean operators",Peem,Internal Team,All,Medium,Planned,Feature,UX Designer,2024-01-12,Medium,Medium,High
+FR-013,Data Export API,"Create an API endpoint for exporting feature request data with filtering and pagination",Peem,Customer Support,Developer,Medium,Open,API,Technical Lead,2024-01-13,Medium,Low,Medium
+FR-014,Custom Workflows,"Allow teams to create custom workflows with conditional logic and automated actions",Peem,Customer Interview,Enterprise,High,In Progress,Feature,Product Manager,2024-01-14,High,High,High
+FR-015,Rich Text Editor,"Add rich text editing support for feature request descriptions with image upload capabilities",Peem,Internal Team,All,Medium,Planned,UX,UX Designer,2024-01-15,Medium,Low,Medium
+FR-016,Automated Insights,"Use AI to automatically generate insights and recommendations from feature request data",Peem,Customer Interview,Enterprise,High,Open,AI,Product Manager,2024-01-16,High,High,High
+FR-017,Custom Reports,"Enable creation of custom reports with visualization options and scheduled delivery",Peem,Customer Support,Enterprise,Medium,In Progress,Analytics,Product Manager,2024-01-17,High,Medium,High
+FR-018,Slack Integration,"Add Slack integration for notifications and quick feature request creation",Peem,Internal Team,All,Medium,Planned,Integration,Technical Lead,2024-01-18,Medium,Low,Medium
+FR-019,User Role Management,"Implement granular role-based access control with custom permissions",Peem,Customer Support,Enterprise,High,Open,Security,Security Team,2024-01-19,High,Medium,High
+FR-020,Audit Logs,"Add detailed audit logs for all system actions with filtering and export capabilities",Peem,Customer Interview,Enterprise,Medium,In Progress,Security,Security Team,2024-01-20,Medium,Medium,Medium
+FR-021,Dark Mode Support,"Implement dark mode theme with system preference detection",Peem,Internal Team,All,Low,Planned,UX,UX Designer,2024-01-21,Low,Low,Medium
+FR-022,Data Import API,"Create an API endpoint for importing feature requests with validation",Peem,Customer Support,Developer,Medium,Open,API,Technical Lead,2024-01-22,Medium,Medium,Medium
+FR-023,Custom Tags,"Allow creation and management of custom tags for feature requests",Peem,Customer Interview,All,Medium,In Progress,Feature,Product Manager,2024-01-23,Medium,Low,High
+FR-024,Email Notifications,"Implement customizable email notifications for feature request updates",Peem,Internal Team,All,Medium,Planned,Notification,Product Manager,2024-01-24,Medium,Medium,High
+FR-025,Salesforce Integration,"Enable bi-directional sync with Salesforce for customer data and opportunities",Peem,Customer Support,Enterprise,High,Open,Integration,Technical Lead,2024-01-25,High,High,Medium
+FR-026,Custom Dashboards,"Allow creation of custom dashboards with different widgets and metrics",Peem,Customer Interview,Enterprise,High,In Progress,Analytics,Product Manager,2024-01-26,High,Medium,High
+FR-027,Bulk Actions,"Add ability to perform bulk actions on multiple feature requests",Peem,Internal Team,All,Medium,Planned,Feature,Product Manager,2024-01-27,Medium,Low,Medium
+FR-028,API Rate Limiting,"Implement configurable rate limiting for API endpoints",Peem,Customer Support,Developer,Medium,Open,API,Technical Lead,2024-01-28,Medium,Low,Low
+FR-029,Custom Statuses,"Allow teams to create and manage custom feature request statuses",Peem,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-01-29,Medium,Medium,High
+FR-030,Performance Monitoring,"Add system performance monitoring and alerting capabilities",Peem,Internal Team,All,High,Planned,Technical,Technical Lead,2024-01-30,High,Medium,Medium
+FR-031,Multi-language Support,"Add support for multiple languages in the user interface",Peem,Customer Support,International,High,Open,Localization,Product Manager,2024-01-31,High,High,High
+FR-032,Custom Metrics,"Enable creation of custom metrics and KPIs for feature requests",Peem,Customer Interview,Enterprise,Medium,In Progress,Analytics,Product Manager,2024-02-01,High,Medium,High
+FR-033,Automated Testing,"Implement automated testing framework for API and UI",Peem,Internal Team,Developer,Medium,Planned,Technical,Technical Lead,2024-02-02,Medium,Medium,Low
+FR-034,Webhook Support,"Add webhook support for integration with external systems",Peem,Customer Support,Developer,Medium,Open,Integration,Technical Lead,2024-02-03,Medium,Medium,Medium
+FR-035,Custom Views,"Allow creation of custom views with saved filters and columns",Peem,Customer Interview,All,Medium,In Progress,Feature,Product Manager,2024-02-04,Medium,Medium,High
+FR-036,Data Backup,"Implement automated data backup and restore capabilities",Peem,Internal Team,All,High,Planned,Technical,Technical Lead,2024-02-05,High,Medium,Medium
+FR-037,Custom Integrations,"Enable building custom integrations using API and webhooks",Peem,Customer Support,Developer,High,Open,Integration,Technical Lead,2024-02-06,High,High,Medium
+FR-038,Advanced Filters,"Add advanced filtering capabilities with complex conditions",Peem,Customer Interview,All,Medium,In Progress,Feature,Product Manager,2024-02-07,Medium,Medium,High
+FR-039,User Activity Tracking,"Track and display user activity history with filtering",Peem,Internal Team,Enterprise,Medium,Planned,Analytics,Product Manager,2024-02-08,Medium,Medium,Medium
+FR-040,Custom Notifications,"Allow creation of custom notification rules and channels",Peem,Customer Support,All,Medium,Open,Notification,Product Manager,2024-02-09,Medium,Medium,High
+FR-041,Data Encryption,"Implement end-to-end encryption for sensitive data",Peem,Customer Interview,Enterprise,High,In Progress,Security,Security Team,2024-02-10,High,High,Medium
+FR-042,Custom Reports API,"Create API endpoints for custom report generation",Peem,Internal Team,Developer,Medium,Planned,API,Technical Lead,2024-02-11,Medium,Medium,Medium
+FR-043,Team Templates,"Add support for team-specific templates and defaults",Peem,Customer Support,Enterprise,Medium,Open,Feature,Product Manager,2024-02-12,Medium,Low,High
+FR-044,Advanced Permissions,"Implement advanced permission system with custom roles",Peem,Customer Interview,Enterprise,High,In Progress,Security,Security Team,2024-02-13,High,Medium,High
+FR-045,Custom Workflows API,"Create API endpoints for custom workflow management",Peem,Internal Team,Developer,Medium,Planned,API,Technical Lead,2024-02-14,Medium,High,Medium
+FR-046,Data Migration Tools,"Add tools for data migration from other systems",Peem,Customer Support,Enterprise,High,Open,Feature,Technical Lead,2024-02-15,High,High,Medium
+FR-047,Custom Fields API,"Create API endpoints for custom field management",Peem,Customer Interview,Developer,Medium,In Progress,API,Technical Lead,2024-02-16,Medium,Medium,Medium
+FR-048,Advanced Search API,"Implement API endpoints for advanced search capabilities",Peem,Internal Team,Developer,Medium,Planned,API,Technical Lead,2024-02-17,Medium,Medium,Medium
+FR-049,Custom Metrics API,"Create API endpoints for custom metrics management",Peem,Customer Support,Developer,Medium,Open,API,Technical Lead,2024-02-18,Medium,Medium,Medium
+FR-050,Team Analytics,"Add team-specific analytics and reporting capabilities",Peem,Customer Interview,Enterprise,High,In Progress,Analytics,Product Manager,2024-02-19,High,Medium,High
+FR-051,Custom Views API,"Implement API endpoints for custom view management",Peem,Internal Team,Developer,Medium,Planned,API,Technical Lead,2024-02-20,Medium,Medium,Medium
+FR-052,Data Archiving,"Add capabilities for archiving old feature requests",Peem,Customer Support,Enterprise,Medium,Open,Feature,Product Manager,2024-02-21,Medium,Low,Medium
+FR-053,Custom Reports Export,"Enable export of custom reports in multiple formats",Peem,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-02-22,Medium,Low,High
+FR-054,Advanced Audit Logs,"Implement detailed audit logging with advanced filtering",Peem,Internal Team,Enterprise,High,Planned,Security,Security Team,2024-02-23,High,Medium,Medium
+FR-055,Custom Dashboard API,"Create API endpoints for custom dashboard management",Peem,Customer Support,Developer,Medium,Open,API,Technical Lead,2024-02-24,Medium,Medium,Medium
+FR-056,Team Permissions,"Add team-specific permission management capabilities",Peem,Customer Interview,Enterprise,High,In Progress,Security,Security Team,2024-02-25,High,Medium,High
+FR-057,Custom Integration API,"Implement API endpoints for custom integration management",Peem,Internal Team,Developer,Medium,Planned,API,Technical Lead,2024-02-26,Medium,High,Medium
+FR-058,Data Validation,"Add advanced data validation capabilities",Peem,Customer Support,All,Medium,Open,Feature,Technical Lead,2024-02-27,Medium,Medium,Medium
+FR-059,Custom Notification API,"Create API endpoints for custom notification management",Peem,Customer Interview,Developer,Medium,In Progress,API,Technical Lead,2024-02-28,Medium,Medium,Medium
+FR-060,Team Templates API,"Implement API endpoints for team template management",Peem,Internal Team,Developer,Medium,Planned,API,Technical Lead,2024-02-29,Medium,Medium,Medium
+FR-061,Data Import Validation,"Add advanced validation for data imports",Peem,Customer Support,All,Medium,Open,Feature,Technical Lead,2024-03-01,Medium,Medium,Medium
+FR-062,Custom Field Templates,"Enable creation of custom field templates",Peem,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-03-02,Medium,Low,High
+FR-063,Advanced API Security,"Implement advanced security measures for API",Peem,Internal Team,Developer,High,Planned,Security,Security Team,2024-03-03,High,High,Medium
+FR-064,Data Export Templates,"Add support for custom data export templates",Peem,Customer Support,Enterprise,Medium,Open,Feature,Product Manager,2024-03-04,Medium,Low,High
+FR-065,Custom Report Templates,"Enable creation of custom report templates",Peem,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-03-05,Medium,Low,High
+FR-066,Advanced API Analytics,"Add detailed analytics for API usage",Peem,Internal Team,Developer,Medium,Planned,Analytics,Technical Lead,2024-03-06,Medium,Medium,Medium
+FR-067,Data Import Templates,"Add support for custom data import templates",Peem,Customer Support,Enterprise,Medium,Open,Feature,Product Manager,2024-03-07,Medium,Low,High
+FR-068,Custom Dashboard Templates,"Enable creation of custom dashboard templates",Peem,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-03-08,Medium,Low,High
+FR-069,Advanced API Documentation,"Improve API documentation with interactive examples",Peem,Internal Team,Developer,High,Planned,Documentation,Technical Lead,2024-03-09,High,Medium,Medium
+FR-070,Data Validation Templates,"Add support for custom data validation templates",Peem,Customer Support,Enterprise,Medium,Open,Feature,Technical Lead,2024-03-10,Medium,Medium,Medium
+FR-071,Custom Workflow Templates,"Enable creation of custom workflow templates",Peem,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-03-11,Medium,Medium,High
+FR-072,Advanced API Testing,"Implement comprehensive API testing tools",Peem,Internal Team,Developer,High,Planned,Technical,Technical Lead,2024-03-12,High,High,Medium
+FR-073,Data Migration Templates,"Add support for custom data migration templates",Peem,Customer Support,Enterprise,Medium,Open,Feature,Technical Lead,2024-03-13,Medium,Medium,Medium
+FR-074,Custom Integration Templates,"Enable creation of custom integration templates",Peem,Customer Interview,Enterprise,Medium,In Progress,Feature,Technical Lead,2024-03-14,Medium,High,Medium
+FR-075,Advanced API Monitoring,"Add detailed monitoring for API performance",Peem,Internal Team,Developer,High,Planned,Technical,Technical Lead,2024-03-15,High,Medium,Medium
+FR-076,Data Archive Templates,"Add support for custom data archive templates",Peem,Customer Support,Enterprise,Medium,Open,Feature,Product Manager,2024-03-16,Medium,Low,Medium
+FR-077,Custom Report Scheduling,"Enable scheduling of custom report generation",Peem,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-03-17,Medium,Low,High
+FR-078,Advanced API Rate Limiting,"Implement advanced API rate limiting features",Peem,Internal Team,Developer,High,Planned,Technical,Technical Lead,2024-03-18,High,Medium,Medium
+FR-079,Data Backup Templates,"Add support for custom data backup templates",Peem,Customer Support,Enterprise,Medium,Open,Feature,Technical Lead,2024-03-19,Medium,Medium,Medium
+FR-080,Custom Dashboard Sharing,"Enable sharing of custom dashboards",Peem,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-03-20,Medium,Low,High
+FR-081,Advanced API Versioning,"Implement comprehensive API versioning",Peem,Internal Team,Developer,High,Planned,Technical,Technical Lead,2024-03-21,High,High,Medium
+FR-082,Data Recovery Tools,"Add tools for data recovery and rollback",Peem,Customer Support,Enterprise,High,Open,Feature,Technical Lead,2024-03-22,High,High,Medium
+FR-083,Custom Report Sharing,"Enable sharing of custom reports",Peem,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-03-23,Medium,Low,High
+FR-084,Advanced API Caching,"Implement advanced API caching mechanisms",Peem,Internal Team,Developer,High,Planned,Technical,Technical Lead,2024-03-24,High,Medium,Medium
+FR-085,Data Cleanup Tools,"Add tools for data cleanup and optimization",Peem,Customer Support,Enterprise,Medium,Open,Feature,Technical Lead,2024-03-25,Medium,Medium,Medium
+FR-086,Custom View Sharing,"Enable sharing of custom views",Peem,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-03-26,Medium,Low,High
+FR-087,Advanced API Error Handling,"Implement comprehensive API error handling",Peem,Internal Team,Developer,High,Planned,Technical,Technical Lead,2024-03-27,High,Medium,Medium
+FR-088,Data Integrity Tools,"Add tools for ensuring data integrity",Peem,Customer Support,Enterprise,High,Open,Feature,Technical Lead,2024-03-28,High,High,Medium
+FR-089,Custom Template Sharing,"Enable sharing of custom templates",Peem,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-03-29,Medium,Low,High
+FR-090,Advanced API Authentication,"Implement advanced API authentication methods",Peem,Internal Team,Developer,High,Planned,Security,Security Team,2024-03-30,High,High,Medium
+FR-091,Data Analysis Tools,"Add tools for advanced data analysis",Peem,Customer Support,Enterprise,High,Open,Analytics,Product Manager,2024-03-31,High,Medium,High
+FR-092,Custom Integration Sharing,"Enable sharing of custom integrations",Peem,Customer Interview,Enterprise,Medium,In Progress,Feature,Technical Lead,2024-04-01,Medium,High,Medium
+FR-093,Advanced API Logging,"Implement comprehensive API logging",Peem,Internal Team,Developer,High,Planned,Technical,Technical Lead,2024-04-02,High,Medium,Medium
+FR-094,Data Visualization Tools,"Add advanced data visualization capabilities",Peem,Customer Support,Enterprise,High,Open,Analytics,Product Manager,2024-04-03,High,Medium,High
+FR-095,Custom Workflow Sharing,"Enable sharing of custom workflows",Peem,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-04-04,Medium,Medium,High
+FR-096,Advanced API Metrics,"Implement comprehensive API metrics",Peem,Internal Team,Developer,High,Planned,Analytics,Technical Lead,2024-04-05,High,Medium,Medium
+FR-097,Data Export Tools,"Add advanced data export capabilities",Peem,Customer Support,Enterprise,Medium,Open,Feature,Product Manager,2024-04-06,Medium,Low,High
+FR-098,Custom Field Sharing,"Enable sharing of custom fields",Peem,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-04-07,Medium,Low,High
+FR-099,Advanced API Documentation,"Improve API documentation with tutorials",Peem,Internal Team,Developer,High,Planned,Documentation,Technical Lead,2024-04-08,High,Medium,Medium
+FR-100,Data Import Tools,"Add advanced data import capabilities",Peem,Customer Support,Enterprise,Medium,Open,Feature,Product Manager,2024-04-09,Medium,Low,High 

@@ -9,6 +9,7 @@ __pycache__/
 .env.development.local
 .env.test.local
 .env.production.local
+APIS
 
 # Build
 /frontend/build
@@ -29,5 +30,4 @@ yarn-error.log*
 
 # Database
 *.sqlite3
-*.db APIS
-APIS
+*.db
