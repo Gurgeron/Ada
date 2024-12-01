@@ -31,10 +31,26 @@ const AnalysisContainer = () => {
   return (
     <div className="min-h-screen bg-white p-8">
       <div className="max-w-[1400px] mx-auto">
-        {/* Navigation */}
-        <div className="mb-6">
+        {/* Logo and Navigation */}
+        <div className="flex items-center mb-6">
+          <div className="flex items-center">
+            <svg
+              className="w-8 h-8 text-[#2B2B2B] opacity-80 mr-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                d="M8 13v-1m4 1v-3m4 3V8M12 21l9-9-9-9-9 9 9 9z"
+              />
+            </svg>
+          </div>
           {/* Enhanced Tab Navigation */}
-          <div className="flex space-x-4 border-b border-gray-200">
+          <div className="flex space-x-4 border-b border-gray-200 flex-grow">
             <button
               onClick={() => handleTabChange('table')}
               className={`px-8 py-4 text-base font-medium transition-all duration-200 relative

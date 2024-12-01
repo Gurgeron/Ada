@@ -140,6 +140,9 @@
 - Improved button hover state with subtle color transition
 - Centered chart icon on landing page using flex container
 - Improved landing page layout and spacing
+- Added chart icon to top left of analysis page
+- Improved navigation layout with consistent branding
+- Enhanced visual hierarchy in analysis container
 
 ### Fixed
 - Fixed 404 errors for insights API endpoint
