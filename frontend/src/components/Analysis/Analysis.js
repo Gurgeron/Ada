@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import AdaChat from '../Ada/AdaChat';
 import FeatureTable from './FeatureTable';
 import axios from 'axios';
 
@@ -134,13 +133,19 @@ const Analysis = () => {
           
           // Create columns configuration
           const tableColumns = columnOrder.map(header => ({
-            header,
+            Header: header,
             accessor: header,
             Cell: ({ value }) => {
               if (!value) return '';
               
               if (header === 'Status') {
-                return <span className={`px-2 py-1 rounded-full text-sm ${getStatusColor(value)}`}>{value}</span>;
+                return (
+                  <div className="min-w-[120px]">
+                    <span className={`px-3 py-1.5 rounded-full text-sm ${getStatusColor(value)}`}>
+                      {value}
+                    </span>
+                  </div>
+                );
               }
               if (header === 'Priority') {
                 return <span className={`px-2 py-1 rounded-full text-sm ${getPriorityColor(value)}`}>{value}</span>;
@@ -149,10 +154,20 @@ const Analysis = () => {
                 return <span className="px-2 py-1 rounded-full text-sm bg-gray-100">{value}</span>;
               }
               if (header === 'Description') {
-                return <div className="max-w-md whitespace-normal">{value}</div>;
+                return <div className="min-w-[400px] max-w-xl whitespace-normal text-sm text-gray-600 py-2">{value}</div>;
               }
               return value;
-            }
+            },
+            // Add width configuration for specific columns
+            ...(header === 'Description' && {
+              width: 400,
+              minWidth: 400,
+              maxWidth: 600
+            }),
+            ...(header === 'Status' && {
+              width: 120,
+              minWidth: 120
+            })
           }));
           
           setColumns(tableColumns);
@@ -192,22 +207,11 @@ const Analysis = () => {
     return colors[priority] || 'bg-gray-100 text-gray-800';
   };
 
-  if (!contextId) {
-    return (
-      <div className="min-h-screen bg-[#FFFFFF] p-8 flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-[#2B2B2B] mb-4">No Context Found</h2>
-          <p className="text-[#B3B3B3]">Please complete the setup process first.</p>
-        </div>
-      </div>
-    );
-  }
-
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#FFFFFF] p-8 flex items-center justify-center">
+      <div className="flex items-center justify-center p-8">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2B2B2B]"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#4c9085]"></div>
           <p className="mt-4 text-[#B3B3B3]">Loading your data...</p>
         </div>
       </div>
@@ -216,7 +220,7 @@ const Analysis = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-[#FFFFFF] p-8 flex items-center justify-center">
+      <div className="flex items-center justify-center p-8">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-red-600 mb-4">Error</h2>
           <p className="text-[#B3B3B3]">{error}</p>
@@ -226,23 +230,8 @@ const Analysis = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#FFFFFF] p-8">
-      <div className="max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Analysis Area with Table */}
-          <div className="lg:col-span-2">
-            <h2 className="text-2xl font-bold text-[#2B2B2B] mb-6">
-              Feature Request Analysis
-            </h2>
-            <FeatureTable data={featureData} columns={columns} />
-          </div>
-
-          {/* Chat Interface */}
-          <div className="lg:col-span-1 lg:h-[calc(100vh-8rem)] lg:sticky lg:top-8">
-            <AdaChat contextId={contextId} />
-          </div>
-        </div>
-      </div>
+    <div>
+      <FeatureTable data={featureData} columns={columns} />
     </div>
   );
 };
