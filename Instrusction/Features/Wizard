@@ -1,0 +1,101 @@
+Wizard for Product Context
+Overview
+The Wizard collects foundational information about the user's product and guides them to upload feature request data. This contextual data enables Ada to provide tailored insights.
+
+Functional Requirements
+Multi-Step Process:
+Collect product name, goals, and user personas.
+Guide the user to upload data in the final step.
+Real-Time Validation:
+Ensure all required fields are filled before moving to the next step.
+Seamless Integration with File Upload:
+Embed the file upload interface in the Wizard's final step.
+
+UI Specifications
+Use a classical, centered layout with:
+Large headers for prompts (e.g., “Step 1: Tell us about your product”).
+Text boxes, dropdowns, or drag-and-drop components for input.
+Progress bar or step indicator at the top:
+Example: "Step 2 of 4."
+
+Data Storage
+Save user input in a structured JSON format.
+Example:
+json
+Copy code
+{
+  "product_name": "MyProduct",
+  "goals": "Simplify task management for teams.",
+  "personas": ["Team Leads", "Remote Workers"]
+}
+
+
+
+Backend Integration
+API Endpoint:
+/wizard-context
+Methods:
+POST: Save Wizard data.
+GET: Retrieve previously saved data.
+
+Development Notes
+Build each step as a reusable component to allow future updates.
+Ensure validation is modular (e.g., field requirements can change without affecting overall flow).
+
+2. File Upload (Part of the Wizard)
+Overview
+The file upload component allows users to import feature request data in CSV, Excel, or Google Sheets formats.
+
+Functional Requirements
+Supported File Formats:
+CSV.
+Excel (.xlsx).
+Google Sheets.
+Validation:
+Ensure required headers exist (e.g., “Feature Request,” “Customer Type”).
+Handle errors gracefully with clear messages (e.g., “Missing headers. Please include ‘Feature Request’”).
+Data Preprocessing:
+Normalize data (e.g., remove duplicates, fix casing).
+Convert all file types into a common JSON format for backend storage.
+
+UI Specifications
+Drag-and-drop interface with fallback button to browse files.
+Display validation feedback below the upload box:
+Green: “Your file looks great!”
+Red: “Headers are missing. Please check your file.”
+
+Backend Integration
+API Endpoint:
+/upload-data
+Methods:
+POST: Upload and process files.
+GET: Retrieve processed data.
+File Parsing Logic:
+CSV: Use Python’s pandas library.
+Excel: Use openpyxl.
+Google Sheets: Use the Google Sheets API for authentication and data import.
+
+Data Format
+Example Output After Preprocessing:
+json
+Copy code
+[
+  {
+    "feature_request": "Add API integrations",
+    "customer_type": "Enterprise",
+    "priority": "High"
+  },
+  {
+    "feature_request": "Improve UI responsiveness",
+    "customer_type": "Small Business",
+    "priority": "Medium"
+  }
+]
+
+
+
+Development Notes
+Ensure the file type is detected automatically.
+Build error handling into the file parsing step (e.g., log errors and return friendly messages to the user).
+For Google Sheets, include OAuth authentication to allow users to import files directly.
+

@@ -1,0 +1,131 @@
+App Flow
+1. User Onboarding
+Entry Point
+User visits the platform homepage.
+They see a welcome message introducing the app:
+“Welcome to Feature Request Insights! Start analyzing your feature requests to uncover actionable pain points.”
+Call-to-Action (CTA)
+Two options:
+“Start Wizard” (primary button).
+“Learn More” (link to an explanation of the platform’s benefits).
+
+2. Wizard Flow
+Step 1: Product Name
+Prompt: “What is the name of your product?”
+Input: Single-line text input.
+Backend Action: Save product name via /wizard-context API.
+
+Step 2: Product Goals
+Prompt: “What is your product’s main goal?”
+Placeholder: “E.g., Simplify project management for remote teams.”
+Input: Multi-line text box.
+Backend Action: Save goals via /wizard-context API.
+
+Step 3: Key User Personas
+Prompt: “Who are your target users?”
+Placeholder: “E.g., Freelancers, Small Business Owners.”
+Input: Dropdown or free text (multi-line).
+Backend Action: Save personas via /wizard-context API.
+
+Step 4: Upload Feature Requests
+Prompt: “Upload your feature request data to begin analysis.”
+Supported Formats:
+CSV, Excel (.xlsx), Google Sheets.
+Drag-and-Drop Area:
+Label: “Drag and drop your file here or click to browse.”
+Validation:
+Check headers like “Feature Request,” “Customer Type,” “Priority.”
+Error Message:
+“Your file is missing required columns. Please check and re-upload.”
+Backend Action:
+Parse and preprocess data via /upload-data API.
+Save cleaned data to the database.
+
+Transition to Results
+Once data is successfully uploaded, user clicks “Analyze Data” to proceed to the Results Page.
+
+3. Results Page
+Overview
+The Results Page has two primary components:
+Chatbot (Ada): For querying insights and receiving actionable summaries.
+Visualized Table: For exploring raw data.
+
+Section 1: Chatbot (Ada)
+UI Placement
+Persistent sidebar on the right, toggleable with a button (“Chat with Ada”).
+Core Actions
+Proactive Welcome:
+Ada greets the user:
+“Hi, I’m Ada! I’m here to help you uncover insights from your feature request data. Feel free to ask me questions!”
+User Queries:
+User types a query:
+“What are the top pain points?”
+Backend Action:
+Query /query-ada API with Wizard context and uploaded data.
+Response:
+Ada responds: “The top pain points are: 1. Lack of API integrations (30%). 2. Missing onboarding documentation (20%).”
+Follow-Up Suggestions (Future):
+Ada proactively suggests additional questions:
+“Would you like to know what small business users request most often?”
+
+Section 2: Visualized Table
+UI Placement
+Centered in the main content area.
+Core Features
+Data Display:
+Table shows rows with columns like:
+“Feature Request”
+“Customer Type”
+“Priority”
+Sorting:
+User clicks column headers to sort data (e.g., by “Priority”).
+Future Expandability:
+Placeholder for filters (e.g., filter by “Customer Type”).
+
+4. Iterative Query Flow
+Chatbot Iteration
+User continues to ask Ada questions:
+“What percentage of requests are from enterprise users?”
+Ada dynamically analyzes the data and responds.
+Manual Data Exploration
+User manually explores the data in the table, applying sorting as needed.
+
+5. Optional Actions
+Export Insights (Future Feature)
+Button: “Export Insights”
+Generates a downloadable PDF or CSV summary of key insights.
+
+Backend Workflow
+Wizard Context:
+Inputs saved to PostgreSQL.
+Retrieved during /query-ada API calls for context-aware responses.
+File Upload:
+Raw file parsed into JSON.
+Stored in the database for use by Ada and the Table.
+Ada Querying:
+User query sent to /query-ada.
+Backend combines:
+Preprocessed data.
+Wizard context.
+Query processed via OpenAI API.
+Response sent back to the frontend.
+
+Key Screens in the App Flow
+1. Home Page
+CTA Buttons:
+“Start Wizard”
+“Learn More”
+
+2. Wizard Steps
+Step-by-Step Form:
+Progress bar at the top (e.g., “Step 2 of 4”).
+Simple text inputs or dropdowns for user-friendly data entry.
+
+3. Results Page
+Primary Layout
+Main Area: Visualized Table with data.
+Sidebar: Ada for dynamic insights.
+Secondary Actions
+“Upload New Data” button for reanalysis.
+“Download Insights” (Future).
+

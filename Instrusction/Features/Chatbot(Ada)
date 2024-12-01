@@ -1,0 +1,131 @@
+Chatbot (Ada)
+Overview
+Ada is an AI-powered assistant that uses the OpenAI API for natural language processing (NLP) to analyze uploaded data, extract insights, and respond to user queries.
+
+Functional Requirements
+Conversational Q&A:
+Ada answers user queries based on uploaded data, such as:
+“What are the most common pain points?”
+“What percentage of requests mention integrations?”
+Integration with Product Context:
+Ada personalizes responses using the product context provided in the Wizard.
+Proactive Suggestions (Future):
+Suggest trends and themes without user queries, based on insights from data.
+
+How Ada Uses OpenAI API
+NLP Processing:
+Ada uses OpenAI’s GPT-4 to:
+Parse user queries and extract intent (e.g., “common pain points”).
+Analyze uploaded data to identify trends, themes, and recurring pain points.
+Generate natural language responses tailored to the query.
+Request Workflow:
+When a user interacts with Ada, the backend sends a request to OpenAI’s API, including:
+The query (e.g., “What are the most requested features?”).
+Processed data (e.g., clusters, themes).
+Product context from the Wizard.
+Response Workflow:
+OpenAI processes the request and returns a structured response.
+Ada formats this response into user-friendly text.
+
+API Integration
+Endpoint for OpenAI Requests
+Backend API: /query-ada
+Workflow:
+Input:
+json
+Copy code
+{
+  "query": "What are the top pain points?",
+  "product_context": {
+    "product_name": "MyProduct",
+    "goals": "Help users save time with automation.",
+    "personas": ["Small Business Owners"]
+  },
+  "data": [
+    {
+      "feature_request": "Add API integrations",
+      "customer_type": "Enterprise",
+      "priority": "High"
+    },
+    {
+      "feature_request": "Improve onboarding documentation",
+      "customer_type": "Small Business",
+      "priority": "Medium"
+    }
+  ]
+}
+
+
+OpenAI API Request:
+python
+Copy code
+import openai
+
+openai.api_key = "your-api-key"
+
+response = openai.ChatCompletion.create(
+    model="gpt-4",
+    messages=[
+        {
+            "role": "system",
+            "content": (
+                "Your name is Ada. You are an intelligent assistant helping Product Managers analyze feature request data. "
+                "Your primary role is to identify and articulate pain points derived from the uploaded data, offering clear, actionable insights. "
+                "You excel at understanding the themes and trends in unstructured data, clustering related topics, and summarizing them in human-friendly language. "
+                "Your responses should be concise yet profound, ensuring clarity while maintaining professionalism. "
+                "You always keep the Product Manager's goals and personas in mind, referencing these contexts to tailor your answers. "
+                "For example, if a PM is focused on improving 'collaboration for small teams,' ensure your insights align with that goal. "
+                "When data is unclear or trends are weak, acknowledge this openly and suggest steps the PM can take to improve their analysis. "
+                "You prioritize being supportive, insightful, and solution-oriented."
+            ),
+        },
+        {"role": "user", "content": "What are the top pain points in this data?"},
+        {"role": "assistant", "content": "Analyzing the data provided..."}
+    ],
+    temperature=0.7
+)
+
+
+Output:
+json
+Copy code
+{
+  "response": "The top pain points are: 1. Lack of API integrations (30%). 2. Missing documentation (20%)."
+}
+
+
+
+Key Implementation Notes
+OpenAI API Configuration:
+Use the openai.ChatCompletion endpoint for GPT-4.
+Include a system message to guide the AI’s behavior (e.g., “You are an assistant helping PMs analyze feature request data.”).
+Data Preprocessing:
+Summarize and clean data before sending it to OpenAI. For example:
+Cluster feature requests by themes.
+Count occurrences of specific phrases or keywords (e.g., “API integration”).
+Rate Limits:
+Monitor OpenAI’s API rate limits and batch requests if needed.
+Error Handling:
+Handle OpenAI API failures gracefully:
+If the API is unavailable, return a fallback message:
+“I’m currently unable to process this request. Please try again later.”
+Cost Management:
+Optimize API usage by:
+Using smaller data payloads when possible.
+Caching results for repeated queries.
+
+Proactive Suggestions (Future)
+Leverage OpenAI’s ability to summarize data without explicit queries.
+Example: After file upload, Ada could automatically display:
+“30% of requests involve API integrations.”
+“Recurring theme: Users request better onboarding documentation.”
+
+Development Notes
+Frontend:
+Ensure Ada’s responses are formatted for clarity and displayed as chat bubbles.
+Backend:
+Implement modular integration so the OpenAI API logic can be updated (e.g., switching to a new model or adjusting system prompts).
+Data Privacy:
+Avoid sending sensitive or identifiable user data to OpenAI.
+Anonymize inputs where possible.
+

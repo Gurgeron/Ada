@@ -1,0 +1,169 @@
+Technical Stack Documentation
+Guiding Principles
+Simplicity:
+Prioritize tools that are easy to implement and maintain.
+Avoid unnecessary components like authentication at this stage.
+Modularity:
+Ensure components are independent, making it easy to add features later (e.g., user authentication or advanced analytics).
+Compatibility with Cursor.ai:
+Favor well-documented frameworks and libraries Cursor.ai can leverage effectively.
+
+Overview of the Stack
+Component
+Technology
+Reasoning
+Frontend
+React.js
+Simple, modular, and widely supported.
+Backend
+Flask (Python)
+Lightweight, integrates seamlessly with Python libraries.
+Data Storage
+PostgreSQL
+Reliable relational database for storing structured data.
+File Parsing
+pandas (Python)
+Industry-standard for handling CSV and Excel files.
+NLP Engine
+OpenAI API (GPT-4)
+Prebuilt, powerful natural language processing engine.
+Deployment
+Render or AWS (Elastic Beanstalk)
+Easy deployment with scalability options.
+Google Sheets API
+Google Sheets API
+For handling Google Sheets uploads directly.
+
+
+Frontend
+Framework: React.js
+Why React?
+Modular structure makes it easy to develop and expand components like Wizard, File Upload, Table, and Ada.
+Cursor.ai supports generating React components effectively.
+Structure
+Components:
+Wizard: Multi-step form for collecting product context.
+File Upload: Drag-and-drop upload box with validation.
+Visualized Table: Interactive data table with sorting functionality.
+Chatbot (Ada): Sidebar component for user interaction.
+State Management
+Use React Context API to manage state across components (e.g., sharing Wizard context with Ada and Table).
+Styling
+Simple CSS or TailwindCSS for lightweight and maintainable styling.
+
+Backend
+Framework: Flask (Python)
+Why Flask?
+Lightweight and easy to set up.
+Integrates well with pandas for file parsing and OpenAI API for NLP tasks.
+Cursor.ai can generate efficient Flask endpoints.
+API Endpoints
+/wizard-context
+POST: Save Wizard input (e.g., product name, goals).
+GET: Retrieve saved context.
+/upload-data
+POST: Process uploaded file (CSV, Excel, or Google Sheets).
+GET: Retrieve preprocessed data for the table.
+/query-ada
+POST: Send user queries, Wizard context, and data to OpenAI API for insights.
+/analyze-data
+(Future) Perform clustering and trend analysis server-side.
+Structure
+Use Blueprints to organize the backend by feature (e.g., separate blueprints for Wizard, File Upload, and Ada).
+Store shared utilities (e.g., data parsing, API integrations) in a common utils directory.
+
+Data Storage
+Database: PostgreSQL
+Why PostgreSQL?
+Handles structured data (e.g., Wizard inputs, preprocessed datasets) efficiently.
+Scales well for future needs.
+Schema
+Wizard Context Table:
+id: Unique identifier.
+product_name: Text.
+goals: Text.
+personas: JSON.
+Uploaded Data Table:
+file_id: Unique identifier.
+context_id: Foreign key linking to Wizard Context.
+data: JSON (stores preprocessed data).
+
+File Parsing
+Library: pandas (Python)
+Why pandas?
+Mature, efficient library for handling CSV and Excel files.
+Cursor.ai can generate reliable pandas-based scripts.
+Workflow
+Detect file type (CSV, Excel, or Sheets).
+Parse and validate headers:
+Required headers: "Feature Request," "Customer Type," "Priority."
+Normalize data:
+Remove duplicates.
+Standardize text (e.g., lowercase, trim whitespace).
+Convert to JSON for storage and use by other components (Ada, Table).
+Google Sheets Integration
+Use Google Sheets API to fetch data as a pandas DataFrame for consistency with other file types.
+
+NLP Engine
+Service: OpenAI API (GPT-4)
+Why OpenAI?
+Prebuilt and powerful NLP capabilities, eliminating the need to develop custom models.
+Supports clustering, summarization, and conversational responses.
+Integration
+Input:
+Wizard context.
+Preprocessed data (JSON).
+User query (e.g., “What are the top pain points?”).
+Output:
+Actionable insights (e.g., “30% of requests mention API integrations”).
+Example Request
+python
+Copy code
+import openai
+
+response = openai.ChatCompletion.create(
+    model="gpt-4",
+    messages=[
+        {"role": "system", "content": "You are Ada, an assistant helping PMs analyze feature requests."},
+        {"role": "user", "content": "What are the top pain points in this data?"}
+    ],
+    temperature=0.7
+)
+
+
+Deployment
+Platform: Render (Primary) or AWS Elastic Beanstalk (Alternative)
+Why Render?
+Simplified deployment process with built-in PostgreSQL support.
+Automatically scales for increased traffic.
+Setup
+Frontend: Deploy React app as a static site.
+Backend: Deploy Flask app as a Docker container.
+Database: Use Render’s PostgreSQL add-on.
+
+Modular Design Highlights
+Frontend Modularity:
+Each feature (Wizard, File Upload, Ada, Table) is implemented as a React component.
+Components interact via Context API or REST APIs for loose coupling.
+Backend Modularity:
+Flask blueprints separate business logic by feature.
+Shared utilities for file parsing and OpenAI API ensure reusable logic.
+Data Handling:
+Preprocess all data into JSON format, enabling seamless integration across frontend and backend.
+API-Driven Architecture:
+Every feature (Wizard, Ada, Table) communicates with the backend via REST APIs, ensuring scalability and flexibility.
+
+Milestones
+Week 1-2:
+Set up Flask backend and PostgreSQL.
+Build Wizard frontend and backend endpoints.
+Week 3-4:
+Implement File Upload with pandas for parsing CSV/Excel.
+Integrate Google Sheets API.
+Week 5-6:
+Develop Ada’s chat functionality with OpenAI API.
+Build the visualized table with sorting.
+Week 7+:
+Add advanced features (e.g., filters, dashboards).
+
+

@@ -1,0 +1,98 @@
+Request ID,Requested By,Request Channel,Request Date,Product,Feature Title,Type,Description,Priority,Status
+REQ-001,Product Manager,Customer Interview,2024-03-01,Peem,AI-Powered Priority Scoring,Feature,"Add automatic priority scoring for feature requests based on factors like frequency of mentions, customer segment, and alignment with product goals",High,Open
+REQ-002,UX Designer,Internal Team,2024-03-02,Peem,Custom Dashboard Layouts,UX,"Allow users to customize their dashboard layout by dragging and dropping insight cards, and saving multiple layout presets",Medium,Open
+REQ-003,Enterprise Customer,Email,2024-03-02,Peem,Jira Integration,Integration,"Add ability to sync feature requests with Jira tickets, including bi-directional status updates and comment syncing",High,In Progress
+REQ-004,Support Team,Slack,2024-03-03,Peem,Bulk Import from Zendesk,Integration,"Enable importing feature requests directly from Zendesk tickets, with automatic tagging based on ticket fields",Medium,Open
+REQ-005,Product Manager,Customer Interview,2024-03-03,Peem,Advanced Filtering Options,Feature,"Add more filtering options in the dashboard, including custom fields, date ranges, and customer segments",Medium,Open
+REQ-006,Customer Success,Email,2024-03-04,Peem,Export to PowerPoint,Feature,"Add ability to export dashboard insights and feature clusters directly to PowerPoint presentations for stakeholder meetings",Low,Open
+REQ-007,Enterprise Customer,Support Ticket,2024-03-04,Peem,Team Collaboration,Feature,"Add commenting and @mentions on feature requests and insight cards for better team collaboration",High,Open
+REQ-008,Product Manager,Internal Team,2024-03-05,Peem,Trend Analysis,Analytics,"Add trend analysis to show how feature request patterns change over time, including seasonal trends",Medium,Planned
+REQ-009,UX Designer,Customer Interview,2024-03-05,Peem,Dark Mode Support,UX,"Add dark mode theme option for better visibility and reduced eye strain during long analysis sessions",Low,Open
+REQ-010,Support Team,Slack,2024-03-06,Peem,Customer Feedback Portal,Feature,"Create a customer-facing portal where users can submit and vote on feature requests directly",High,Planned
+REQ-011,Product Manager,Internal Team,2024-03-06,Peem,Custom Fields Support,Feature,"Allow adding custom fields to feature requests to capture product-specific metadata",Medium,Open
+REQ-012,Enterprise Customer,Email,2024-03-07,Peem,Salesforce Integration,Integration,"Integrate with Salesforce to pull in customer context and opportunity data for better prioritization",High,Open
+REQ-013,Customer Success,Customer Interview,2024-03-07,Peem,Automated Insights,AI,"Use AI to automatically generate insights about emerging themes and potential priority features",Medium,Planned
+REQ-014,UX Designer,Internal Team,2024-03-08,Peem,Accessibility Improvements,UX,"Improve accessibility features including keyboard navigation, screen reader support, and high contrast mode",High,Open
+REQ-015,Product Manager,Customer Interview,2024-03-08,Peem,Multiple Product Support,Feature,"Add ability to manage and analyze feature requests across multiple products or product lines",Medium,Open
+"Add dark mode support","Users want the ability to switch between light and dark themes for better visibility in different lighting conditions","Sarah Chen",High,Open,UI/UX
+"Implement night theme","Request for a dark color scheme to reduce eye strain during nighttime usage","Mike Johnson",Medium,Planned,UI/UX
+"Export data to Excel","Add functionality to export all data and reports to Excel format","David Smith",High,In Progress,Feature
+"Export to CSV option","Need ability to download data in CSV format for external analysis","Rachel Wong",Medium,Open,Feature
+"Single sign-on integration","Implement SSO with Google and Microsoft accounts for easier login","Tom Wilson",High,Planned,Security
+"Add social login options","Enable login with Facebook and LinkedIn accounts","Emily Davis",Medium,Open,Security
+"Real-time collaboration","Allow multiple users to work on the same document simultaneously","Alex Turner",High,In Progress,Collaboration
+"Shared workspace feature","Enable team members to work together in a shared environment","James Miller",High,Open,Collaboration
+"Mobile app for iOS","Develop native iOS app for better mobile experience","Lisa Park",High,Planned,Mobile
+"Android application","Create Android version of the platform","Chris Martinez",High,Open,Mobile
+"Keyboard shortcuts","Add keyboard shortcuts for common actions to improve productivity","Nina Patel",Low,Open,UI/UX
+"Custom hotkeys","Allow users to customize keyboard shortcuts for different actions","Bob Anderson",Low,Planned,UI/UX
+"Password reset flow","Improve the password recovery process with better user guidance","Sophie Wilson",Medium,Completed,Security
+"Forgot password enhancement","Make password reset process more user-friendly with email verification","Kevin Chang",Medium,Open,Security
+"API documentation","Create comprehensive API documentation with examples","Mark Thompson",High,In Progress,Developer
+"API reference guide","Provide detailed documentation for all API endpoints with usage examples","Diana Lee",High,Open,Developer
+"Performance optimization","Improve overall system performance and reduce loading times","Ryan Cooper",High,In Progress,Technical
+"Speed improvements","Optimize application to reduce page load times and improve responsiveness","Jennifer Kim",High,Open,Technical
+"Bulk import tool","Add functionality to import multiple records at once","Sam Brown",Medium,Planned,Feature
+"Mass data import","Create tool for importing large datasets efficiently","Maria Garcia",Medium,Open,Feature
+"Custom dashboard widgets","Allow users to create and customize their own dashboard widgets","Peter Wright",Medium,In Progress,UI/UX
+"Personalized dashboards","Enable users to customize their dashboard layout and components","Amanda Taylor",Medium,Open,UI/UX
+"Two-factor authentication","Implement 2FA for additional security","John Doe",High,Completed,Security
+"Multi-factor auth","Add additional security layers with authenticator app support","Emma White",High,Open,Security
+"Automated reports","Schedule automated report generation and delivery","Michael Scott",Medium,Planned,Feature
+"Report scheduling","Allow users to schedule periodic report generation","Pam Beesly",Medium,Open,Feature
+"Integration with Slack","Add Slack integration for notifications and updates","Jim Halpert",Low,In Progress,Integration
+"Slack notifications","Send important alerts and updates to Slack channels","Dwight Schrute",Low,Open,Integration
+"User activity logs","Track and display user activity history","Oscar Martinez",Medium,Completed,Admin
+"Activity tracking","Monitor and log all user actions in the system","Angela Martin",Medium,Open,Admin
+"Role-based permissions","Implement granular role-based access control","Stanley Hudson",High,In Progress,Security
+"Custom user roles","Allow creation of custom roles with specific permissions","Phyllis Vance",High,Open,Security
+"Data backup system","Implement automated daily backups of all data","Creed Bratton",High,Completed,Technical
+"Automated backups","Create system for regular data backups and recovery","Kelly Kapoor",High,Open,Technical
+"Search functionality","Improve search with filters and advanced options","Andy Bernard",High,In Progress,Feature
+"Enhanced search","Add advanced search capabilities with multiple filters","Erin Hannon",High,Open,Feature
+"Email notifications","Send email alerts for important events and updates","Toby Flenderson",Medium,Planned,Communication
+"Notification system","Implement comprehensive notification system with email support","Meredith Palmer",Medium,Open,Communication
+"Print to PDF","Add option to export reports as PDF files","Kevin Malone",Low,In Progress,Feature
+"PDF export","Enable PDF generation for all reports and documents","Ryan Howard",Low,Open,Feature
+"Custom themes","Allow users to customize application colors and themes","Jan Levinson",Low,Planned,UI/UX
+"Theme customization","Provide options to personalize the application appearance","Holly Flax",Low,Open,UI/UX
+"Offline mode support","Enable app functionality without internet connection","Walter White",High,Planned,Feature
+"Offline access","Allow users to work offline and sync when online","Jesse Pinkman",High,Open,Feature
+"Data visualization","Add interactive charts and graphs for data analysis","Skyler White",Medium,In Progress,Analytics
+"Analytics dashboard","Create visual representations of key metrics and trends","Hank Schrader",Medium,Open,Analytics
+"Multi-language support","Add support for multiple languages and localization","Gus Fring",High,Planned,Localization
+"Language localization","Enable users to switch between different languages","Saul Goodman",High,Open,Localization
+"File attachment support","Allow users to attach files to records","Mike Ehrmantraut",Medium,In Progress,Feature
+"Document upload","Enable document uploading and management","Huell Babineaux",Medium,Open,Feature
+"Calendar integration","Add calendar sync with Google and Outlook","Ted Beneke",Low,Planned,Integration
+"Calendar sync","Implement calendar functionality with external services","Lydia Rodarte-Quayle",Low,Open,Integration
+"Audit trail","Keep detailed logs of all system changes","Steven Gomez",High,In Progress,Admin
+"Change history","Track and display history of all modifications","Tuco Salamanca",High,Open,Admin
+"Password complexity rules","Implement strong password requirements","Jane Margolis",Medium,Completed,Security
+"Password policies","Add configurable password strength requirements","Skinny Pete",Medium,Open,Security
+"Mobile responsiveness","Improve website layout on mobile devices","Badger Mayhew",High,In Progress,UI/UX
+"Responsive design","Optimize interface for different screen sizes","Brandon Mayhew",High,Open,UI/UX
+"API rate limiting","Implement rate limiting for API endpoints","Chuck McGill",Medium,Planned,Developer
+"API throttling","Add request throttling to prevent abuse","Howard Hamlin",Medium,Open,Developer
+"Automated testing","Add automated test suite for quality assurance","Kim Wexler",High,In Progress,Technical
+"Test automation","Implement comprehensive automated testing","Nacho Varga",High,Open,Technical
+"Comment system","Add ability to comment on items","Lalo Salamanca",Low,Planned,Collaboration
+"Discussion feature","Enable discussions and comments on entries","Eduardo Salamanca",Low,Open,Collaboration
+"Image optimization","Optimize image loading and compression","Don Eladio",Medium,In Progress,Performance
+"Image compression","Improve image handling and storage efficiency","Juan Bolsa",Medium,Open,Performance
+"Webhook integration","Add support for custom webhooks","Hector Salamanca",High,Planned,Integration
+"Custom webhooks","Enable integration with external systems via webhooks","Marco Salamanca",High,Open,Integration
+"Rich text editor","Add WYSIWYG editor for content creation","Leonel Salamanca",Medium,In Progress,UI/UX
+"Text formatting","Implement rich text formatting capabilities","Daniel Wormald",Medium,Open,UI/UX
+"Data encryption","Implement end-to-end encryption","Tyrus Kitt",High,Completed,Security
+"Encryption system","Add data encryption at rest and in transit","Victor",High,Open,Security
+"Batch processing","Add support for batch operations","Domingo Molina",Medium,Planned,Feature
+"Bulk operations","Enable processing of multiple items at once","Gustavo Fring",Medium,Open,Feature
+"Custom fields","Allow users to add custom data fields","Don Juan Bolsa",Low,In Progress,Feature
+"Field customization","Enable creation of custom data fields","Krazy-8",Low,Open,Feature
+"Version control","Track versions of documents and files","Werner Ziegler",High,Planned,Feature
+"Document versioning","Implement version history for documents","Kai Proctor",High,Open,Feature
+"API analytics","Track and analyze API usage patterns","Lyle",Medium,In Progress,Analytics
+"Usage analytics","Monitor and report on API utilization","Casper",Medium,Open,Analytics
+"Team collaboration","Enable team-based workflows","Gale Boetticher",High,Completed,Collaboration
+"Workflow management","Implement collaborative workflow system","Combo",High,Open,Collaboration 

@@ -1,0 +1,117 @@
+Product Requirements Document (PRD): Feature Request Insights Platform
+TL;DR
+This platform helps Product Managers uncover customer pain points by focusing on three core features:
+Wizard: Collects product context and transitions to data upload.
+Chatbot (Ada): An AI-powered assistant to analyze data and surface trends, themes, and pain points.
+Visualized Table: Displays uploaded feature request data in an interactive, sortable format.
+The system supports file uploads in CSV, Google Sheets, and Excel formats, with modular architecture for future feature expansions like filtering and dashboards.
+
+Problem Statement
+Feature requests are a goldmine of user insights, but PMs struggle to process and analyze them. This platform simplifies the process, guiding users from product context setup to data upload, enabling them to analyze trends through Ada and an interactive table.
+
+Features
+1. Wizard for Product Context
+Purpose: Collect foundational product information and guide users to upload their feature request data.
+Core Capabilities
+Guided Prompts:
+Gather structured inputs:
+Product Name
+Product Goals (e.g., "Simplify collaboration for distributed teams").
+Key User Personas (e.g., “Enterprise Developers”).
+Data Upload Transition:
+The final step of the Wizard transitions into file upload, prompting the user:
+“Thanks for providing your product details! Now, upload your feature requests to get started with insights.”
+Modular Design:
+Each Wizard step is a standalone component, enabling easy updates (e.g., adding or removing prompts).
+Implementation Notes
+Embed the file upload UI directly in the final Wizard step for a seamless experience.
+Use validation to guide users on supported formats:
+Show a message like “We support CSV, Excel, and Google Sheets formats.”
+Example Flow
+Step 1: Welcome: “Let’s start by understanding your product!”
+Step 2: Collect product goals.
+Step 3: Identify key user personas.
+Step 4: File upload with clear instructions and drag-and-drop functionality.
+UI Design
+File Upload Section (Final Wizard Step):
+Drag-and-drop box styled as a classical UI element (e.g., a dotted rectangle with text “Drag and drop your file here or click to browse”).
+Labels to guide users on supported file formats:
+“Supported formats: CSV, Excel (.xlsx), Google Sheets.”
+
+2. Chatbot (Ada)
+Purpose: Ada provides actionable insights by analyzing uploaded feature request data.
+Core Capabilities
+Q&A Functionality:
+Ada answers questions like:
+“What are the most common pain points in this data?”
+“Which requests are most frequent among Enterprise users?”
+Integration with Product Context:
+Ada uses inputs from the Wizard to contextualize insights (e.g., tailoring responses to product goals).
+File Format-Agnostic Analysis:
+Ada analyzes data uniformly, regardless of whether the source is CSV, Excel, or Google Sheets.
+Implementation Notes
+Modular backend separates:
+Data ingestion logic for multiple file formats.
+NLP analysis pipeline for trends and insights.
+Example Flow
+User uploads a file via the Wizard.
+User asks Ada: “What’s the biggest pain point?”
+Ada responds:
+“30% of requests mention lack of API documentation.”
+
+3. Visualized Table
+Purpose: Display uploaded feature request data in a clean, sortable format for easy exploration.
+Core Capabilities
+Basic Table Features:
+Display data in rows and columns (e.g., “Feature Request,” “Customer Type,” “Priority”).
+Allow sorting by columns (e.g., by Priority).
+Expandable Architecture for Filters (Future):
+The table supports modular additions, like filters for customer segment or date range.
+File Format Support:
+Uniformly display data from CSV, Excel, and Google Sheets in the same table layout.
+Implementation Notes
+Use a shared data-processing pipeline to ensure consistent formatting across all file types.
+Decouple table rendering from data ingestion to allow seamless integration with additional features.
+Example Flow
+User uploads a file in the Wizard.
+Table displays rows with sortable headers (e.g., Feature Request, Customer Type, Priority).
+
+Technical Notes for Cursor.ai
+File Upload Functionality
+Supported File Formats:
+CSV: Use Python’s pandas library for parsing and cleaning.
+Excel (.xlsx): Use openpyxl or similar library for handling Excel files.
+Google Sheets: Integrate with Google Sheets API for direct import.
+Unified Data Preprocessing:
+Normalize data during upload:
+Ensure headers align (e.g., “Feature Request” and “Customer Type”).
+Handle missing or malformed data gracefully.
+Error Handling:
+Validate file structure on upload and provide user-friendly error messages:
+“Your file is missing required columns. Please include headers like ‘Feature Request.’”
+Modular Backend Architecture
+Data Ingestion Layer:
+Separate file upload handling from data analysis.
+Example flow:
+Detect file type (CSV, Excel, or Google Sheets).
+Parse data into a common JSON format.
+Store cleaned data for use by Ada and the Table.
+API-Driven Development:
+/upload-data: Accepts and processes files.
+/analyze-data: Runs clustering and NLP analysis.
+/query-ada: Handles conversational queries.
+
+Milestones & Sequencing
+Week 1-2:
+Build Wizard with product context prompts and integrated File Upload supporting CSV, Excel, and Google Sheets.
+Week 3-4:
+Develop unified preprocessing pipeline for all file types.
+Build the visualized table with sortable functionality.
+Week 5-6:
+Develop Ada’s backend for basic Q&A (analyzing trends and generating responses).
+Integrate Ada with the platform for real-time queries.
+Week 7+:
+Add advanced capabilities (e.g., filters for the table, proactive Ada suggestions).
+
+
+
