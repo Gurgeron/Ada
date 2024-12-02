@@ -133,7 +133,7 @@ const WizardForm = () => {
           ${completed ? 'text-white' : active ? 'text-[#2B2B2B]' : 'text-white'}
           transform translate-y-[1px]
         `}>
-          {completed ? '✓' : toRomanNumeral(number)}
+          {completed ? '•' : toRomanNumeral(number)}
         </span>
       </div>
 

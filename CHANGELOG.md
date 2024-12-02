@@ -174,6 +174,13 @@
 - Updated landing page button hover color to lighter gray (#C7C7C7)
 - Enhanced landing page button hover effect with scale transform and shadow
 - Added consistent spacing and alignment across all elements
+- Updated wizard step completion indicator to a minimalistic dot symbol
+- Updated wizard step indicators to use Roman numerals
+- Changed step indicator font to serif for better Roman numeral display
+- Adjusted header icon position slightly lower for better visual balance
+- Updated landing page button hover color to lighter gray (#C7C7C7)
+- Enhanced landing page button hover effect with scale transform and shadow
+- Added consistent spacing and alignment across all elements
 
 ### Fixed
 - Fixed 404 errors for insights API endpoint
