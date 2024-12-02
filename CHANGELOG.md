@@ -98,6 +98,12 @@
 - Maintained color-coding for Priority levels
 
 ## [Unreleased]
+- Added "AI that GET your user" subheader to Analysis page
+- Restored Ada header while keeping navigation icon removed
+- Removed duplicate icon from navigation tabs
+- Moved Ada header to top of Analysis container
+- Added markdown support in Ada chat messages
+- Added consistent spacing and alignment across all elements
 - Removed redundant "Feature Request Analysis" header from Analysis component
 - Streamlined interface by removing duplicate headers
 - Improved visual hierarchy and reduced clutter
@@ -180,6 +186,40 @@
 - Adjusted header icon position slightly lower for better visual balance
 - Updated landing page button hover color to lighter gray (#C7C7C7)
 - Enhanced landing page button hover effect with scale transform and shadow
+- Added consistent spacing and alignment across all elements
+- Added markdown support in Ada chat messages
+- Installed react-markdown for message rendering
+- Added Tailwind typography plugin for markdown styling
+- Updated wizard step completion indicator to minimalistic dot symbol
+- Updated wizard step indicators to use Roman numerals
+- Changed step indicator font to serif for better Roman numeral display
+- Added consistent spacing and alignment across all elements
+- Added row numbers to feature table with zero-padding
+- Added markdown support in Ada chat messages
+- Installed react-markdown for message rendering
+- Added Tailwind typography plugin for markdown styling
+- Updated wizard step completion indicator to minimalistic dot symbol
+- Added consistent spacing and alignment across all elements
+- Fixed infinite update loop in feature table row numbers
+- Added row numbers to feature table with zero-padding
+- Added markdown support in Ada chat messages
+- Installed react-markdown for message rendering
+- Added Tailwind typography plugin for markdown styling
+- Updated wizard step completion indicator to minimalistic dot symbol
+- Added consistent spacing and alignment across all elements
+- Adjusted chat container height for better screen fit
+- Fixed infinite update loop in feature table row numbers
+- Added row numbers to feature table with zero-padding
+- Added markdown support in Ada chat messages
+- Installed react-markdown for message rendering
+- Added Tailwind typography plugin for markdown styling
+- Updated wizard step completion indicator to minimalistic dot symbol
+- Added consistent spacing and alignment across all elements
+- Added Ada header with icon to Analysis page
+- Adjusted chat container height for better screen fit
+- Fixed infinite update loop in feature table row numbers
+- Added row numbers to feature table with zero-padding
+- Added markdown support in Ada chat messages
 - Added consistent spacing and alignment across all elements
 
 ### Fixed
