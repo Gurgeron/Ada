@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Analysis from './Analysis';
 import Dashboard from '../Dashboard/Dashboard';
 import AdaChat from '../Ada/AdaChat';
+import VoiceChat from '../Ada/VoiceChat';
 
 const AnalysisContainer = () => {
   const location = useLocation();
@@ -10,6 +11,7 @@ const AnalysisContainer = () => {
   const queryParams = new URLSearchParams(location.search);
   const contextId = queryParams.get('context_id');
   const activeTab = queryParams.get('tab') || 'table';
+  const [chatMode, setChatMode] = useState('text'); // 'text' or 'voice'
 
   const handleTabChange = (tab) => {
     const newParams = new URLSearchParams(location.search);
@@ -104,7 +106,50 @@ const AnalysisContainer = () => {
 
           {/* Chat Interface */}
           <div className="lg:col-span-1 lg:h-[calc(100vh-8rem)] lg:sticky lg:top-8">
-            <AdaChat contextId={contextId} />
+            <div className="flex flex-col h-full">
+              {/* Chat Mode Toggle */}
+              <div className="flex justify-end mb-2 px-4">
+                <div className="inline-flex rounded-lg border border-gray-200">
+                  <button
+                    onClick={() => setChatMode('text')}
+                    className={`px-4 py-2 rounded-l-lg ${
+                      chatMode === 'text'
+                        ? 'bg-[#4c9085] text-white'
+                        : 'bg-white text-gray-600 hover:bg-gray-50'
+                    }`}
+                  >
+                    <span className="flex items-center gap-2">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                      </svg>
+                      Text
+                    </span>
+                  </button>
+                  <button
+                    onClick={() => setChatMode('voice')}
+                    className={`px-4 py-2 rounded-r-lg ${
+                      chatMode === 'voice'
+                        ? 'bg-[#4c9085] text-white'
+                        : 'bg-white text-gray-600 hover:bg-gray-50'
+                    }`}
+                  >
+                    <span className="flex items-center gap-2">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                      </svg>
+                      Voice
+                    </span>
+                  </button>
+                </div>
+              </div>
+              
+              {/* Chat Component */}
+              {chatMode === 'text' ? (
+                <AdaChat contextId={contextId} />
+              ) : (
+                <VoiceChat contextId={contextId} />
+              )}
+            </div>
           </div>
         </div>
       </div>

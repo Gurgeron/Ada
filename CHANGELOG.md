@@ -7,6 +7,10 @@
   - Maintained chat interface across both views
   - Added URL-based tab state management
   - Used consistent styling with main color palette
+- Added voice chat toggle button in the chat interface
+  - Users can now switch between text and voice chat modes
+  - Button includes intuitive icons and hover effects
+  - Maintains consistent styling with the app's design system
 
 ## [Previous]
 - Added new Insights Dashboard feature:
@@ -221,6 +225,14 @@
 - Added row numbers to feature table with zero-padding
 - Added markdown support in Ada chat messages
 - Added consistent spacing and alignment across all elements
+- Added real-time voice chat capabilities using OpenAI's Realtime API
+- Implemented WebSocket server for bidirectional audio streaming
+- Added voice recording and playback controls
+- Added visual feedback for recording and playback states
+- Updated backend dependencies for WebSocket support
+- Added markdown support in Ada chat messages
+- Added consistent spacing and alignment across all elements
+- Added toggle between text and voice chat modes
 
 ### Fixed
 - Fixed 404 errors for insights API endpoint
