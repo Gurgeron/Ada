@@ -143,6 +143,37 @@
 - Added chart icon to top left of analysis page
 - Improved navigation layout with consistent branding
 - Enhanced visual hierarchy in analysis container
+- Moved chart icon next to Ada header on landing page
+- Reduced spacing between elements for better visual flow
+- Improved landing page layout proportions
+- Improved landing page horizontal centering with flex layout
+- Enhanced responsive layout with better width control
+- Added consistent spacing and alignment across all elements
+- Enhanced landing page button hover effect with scale transform and shadow
+- Improved landing page horizontal centering with flex layout
+- Enhanced responsive layout with better width control
+- Added consistent spacing and alignment across all elements
+- Updated landing page button hover color to brand color (#4c9085)
+- Enhanced landing page button hover effect with scale transform and shadow
+- Improved landing page horizontal centering with flex layout
+- Enhanced responsive layout with better width control
+- Added consistent spacing and alignment across all elements
+- Updated landing page button hover color to lighter gray (#666666)
+- Enhanced landing page button hover effect with scale transform and shadow
+- Improved landing page horizontal centering with flex layout
+- Enhanced responsive layout with better width control
+- Added consistent spacing and alignment across all elements
+- Updated landing page button hover color to lighter gray (#C7C7C7)
+- Enhanced landing page button hover effect with scale transform and shadow
+- Improved landing page horizontal centering with flex layout
+- Added consistent spacing and alignment across all elements
+- Adjusted header icon position slightly lower for better visual balance
+- Updated wizard step indicators to use Roman numerals
+- Changed step indicator font to serif for better Roman numeral display
+- Adjusted header icon position slightly lower for better visual balance
+- Updated landing page button hover color to lighter gray (#C7C7C7)
+- Enhanced landing page button hover effect with scale transform and shadow
+- Added consistent spacing and alignment across all elements
 
 ### Fixed
 - Fixed 404 errors for insights API endpoint
