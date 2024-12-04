@@ -238,8 +238,24 @@ const Analysis = () => {
       {/* Header */}
       <div className="bg-white border-b">
         <div className="max-w-[1400px] mx-auto px-8 py-6">
-          <h1 className="text-3xl font-bold text-[#2B2B2B]">Feature Request Analysis</h1>
-          <p className="text-[#B3B3B3] mt-2">Analyze and prioritize feature requests</p>
+          <div className="flex items-center gap-3 mb-4">
+            <svg
+              className="w-8 h-8 text-[#2B2B2B] opacity-20"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                d="M8 13v-1m4 1v-3m4 3V8M12 21l9-9-9-9-9 9 9 9z"
+              />
+            </svg>
+            <h1 className="text-3xl font-bold text-[#2B2B2B]">Ada</h1>
+          </div>
+          <p className="text-[#B3B3B3] mt-2">Your Feature Request Analysis Assistant</p>
           
           {/* Tabs */}
           <div className="flex space-x-6 mt-6">

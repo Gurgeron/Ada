@@ -3,6 +3,11 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3002';
 
+// Helper function to convert markdown-style bold to HTML
+const formatMessage = (text) => {
+  return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+};
+
 const AdaChat = ({ contextId }) => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -70,7 +75,12 @@ const AdaChat = ({ contextId }) => {
                   : 'text-gray-700'
               }`}
             >
-              <div className="whitespace-pre-wrap">{message.content}</div>
+              <div 
+                className="whitespace-pre-wrap"
+                dangerouslySetInnerHTML={{ 
+                  __html: formatMessage(message.content)
+                }}
+              />
             </div>
           </div>
         ))}
