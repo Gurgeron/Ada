@@ -86,10 +86,7 @@ const AdaChat = ({ contextId }) => {
     <div className="flex flex-col h-[calc(100vh-2rem)] max-h-[800px] bg-white rounded-lg shadow-lg mx-4 my-2">
       {/* Header */}
       <div className="flex items-center p-4 border-b">
-        <div>
-          <h2 className="text-xl font-semibold text-[#4c9085]">Ada</h2>
-          <p className="text-sm text-gray-500">Your Feature Request Analysis Assistant</p>
-        </div>
+        <h2 className="text-xl font-semibold text-[#4c9085]">Ada</h2>
       </div>
 
       {/* Messages Container */}
