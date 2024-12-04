@@ -31,11 +31,14 @@ const AnalysisContainer = () => {
   return (
     <div className="min-h-screen bg-white p-8">
       <div className="max-w-[1400px] mx-auto">
-        {/* Logo and Navigation */}
-        <div className="flex items-center mb-6">
-          <div className="flex items-center">
+        {/* Ada Header */}
+        <div className="flex flex-col items-start mb-8">
+          <div className="flex items-center justify-start gap-3">
+            <h1 className="text-4xl font-bold text-[#2B2B2B]">
+              Ada
+            </h1>
             <svg
-              className="w-8 h-8 text-[#2B2B2B] opacity-80 mr-4"
+              className="w-8 h-8 text-[#2B2B2B] opacity-20"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -49,6 +52,13 @@ const AnalysisContainer = () => {
               />
             </svg>
           </div>
+          <p className="text-[#B3B3B3] text-xl mt-2">
+            AI that GET your user
+          </p>
+        </div>
+
+        {/* Navigation */}
+        <div className="flex items-center mb-6">
           {/* Enhanced Tab Navigation */}
           <div className="flex space-x-4 border-b border-gray-200 flex-grow">
             <button
