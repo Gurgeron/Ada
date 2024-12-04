@@ -7,6 +7,28 @@
   - Maintained chat interface across both views
   - Added URL-based tab state management
   - Used consistent styling with main color palette
+- Restored full layout with table and chat interface
+- Added responsive grid layout (2/3 table, 1/3 chat)
+- Improved sticky chat positioning for desktop
+- Cleaned up debug code and console logs
+- Restored dashboard view with insights and metrics
+- Added tabbed navigation between table and dashboard views
+- Added main header with title and description
+- Improved tab styling and transitions
+- Installed chart.js and react-chartjs-2 dependencies
+- Added chart components for data visualization
+- Added insight cards for metrics display
+- Added dashboard layout with responsive grid
+- Implemented insights API endpoint with mock data
+- Added insights route and blueprint
+- Added mock data for dashboard visualization
+- Added proper error handling for insights endpoint
+- Implemented sticky columns for better table navigation
+- Added shadow effect for sticky columns
+- Added proper z-index handling for overlapping elements
+- Updated table header to be sticky on vertical scroll only
+- Improved table scroll behavior for better usability
+- Enhanced table layout and structure
 
 ## [Previous]
 - Added new Insights Dashboard feature:
@@ -97,6 +119,81 @@
 - Updated data accessors to match the API response structure
 - Maintained color-coding for Priority levels
 
+## [1.0.5] - 2024-01-20
+
+### Fixed
+- Fixed FeatureTable rendering issues
+  - Added proper header property handling (Header/header)
+  - Added fallback for column IDs
+  - Added null/undefined checks for values
+  - Added fallback values for column widths
+
+## [1.0.4] - 2024-01-20
+
+### Fixed
+- Restored original grid layout with improved styling
+  - Kept the original grid-cols-3 structure
+  - Added proper background colors and shadows
+  - Fixed spacing and margins
+  - Improved container styling
+
+### Changed
+- Simplified layout structure while maintaining functionality
+- Added proper headers and descriptions
+- Fixed height calculations
+- Enhanced visual consistency
+
+## [1.0.3] - 2024-01-20
+
+### Fixed
+- Improved overall layout and component visibility
+  - Fixed height calculations for all components
+  - Added proper overflow handling
+  - Improved spacing and padding
+  - Enhanced visual hierarchy
+
+### Added
+- Added welcome message to chat interface
+- Added proper headers and descriptions
+- Added loading states and error handling
+- Added consistent shadows and rounded corners
+
+### Changed
+- Updated layout structure to use flex instead of grid
+- Modified height calculations for better viewport fit
+- Improved component styling and transitions
+- Enhanced responsive design
+
+## [1.0.2] - 2024-01-20
+
+### Fixed
+- Restored proper layout for chatbot and dashboard
+  - Fixed the main content and chat interface layout
+  - Improved responsive design with proper flex layout
+  - Added proper shadow and rounded corners
+  - Fixed sticky positioning for chat interface
+  - Adjusted height calculations for better viewport fit
+
+## [1.0.1] - 2024-01-20
+
+### Fixed
+- Fixed rendering issues in FeatureTable component
+  - Added data validation and sanitization
+  - Enhanced column configuration with proper fallbacks
+  - Improved error handling for null/undefined values
+  - Fixed styling issues with column widths
+  - Added proper type checking for data and columns
+
+### Added
+- Added data sanitization layer to handle invalid input
+- Added fallback values for missing properties
+- Added string conversion for cell values
+
+### Changed
+- Updated column width handling to use fallback values
+- Modified cell rendering to handle null/undefined values
+- Updated column configuration to be more flexible
+
 ## [Unreleased]
 - Removed redundant "Feature Request Analysis" header from Analysis component
 - Streamlined interface by removing duplicate headers
@@ -181,23 +278,27 @@
 - Updated landing page button hover color to lighter gray (#C7C7C7)
 - Enhanced landing page button hover effect with scale transform and shadow
 - Added consistent spacing and alignment across all elements
-
-### Fixed
-- Fixed 404 errors for insights API endpoint
-- Improved data loading in Dashboard component
-- Added proper error handling for missing or invalid data
-- Fixed boolean attribute warning by creating a CustomFileUploader component to properly handle error states
-- Improved file upload error handling with better prop management
-- Enhanced component structure for better maintainability
-- Resolved styled-components warning by implementing proper transient props ($hasError) for FileUploader styling
-- Improved component architecture with styled-components for better prop handling
-- Eliminated DOM warnings related to boolean attributes
-- Fixed insights endpoint 404 error by implementing proper data storage in feature_request_items table
-- Enhanced file upload to store data in both FeatureRequestData and FeatureRequest tables
-- Improved insights generation with detailed metrics and analysis
-- Added proper error handling and logging for insights endpoint
-
-### Changed
 - Updated app.py to register insights blueprint
 - Enhanced dashboard UI with responsive grid layout
 - Improved chart styling and interactivity
+- Updated layout to accommodate both table and dashboard views
+- Enhanced header styling and spacing
+- Improved tab interaction feedback
+- Table rendering issues
+- Column configuration and data handling
+- Layout responsiveness on different screen sizes
+- Chart dependency issues
+- Dashboard component loading
+- Layout responsiveness on different screen sizes
+- Fixed 404 errors for insights API endpoint
+- Improved data loading in Dashboard component
+- Added proper error handling for missing or invalid data
+- Updated table layout to support horizontal scrolling
+- Enhanced table styling with better visual separation
+- Improved table responsiveness and usability
+- Fixed sticky column positioning
+- Improved table scroll behavior
+- Enhanced visual consistency across table elements
+- Fixed table header behavior to match Excel-like freeze panes
+- Improved horizontal scrolling to include all columns
+- Enhanced visual consistency of table header

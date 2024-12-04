@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import FeatureTable from './FeatureTable';
+import AdaChat from '../Ada/AdaChat';
+import Dashboard from '../Dashboard/Dashboard';
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3002';
@@ -13,12 +15,12 @@ const Analysis = () => {
   const [columns, setColumns] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [activeTab, setActiveTab] = useState('table'); // 'table' or 'dashboard'
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${API_URL}/api/data/data/${contextId}`);
-        console.log('Raw API Response:', response.data);
         
         // Extract the data from the response
         let processedData = [];
@@ -29,10 +31,6 @@ const Analysis = () => {
         } else if (Array.isArray(response.data)) {
           processedData = response.data;
         }
-        
-        console.log('First row raw data:', processedData[0]);
-        console.log('Row 15 raw data:', processedData[15]);
-        console.log('Row 16 raw data:', processedData[16]);
         
         if (processedData.length > 0) {
           // Define field mappings from API to CSV columns
@@ -119,15 +117,6 @@ const Analysis = () => {
               row['Request ID'] = `FR-${String(index + 1).padStart(3, '0')}`;
             }
             
-            // Log problematic rows
-            if (index === 15 || index === 16) {
-              console.log(`Row ${index} transformation:`, {
-                original: item,
-                transformed: row,
-                keys: Object.keys(item)
-              });
-            }
-            
             return row;
           });
           
@@ -211,11 +200,22 @@ const Analysis = () => {
     return colors[priority] || 'bg-gray-100 text-gray-800';
   };
 
+  if (!contextId) {
+    return (
+      <div className="min-h-screen bg-white p-8 flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-[#2B2B2B] mb-4">No Context Found</h2>
+          <p className="text-[#B3B3B3]">Please complete the setup process first.</p>
+        </div>
+      </div>
+    );
+  }
+
   if (loading) {
     return (
-      <div className="flex items-center justify-center p-8">
+      <div className="min-h-screen bg-white p-8 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#4c9085]"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2B2B2B]"></div>
           <p className="mt-4 text-[#B3B3B3]">Loading your data...</p>
         </div>
       </div>
@@ -224,7 +224,7 @@ const Analysis = () => {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center p-8">
+      <div className="min-h-screen bg-white p-8 flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-red-600 mb-4">Error</h2>
           <p className="text-[#B3B3B3]">{error}</p>
@@ -234,8 +234,57 @@ const Analysis = () => {
   }
 
   return (
-    <div>
-      <FeatureTable data={featureData} columns={columns} />
+    <div className="min-h-screen bg-[#FFFFFF]">
+      {/* Header */}
+      <div className="bg-white border-b">
+        <div className="max-w-[1400px] mx-auto px-8 py-6">
+          <h1 className="text-3xl font-bold text-[#2B2B2B]">Feature Request Analysis</h1>
+          <p className="text-[#B3B3B3] mt-2">Analyze and prioritize feature requests</p>
+          
+          {/* Tabs */}
+          <div className="flex space-x-6 mt-6">
+            <button
+              onClick={() => setActiveTab('table')}
+              className={`pb-3 px-1 font-medium transition-colors relative ${
+                activeTab === 'table'
+                  ? 'text-[#4c9085] border-b-2 border-[#4c9085]'
+                  : 'text-gray-500 hover:text-[#4c9085]'
+              }`}
+            >
+              Feature Table
+            </button>
+            <button
+              onClick={() => setActiveTab('dashboard')}
+              className={`pb-3 px-1 font-medium transition-colors relative ${
+                activeTab === 'dashboard'
+                  ? 'text-[#4c9085] border-b-2 border-[#4c9085]'
+                  : 'text-gray-500 hover:text-[#4c9085]'
+              }`}
+            >
+              Dashboard
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-[1400px] mx-auto px-8 py-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Main Analysis Area */}
+          <div className="lg:col-span-2">
+            {activeTab === 'table' ? (
+              <FeatureTable data={featureData} columns={columns} />
+            ) : (
+              <Dashboard />
+            )}
+          </div>
+
+          {/* Chat Interface */}
+          <div className="lg:col-span-1 lg:h-[calc(100vh-8rem)] lg:sticky lg:top-8">
+            <AdaChat contextId={contextId} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -14,18 +14,18 @@ const FeatureTable = ({ data = [], columns = [] }) => {
         </div>
       ),
       minWidth: 60,
-      width: 60,
+      width: 60
     },
     ...columns.map(col => ({
       ...col,
-      id: col.accessor,
-      Header: col.header,
+      id: col.accessor || col.id,
+      Header: col.Header || col.header,
       ...(col.accessor === 'Description' && {
         minWidth: 600,
         width: 600,
         Cell: ({ value }) => (
           <div className="min-w-[600px] py-2 whitespace-normal text-sm text-gray-900">
-            {value}
+            {value || ''}
           </div>
         )
       }),
@@ -83,79 +83,75 @@ const FeatureTable = ({ data = [], columns = [] }) => {
 
   return (
     <div className="overflow-hidden shadow-md rounded-lg bg-white flex flex-col" style={{ height: 'calc(100vh - 200px)' }}>
-      {/* Fixed Header */}
-      <div className="sticky top-0 z-10">
-        <table {...getTableProps()} className="min-w-full table-fixed">
-          <thead className="bg-gray-50 shadow-sm">
-            {headerGroups.map(headerGroup => {
-              const { key, ...headerGroupProps } = headerGroup.getHeaderGroupProps();
-              return (
-                <tr key={key} {...headerGroupProps}>
-                  {headerGroup.headers.map(column => {
-                    const { key, ...columnProps } = column.getHeaderProps(column.getSortByToggleProps());
-                    return (
-                      <th
-                        key={key}
-                        {...columnProps}
-                        className={`px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider bg-gray-50
-                          ${column.id === 'lineNumber' ? 'w-[60px]' : ''}
-                          ${column.id === 'Description' ? 'w-[600px]' : ''}
-                        `}
-                        style={{
-                          width: column.width,
-                          minWidth: column.minWidth,
-                        }}
-                      >
-                        {column.render('Header')}
-                        <span className="ml-2">
-                          {column.isSorted
-                            ? column.isSortedDesc
-                              ? ' ↓'
-                              : ' ↑'
-                            : ''}
-                        </span>
-                      </th>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </thead>
-        </table>
-      </div>
-
-      {/* Scrollable Body */}
-      <div className="flex-1 overflow-auto">
-        <table {...getTableProps()} className="min-w-full table-fixed">
-          <tbody {...getTableBodyProps()} className="bg-white divide-y divide-gray-200">
-            {page.map(row => {
-              prepareRow(row);
-              const { key, ...rowProps } = row.getRowProps();
-              return (
-                <tr key={key} {...rowProps} className="hover:bg-gray-50">
-                  {row.cells.map(cell => {
-                    const { key, ...cellProps } = cell.getCellProps();
-                    return (
-                      <td
-                        key={key}
-                        {...cellProps}
-                        className={`px-6 py-4 text-sm text-gray-900
-                          ${cell.column.id === 'Description' ? 'whitespace-normal' : 'whitespace-nowrap'}
-                        `}
-                        style={{
-                          width: cell.column.width,
-                          minWidth: cell.column.minWidth,
-                        }}
-                      >
-                        {cell.render('Cell')}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+      <div className="overflow-x-auto">
+        <div className="inline-block min-w-full align-middle">
+          <div className="overflow-hidden">
+            <table {...getTableProps()} className="min-w-full divide-y divide-gray-200">
+              {/* Sticky Header */}
+              <thead className="bg-gray-50">
+                {headerGroups.map(headerGroup => {
+                  const { key, ...headerGroupProps } = headerGroup.getHeaderGroupProps();
+                  return (
+                    <tr key={key} {...headerGroupProps} className="sticky top-0 z-10 bg-gray-50 shadow-sm">
+                      {headerGroup.headers.map(column => {
+                        const { key, ...columnProps } = column.getHeaderProps(column.getSortByToggleProps());
+                        return (
+                          <th
+                            key={key}
+                            {...columnProps}
+                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
+                            style={{
+                              width: column.width || 'auto',
+                              minWidth: column.minWidth || 'auto',
+                            }}
+                          >
+                            {column.render('Header')}
+                            <span className="ml-2">
+                              {column.isSorted
+                                ? column.isSortedDesc
+                                  ? ' ↓'
+                                  : ' ↑'
+                                : ''}
+                            </span>
+                          </th>
+                        );
+                      })}
+                    </tr>
+                  );
+                })}
+              </thead>
+              {/* Scrollable Body */}
+              <tbody {...getTableBodyProps()} className="bg-white divide-y divide-gray-200">
+                {page.map(row => {
+                  prepareRow(row);
+                  const { key, ...rowProps } = row.getRowProps();
+                  return (
+                    <tr key={key} {...rowProps} className="hover:bg-gray-50">
+                      {row.cells.map(cell => {
+                        const { key, ...cellProps } = cell.getCellProps();
+                        return (
+                          <td
+                            key={key}
+                            {...cellProps}
+                            className={`px-6 py-4 text-sm text-gray-900 ${
+                              cell.column.id === 'Description' ? 'whitespace-normal' : 'whitespace-nowrap'
+                            }`}
+                            style={{
+                              width: cell.column.width || 'auto',
+                              minWidth: cell.column.minWidth || 'auto',
+                            }}
+                          >
+                            {cell.render('Cell')}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
       {/* Fixed Footer */}
