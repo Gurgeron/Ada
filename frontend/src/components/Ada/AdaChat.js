@@ -3,10 +3,40 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3002';
 
+// Helper function to convert markdown-style bold to HTML
+const formatMessage = (text) => {
+  return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+};
+
+// Predefined prompts that users can click on
+const PREDEFINED_PROMPTS = [
+  {
+    text: "What are the top customer pain points?",
+    description: "Identify most pressing customer issues"
+  },
+  {
+    text: "Which features should we prioritize next?",
+    description: "Get recommendations for feature prioritization"
+  },
+  {
+    text: "Summarize the main feature request trends",
+    description: "Overview of common patterns and themes"
+  },
+  {
+    text: "What do enterprise customers want most?",
+    description: "Focus on enterprise segment needs"
+  },
+  {
+    text: "Show quick wins vs long-term projects",
+    description: "Categorize by implementation effort"
+  }
+];
+
 const AdaChat = ({ contextId }) => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [showPrompts, setShowPrompts] = useState(true);
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -17,18 +47,17 @@ const AdaChat = ({ contextId }) => {
     scrollToBottom();
   }, [messages]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!input.trim()) return;
+  const sendMessage = async (text) => {
+    if (!text.trim() || isLoading) return;
 
-    const userMessage = input.trim();
-    setInput('');
-    setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+    setMessages(prev => [...prev, { role: 'user', content: text }]);
     setIsLoading(true);
+    setShowPrompts(false);
+    setInput('');
 
     try {
       const response = await axios.post(`${API_URL}/api/ada/chat`, {
-        query: userMessage,
+        query: text,
         context_id: contextId
       });
 
@@ -44,6 +73,15 @@ const AdaChat = ({ contextId }) => {
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await sendMessage(input);
+  };
+
+  const handlePromptClick = async (prompt) => {
+    await sendMessage(prompt.text);
+  };
+
   return (
     <div className="flex flex-col h-[calc(100vh-2rem)] max-h-[800px] bg-white rounded-lg shadow-lg mx-4 my-2">
       {/* Header */}
@@ -55,6 +93,33 @@ const AdaChat = ({ contextId }) => {
 
       {/* Messages Container */}
       <div className="flex-1 overflow-y-auto px-6 py-4 space-y-6">
+        {showPrompts && messages.length === 0 && (
+          <div className="space-y-4">
+            <p className="text-gray-500 text-sm">Here are some questions you can ask:</p>
+            <div className="grid gap-3">
+              {PREDEFINED_PROMPTS.map((prompt, index) => (
+                <button
+                  key={index}
+                  onClick={() => handlePromptClick(prompt)}
+                  disabled={isLoading}
+                  className={`text-left p-3 rounded-lg border border-[#4c9085]/20 
+                    ${isLoading 
+                      ? 'opacity-50 cursor-not-allowed' 
+                      : 'hover:border-[#4c9085] hover:bg-[#4c9085]/5 hover:shadow-sm'} 
+                    transition-all duration-200 group`}
+                >
+                  <p className="text-[#4c9085] font-medium group-hover:text-[#3d7269]">
+                    {prompt.text}
+                  </p>
+                  <p className="text-sm text-gray-500 mt-1">
+                    {prompt.description}
+                  </p>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+        
         {messages.map((message, index) => (
           <div
             key={index}
@@ -69,7 +134,12 @@ const AdaChat = ({ contextId }) => {
                   : 'text-gray-700'
               }`}
             >
-              <div className="whitespace-pre-wrap">{message.content}</div>
+              <div 
+                className="whitespace-pre-wrap"
+                dangerouslySetInnerHTML={{ 
+                  __html: formatMessage(message.content)
+                }}
+              />
             </div>
           </div>
         ))}
