@@ -2,6 +2,7 @@ from datetime import datetime
 from sqlalchemy import Column, Integer, String, JSON, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from database import Base
+from models.wizard import ProductContext
 
 class FeatureRequestData(Base):
     """Model for storing processed feature request data"""
