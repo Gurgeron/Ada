@@ -100,13 +100,14 @@ class ClusteringService:
             ]
             
             # Create prompt for GPT-4
+            feature_requests_text = '\n\n'.join(feature_texts)
             prompt = f"""Analyze these related feature requests and identify:
 1. The main theme or category
 2. A brief summary of what these features have in common
 3. Key terms or concepts that appear frequently
 
 Feature Requests:
-{'\n\n'.join(feature_texts)}
+{feature_requests_text}
 
 Provide your analysis in JSON format with these keys: theme, summary, key_terms"""
             
