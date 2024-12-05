@@ -15,7 +15,7 @@ const Analysis = () => {
   const [columns, setColumns] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [activeTab, setActiveTab] = useState('table'); // 'table' or 'dashboard'
+  const [activeTab, setActiveTab] = useState('dashboard'); // Changed default to 'dashboard'
 
   useEffect(() => {
     const fetchData = async () => {
@@ -257,18 +257,8 @@ const Analysis = () => {
           </div>
           <p className="text-[#B3B3B3] mt-2">Your Feature Request Analysis Assistant</p>
           
-          {/* Tabs */}
+          {/* Tabs - Reordered */}
           <div className="flex space-x-6 mt-6">
-            <button
-              onClick={() => setActiveTab('table')}
-              className={`pb-3 px-1 font-medium transition-colors relative ${
-                activeTab === 'table'
-                  ? 'text-[#4c9085] border-b-2 border-[#4c9085]'
-                  : 'text-gray-500 hover:text-[#4c9085]'
-              }`}
-            >
-              Feature Table
-            </button>
             <button
               onClick={() => setActiveTab('dashboard')}
               className={`pb-3 px-1 font-medium transition-colors relative ${
@@ -279,6 +269,16 @@ const Analysis = () => {
             >
               Dashboard
             </button>
+            <button
+              onClick={() => setActiveTab('table')}
+              className={`pb-3 px-1 font-medium transition-colors relative ${
+                activeTab === 'table'
+                  ? 'text-[#4c9085] border-b-2 border-[#4c9085]'
+                  : 'text-gray-500 hover:text-[#4c9085]'
+              }`}
+            >
+              Feature Table
+            </button>
           </div>
         </div>
       </div>
@@ -288,10 +288,10 @@ const Analysis = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Analysis Area */}
           <div className="lg:col-span-2">
-            {activeTab === 'table' ? (
-              <FeatureTable data={featureData} columns={columns} />
+            {activeTab === 'dashboard' ? (
+              <Dashboard contextId={contextId} />
             ) : (
-              <Dashboard />
+              <FeatureTable data={featureData} columns={columns} />
             )}
           </div>
 

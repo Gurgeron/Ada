@@ -1,52 +1,41 @@
 # Changelog
 
-## [Latest]
-
+## [Unreleased] - 2024-01-XX
 ### Added
-- Added predefined prompts for common questions
-- Added prompt suggestions UI with descriptions
-- Added click-to-ask functionality for prompts
-- Enhanced chat interface with suggested questions
-- Enhanced table with sticky header for vertical scrolling
-- Implemented insights API with mock data
-- Added dashboard with charts and metrics
-- Added proper error handling for insights endpoint
+- New Podcast Generation Feature (MVP)
+  - Created PodcastCard component with modern UI matching existing design system
+  - Added basic audio player and download functionality
+  - Implemented loading states and error handling
+  - Created backend route for podcast generation
+  - Integrated OpenAI GPT-4 for script generation
+  - Integrated OpenAI TTS for audio generation
+  - Added script display functionality
+  - Moved PodcastCard to top of dashboard for better visibility
 
-### Changed
-- Updated chat interface to show prompts initially
-- Improved prompt styling and interactions
-- Enhanced user onboarding experience
-- Updated table header to be sticky on vertical scroll only
-- Improved table scroll behavior for better usability
-- Enhanced table layout and structure
-- Updated app.py to register insights blueprint
+### Technical Details
+- Frontend:
+  - New `PodcastCard.js` component with React hooks for state management
+  - Integrated with axios for API calls
+  - Added error handling and loading states
+  - Added script toggle functionality
+  - Matched existing design system colors and styling
+  - Added PodcastCard to top of Dashboard layout
 
-### Fixed
-- Improved chat message formatting
-- Enhanced prompt handling and display
-- Fixed message scroll behavior
-- Fixed table header behavior to match Excel-like freeze panes
-- Improved horizontal scrolling to include all columns
-- Enhanced visual consistency of table header
-- Fixed 404 errors for insights API endpoint
+- Backend:
+  - New `podcast.py` route blueprint
+  - Integrated OpenAI GPT-4 for generating podcast scripts
+  - Integrated OpenAI TTS for converting scripts to audio
+  - Implemented file storage for generated podcasts
+  - Added proper error handling and response structure
+  - Configured to use environment variables for API keys
 
-## [Previous]
+### Security Updates
+- Removed hardcoded API keys
+- Added proper environment variable configuration
+- Updated .gitignore to exclude sensitive files
 
-### Added
-- Restored full layout with table and chat interface
-- Added responsive grid layout (2/3 table, 1/3 chat)
-- Added tabbed navigation between table and dashboard views
-- Added chart components for data visualization
-- Added insight cards for metrics display
-
-### Changed
-- Updated layout structure to use flex instead of grid
-- Modified height calculations for better viewport fit
-- Improved component styling and transitions
-- Enhanced responsive design
-
-### Fixed
-- Fixed FeatureTable rendering issues
-- Enhanced column configuration with proper fallbacks
-- Improved error handling for null/undefined values
-- Fixed styling issues with column widths
+### Next Steps
+- Add audio file cleanup mechanism
+- Implement caching for generated podcasts
+- Add progress indicators for script and audio generation
+- Add analytics for podcast generation and usage

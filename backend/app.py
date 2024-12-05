@@ -8,6 +8,7 @@ from routes.wizard import wizard_bp
 from routes.ada import ada_bp
 from routes.data import data_bp
 from routes.insights import insights_bp
+from routes.podcast import podcast_bp
 
 # Load environment variables
 load_dotenv()
@@ -25,6 +26,7 @@ def create_app():
     app.register_blueprint(ada_bp, url_prefix='/api/ada')
     app.register_blueprint(data_bp, url_prefix='/api/data')
     app.register_blueprint(insights_bp, url_prefix='/api/insights')
+    app.register_blueprint(podcast_bp, url_prefix='/api/podcast')
 
     @app.route('/health')
     def health_check():

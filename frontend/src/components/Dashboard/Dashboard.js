@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import InsightCard from './InsightCard';
 import ChartComponent from './ChartComponent';
+import PodcastCard from './PodcastCard';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
@@ -94,6 +95,9 @@ const Dashboard = () => {
           <h1 className="text-3xl font-bold text-[#2B2B2B]">Insights Dashboard</h1>
           <p className="text-[#B3B3B3] mt-2">Overview of your feature request analysis</p>
         </div>
+
+        {/* Podcast Card */}
+        <PodcastCard contextId={contextId} />
 
         {/* Top Row - Key Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
