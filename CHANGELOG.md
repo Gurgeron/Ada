@@ -69,3 +69,7 @@
 
 ## [Latest Changes]
 - Updated pie chart title from "Requests by Category" to "Feature Request Categories" for better clarity and professionalism
+- Fixed CORS configuration in backend to properly handle frontend requests
+  - Added specific origin (http://localhost:3000)
+  - Configured allowed methods and headers
+  - Applied to all API routes

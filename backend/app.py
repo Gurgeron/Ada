@@ -15,7 +15,15 @@ load_dotenv()
 
 def create_app():
     app = Flask(__name__)
-    CORS(app)
+    
+    # Configure CORS with specific origins and options
+    CORS(app, resources={
+        r"/api/*": {
+            "origins": ["http://localhost:3000"],
+            "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+            "allow_headers": ["Content-Type", "Authorization"]
+        }
+    })
 
     # Configure app
     app.config['SQLALCHEMY_DATABASE_URL'] = os.getenv('DATABASE_URL', 'sqlite:///feature_insights.db')
