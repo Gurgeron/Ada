@@ -8,6 +8,16 @@
   - Improving request trends with date-based analysis
   - Adding semantic similarity for request grouping
   - Implementing advanced data processing pipeline
+- Fixed backend server connectivity issues
+  - Ensured proper server startup on port 3002
+  - Verified API endpoints connectivity
+  - Added proper CORS configuration
+- Added "Open in Jira" button for critical issues
+  - Direct link to Jira tickets from dashboard
+  - Minimal UI design matching existing color scheme
+  - Improved button placement at bottom-right of cards
+  - Consistent styling across all request types
+  - Secure external linking with proper rel attributes
 
 ### Added
 - New Podcast Generation Feature (MVP)

@@ -1,0 +1,101 @@
+Request ID,Feature Title,Description,Product,Request Channel,Customer Type,Priority,Status,Type,Requested By,Request Date,Business Value,Implementation Complexity,Customer Impact
+FR-001,AI-Powered Priority Scoring,"Implement an AI system that automatically scores and prioritizes feature requests based on customer impact, business value, and implementation complexity",Ada,Customer Interview,Enterprise,High,Open,Feature,Product Manager,2024-01-01,High,Medium,High
+FR-002,Custom Dashboard Layouts,"Allow users to customize their dashboard layout with drag-and-drop widgets, saved layouts, and personalized metrics",Ada,Internal Team,All,Medium,In Progress,UX,UX Designer,2024-01-02,Medium,Medium,High
+FR-003,Jira Integration,"Enable bi-directional sync with Jira including automatic ticket creation, status updates, and comment synchronization",Ada,Customer Support,Enterprise,Critical,Planned,Integration,Technical Lead,2024-01-03,High,High,Medium
+FR-004,Advanced Analytics Dashboard,"Create a comprehensive analytics dashboard showing feature request trends, customer segment analysis, and priority distribution",Ada,Customer Interview,Enterprise,High,Open,Analytics,Product Manager,2024-01-04,High,High,High
+FR-005,Bulk Import/Export,"Add functionality to bulk import feature requests from CSV/Excel and export data in multiple formats (CSV, Excel, PDF)",Ada,Internal Team,All,Medium,In Progress,Feature,Product Manager,2024-01-05,Medium,Low,Medium
+FR-006,Custom Fields Support,"Allow teams to create and manage custom fields for feature requests with different field types (text, number, dropdown, etc.)",Ada,Customer Interview,Enterprise,High,Planned,Feature,Product Manager,2024-01-06,High,Medium,High
+FR-007,Team Collaboration Tools,"Implement @mentions, comments, and notifications for better team collaboration on feature requests",Ada,Internal Team,All,Medium,Open,Collaboration,Product Manager,2024-01-07,High,Medium,High
+FR-008,API Documentation,Create comprehensive API documentation with interactive examples and SDK support for major programming languages,Ada,Customer Support,Developer,High,In Progress,Documentation,Technical Lead,2024-01-08,High,Medium,Medium
+FR-009,Mobile App Support,Develop native mobile apps for iOS and Android with core feature request management capabilities,Ada,Customer Interview,All,High,Planned,Mobile,Product Manager,2024-01-09,High,High,High
+FR-010,SSO Integration,"Implement Single Sign-On (SSO) support for major providers (Google, Microsoft, Okta)",Ada,Customer Support,Enterprise,High,Open,Security,Security Team,2024-01-10,High,Medium,Medium
+FR-011,Customer Portal,Create a customer-facing portal for submitting and tracking feature requests,Ada,Customer Interview,All,High,In Progress,Feature,Product Manager,2024-01-11,High,High,High
+FR-012,Advanced Search,"Implement advanced search functionality with filters, saved searches, and boolean operators",Ada,Internal Team,All,Critical,Planned,Feature,UX Designer,2024-01-12,Medium,Medium,High
+FR-013,Data Export API,Create an API endpoint for exporting feature request data with filtering and pagination,Ada,Customer Support,Developer,Medium,Open,API,Technical Lead,2024-01-13,Medium,Low,Medium
+FR-014,Custom Workflows,Allow teams to create custom workflows with conditional logic and automated actions,Ada,Customer Interview,Enterprise,High,In Progress,Feature,Product Manager,2024-01-14,High,High,High
+FR-015,Rich Text Editor,Add rich text editing support for feature request descriptions with image upload capabilities,Ada,Internal Team,All,Medium,Planned,UX,UX Designer,2024-01-15,Medium,Low,Medium
+FR-016,Automated Insights,Use AI to automatically generate insights and recommendations from feature request data,Ada,Customer Interview,Enterprise,High,Open,AI,Product Manager,2024-01-16,High,High,High
+FR-017,Custom Reports,Enable creation of custom reports with visualization options and scheduled delivery,Ada,Customer Support,Enterprise,Critical,In Progress,Analytics,Product Manager,2024-01-17,High,Medium,High
+FR-018,Slack Integration,Add Slack integration for notifications and quick feature request creation,Ada,Internal Team,All,Medium,Planned,Integration,Technical Lead,2024-01-18,Medium,Low,Medium
+FR-019,User Role Management,Implement granular role-based access control with custom permissions,Ada,Customer Support,Enterprise,High,Open,Security,Security Team,2024-01-19,High,Medium,High
+FR-020,Audit Logs,Add detailed audit logs for all system actions with filtering and export capabilities,Ada,Customer Interview,Enterprise,Medium,In Progress,Security,Security Team,2024-01-20,Medium,Medium,Medium
+FR-021,Dark Mode Support,Implement dark mode theme with system preference detection,Ada,Internal Team,All,Low,Planned,UX,UX Designer,2024-01-21,Low,Low,Medium
+FR-022,Data Import API,Create an API endpoint for importing feature requests with validation,Ada,Customer Support,Developer,Medium,Open,API,Technical Lead,2024-01-22,Medium,Medium,Medium
+FR-023,Custom Tags,Allow creation and management of custom tags for feature requests,Ada,Customer Interview,All,Medium,In Progress,Feature,Product Manager,2024-01-23,Medium,Low,High
+FR-024,Email Notifications,Implement customizable email notifications for feature request updates,Ada,Internal Team,All,Medium,Planned,Notification,Product Manager,2024-01-24,Medium,Medium,High
+FR-025,Salesforce Integration,Enable bi-directional sync with Salesforce for customer data and opportunities,Ada,Customer Support,Enterprise,High,Open,Integration,Technical Lead,2024-01-25,High,High,Medium
+FR-026,Custom Dashboards,Allow creation of custom dashboards with different widgets and metrics,Ada,Customer Interview,Enterprise,High,In Progress,Analytics,Product Manager,2024-01-26,High,Medium,High
+FR-027,Bulk Actions,Add ability to perform bulk actions on multiple feature requests,Ada,Internal Team,All,Medium,Planned,Feature,Product Manager,2024-01-27,Medium,Low,Medium
+FR-028,API Rate Limiting,Implement configurable rate limiting for API endpoints,Peem,Customer Support,Developer,Medium,Open,API,Technical Lead,2024-01-28,Medium,Low,Low
+FR-029,Custom Statuses,Allow teams to create and manage custom feature request statuses,Peem,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-01-29,Medium,Medium,High
+FR-030,Performance Monitoring,Add system performance monitoring and alerting capabilities,Peem,Internal Team,All,High,Planned,Technical,Technical Lead,2024-01-30,High,Medium,Medium
+FR-031,Multi-language Support,Add support for multiple languages in the user interface,Peem,Customer Support,International,High,Open,Localization,Product Manager,2024-01-31,High,High,High
+FR-032,Custom Metrics,Enable creation of custom metrics and KPIs for feature requests,Peem,Customer Interview,Enterprise,Medium,In Progress,Analytics,Product Manager,2024-02-01,High,Medium,High
+FR-033,Automated Testing,Implement automated testing framework for API and UI,Peem,Internal Team,Developer,Critical,Planned,Technical,Technical Lead,2024-02-02,Medium,Medium,Low
+FR-034,Webhook Support,Add webhook support for integration with external systems,Peem,Customer Support,Developer,Medium,Open,Integration,Technical Lead,2024-02-03,Medium,Medium,Medium
+FR-035,Custom Views,Allow creation of custom views with saved filters and columns,Peem,Customer Interview,All,Medium,In Progress,Feature,Product Manager,2024-02-04,Medium,Medium,High
+FR-036,Data Backup,Implement automated data backup and restore capabilities,Peem,Internal Team,All,High,Planned,Technical,Technical Lead,2024-02-05,High,Medium,Medium
+FR-037,Custom Integrations,Enable building custom integrations using API and webhooks,Peem,Customer Support,Developer,High,Open,Integration,Technical Lead,2024-02-06,High,High,Medium
+FR-038,Advanced Filters,Add advanced filtering capabilities with complex conditions,Peem,Customer Interview,All,Medium,In Progress,Feature,Product Manager,2024-02-07,Medium,Medium,High
+FR-039,User Activity Tracking,Track and display user activity history with filtering,Peem,Internal Team,Enterprise,Critical,Planned,Analytics,Product Manager,2024-02-08,Medium,Medium,Medium
+FR-040,Custom Notifications,Allow creation of custom notification rules and channels,Peem,Customer Support,All,Medium,Open,Notification,Product Manager,2024-02-09,Medium,Medium,High
+FR-041,Data Encryption,Implement end-to-end encryption for sensitive data,Peem,Customer Interview,Enterprise,High,In Progress,Security,Security Team,2024-02-10,High,High,Medium
+FR-042,Custom Reports API,Create API endpoints for custom report generation,Peem,Internal Team,Developer,Medium,Planned,API,Technical Lead,2024-02-11,Medium,Medium,Critical
+FR-043,Team Templates,Add support for team-specific templates and defaults,Peem,Customer Support,Enterprise,Medium,Open,Feature,Product Manager,2024-02-12,Medium,Low,High
+FR-044,Advanced Permissions,Implement advanced permission system with custom roles,Peem,Customer Interview,Enterprise,High,In Progress,Security,Security Team,2024-02-13,High,Medium,High
+FR-045,Custom Workflows API,Create API endpoints for custom workflow management,Peem,Internal Team,Developer,Medium,Planned,API,Technical Lead,2024-02-14,Medium,High,Medium
+FR-046,Data Migration Tools,Add tools for data migration from other systems,Peem,Customer Support,Enterprise,High,Open,Feature,Technical Lead,2024-02-15,High,High,Medium
+FR-047,Custom Fields API,Create API endpoints for custom field management,Peem,Customer Interview,Developer,Medium,In Progress,API,Technical Lead,2024-02-16,Medium,Medium,Medium
+FR-048,Advanced Search API,Implement API endpoints for advanced search capabilities,Peem,Internal Team,Developer,Medium,Planned,API,Technical Lead,2024-02-17,Medium,Medium,Medium
+FR-049,Custom Metrics API,Create API endpoints for custom metrics management,Peem,Customer Support,Developer,Medium,Open,API,Technical Lead,2024-02-18,Medium,Medium,Medium
+FR-050,Team Analytics,Add team-specific analytics and reporting capabilities,Peem,Customer Interview,Enterprise,High,In Progress,Analytics,Product Manager,2024-02-19,High,Medium,High
+FR-051,Custom Views API,Implement API endpoints for custom view management,Peem,Internal Team,Developer,Medium,Planned,API,Technical Lead,2024-02-20,Medium,Medium,Critical
+FR-052,Data Archiving,Add capabilities for archiving old feature requests,Peem,Customer Support,Enterprise,Medium,Open,Feature,Product Manager,2024-02-21,Medium,Low,Medium
+FR-053,Custom Reports Export,Enable export of custom reports in multiple formats,Peem,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-02-22,Medium,Low,High
+FR-054,Advanced Audit Logs,Implement detailed audit logging with advanced filtering,Peem,Internal Team,Enterprise,High,Planned,Security,Security Team,2024-02-23,High,Medium,Medium
+FR-055,Custom Dashboard API,Create API endpoints for custom dashboard management,Peem,Customer Support,Developer,Medium,Open,API,Technical Lead,2024-02-24,Medium,Medium,Medium
+FR-056,Team Permissions,Add team-specific permission management capabilities,Peem,Customer Interview,Enterprise,High,In Progress,Security,Security Team,2024-02-25,High,Medium,High
+FR-057,Custom Integration API,Implement API endpoints for custom integration management,Peem,Internal Team,Developer,Medium,Planned,API,Technical Lead,2024-02-26,Medium,High,Medium
+FR-058,Data Validation,Add advanced data validation capabilities,Peem,Customer Support,All,Medium,Open,Feature,Technical Lead,2024-02-27,Medium,Medium,Medium
+FR-059,Custom Notification API,Create API endpoints for custom notification management,Peem,Customer Interview,Developer,Medium,In Progress,API,Technical Lead,2024-02-28,Medium,Medium,Medium
+FR-060,Team Templates API,Implement API endpoints for team template management,Peem,Internal Team,Developer,Medium,Planned,API,Technical Lead,2024-02-29,Medium,Medium,Medium
+FR-061,Data Import Validation,Add advanced validation for data imports,Peem,Customer Support,All,Medium,Open,Feature,Technical Lead,2024-03-01,Medium,Medium,Medium
+FR-062,Custom Field Templates,Enable creation of custom field templates,Peem,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-03-02,Medium,Low,High
+FR-063,Advanced API Security,Implement advanced security measures for API,Peem,Internal Team,Developer,High,Planned,Security,Security Team,2024-03-03,High,High,Critical
+FR-064,Data Export Templates,Add support for custom data export templates,Peem,Customer Support,Enterprise,Medium,Open,Feature,Product Manager,2024-03-04,Medium,Low,High
+FR-065,Custom Report Templates,Enable creation of custom report templates,Peem,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-03-05,Medium,Low,High
+FR-066,Advanced API Analytics,Add detailed analytics for API usage,Peem,Internal Team,Developer,Critical,Planned,Analytics,Technical Lead,2024-03-06,Medium,Medium,Medium
+FR-067,Data Import Templates,Add support for custom data import templates,Peem,Customer Support,Enterprise,Medium,Open,Feature,Product Manager,2024-03-07,Medium,Low,High
+FR-068,Custom Dashboard Templates,Enable creation of custom dashboard templates,Peem,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-03-08,Medium,Low,High
+FR-069,Advanced API Documentation,Improve API documentation with interactive examples,Peem,Internal Team,Developer,High,Planned,Documentation,Technical Lead,2024-03-09,High,Medium,Medium
+FR-070,Data Validation Templates,Add support for custom data validation templates,Peem,Customer Support,Enterprise,Medium,Open,Feature,Technical Lead,2024-03-10,Medium,Medium,Critical
+FR-071,Custom Workflow Templates,Enable creation of custom workflow templates,Peem,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-03-11,Medium,Medium,High
+FR-072,Advanced API Testing,Implement comprehensive API testing tools,Peem,Internal Team,Developer,High,Planned,Technical,Technical Lead,2024-03-12,High,High,Medium
+FR-073,Data Migration Templates,Add support for custom data migration templates,Peem,Customer Support,Enterprise,Medium,Open,Feature,Technical Lead,2024-03-13,Medium,Medium,Medium
+FR-074,Custom Integration Templates,Enable creation of custom integration templates,Stablet,Customer Interview,Enterprise,Medium,In Progress,Feature,Technical Lead,2024-03-14,Medium,High,Medium
+FR-075,Advanced API Monitoring,Add detailed monitoring for API performance,Stablet,Internal Team,Developer,High,Planned,Technical,Technical Lead,2024-03-15,High,Medium,Medium
+FR-076,Data Archive Templates,Add support for custom data archive templates,Stablet,Customer Support,Enterprise,Medium,Open,Feature,Product Manager,2024-03-16,Medium,Low,Medium
+FR-077,Custom Report Scheduling,Enable scheduling of custom report generation,Stablet,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-03-17,Medium,Low,High
+FR-078,Advanced API Rate Limiting,Implement advanced API rate limiting features,Stablet,Internal Team,Developer,High,Planned,Technical,Technical Lead,2024-03-18,High,Medium,Medium
+FR-079,Data Backup Templates,Add support for custom data backup templates,Stablet,Customer Support,Enterprise,Medium,Open,Feature,Technical Lead,2024-03-19,Medium,Medium,Medium
+FR-080,Custom Dashboard Sharing,Enable sharing of custom dashboards,Stablet,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-03-20,Medium,Low,High
+FR-081,Advanced API Versioning,Implement comprehensive API versioning,Stablet,Internal Team,Developer,High,Planned,Technical,Technical Lead,2024-03-21,High,High,Medium
+FR-082,Data Recovery Tools,Add tools for data recovery and rollback,Stablet,Customer Support,Enterprise,High,Open,Feature,Technical Lead,2024-03-22,High,High,Medium
+FR-083,Custom Report Sharing,Enable sharing of custom reports,Stablet,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-03-23,Medium,Low,High
+FR-084,Advanced API Caching,Implement advanced API caching mechanisms,Stablet,Internal Team,Developer,High,Planned,Technical,Technical Lead,2024-03-24,High,Medium,Medium
+FR-085,Data Cleanup Tools,Add tools for data cleanup and optimization,Stablet,Customer Support,Enterprise,Medium,Open,Feature,Technical Lead,2024-03-25,Medium,Medium,Medium
+FR-086,Custom View Sharing,Enable sharing of custom views,Stablet,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-03-26,Medium,Low,Critical
+FR-087,Advanced API Error Handling,Implement comprehensive API error handling,Stablet,Internal Team,Developer,High,Planned,Technical,Technical Lead,2024-03-27,High,Medium,Medium
+FR-088,Data Integrity Tools,Add tools for ensuring data integrity,Stablet,Customer Support,Enterprise,High,Open,Feature,Technical Lead,2024-03-28,High,High,Medium
+FR-089,Custom Template Sharing,Enable sharing of custom templates,Stablet,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-03-29,Medium,Low,High
+FR-090,Advanced API Authentication,Implement advanced API authentication methods,Stablet,Internal Team,Developer,High,Planned,Security,Security Team,2024-03-30,High,High,Medium
+FR-091,Data Analysis Tools,Add tools for advanced data analysis,Stablet,Customer Support,Enterprise,High,Open,Analytics,Product Manager,2024-03-31,High,Medium,High
+FR-092,Custom Integration Sharing,Enable sharing of custom integrations,Stablet,Customer Interview,Enterprise,Medium,In Progress,Feature,Technical Lead,2024-04-01,Medium,High,Medium
+FR-093,Advanced API Logging,Implement comprehensive API logging,Stablet,Internal Team,Developer,High,Planned,Technical,Technical Lead,2024-04-02,High,Medium,Medium
+FR-094,Data Visualization Tools,Add advanced data visualization capabilities,Stablet,Customer Support,Enterprise,High,Open,Analytics,Product Manager,2024-04-03,High,Medium,High
+FR-095,Custom Workflow Sharing,Enable sharing of custom workflows,Stablet,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-04-04,Medium,Medium,High
+FR-096,Advanced API Metrics,Implement comprehensive API metrics,Stablet,Internal Team,Developer,High,Planned,Analytics,Technical Lead,2024-04-05,High,Medium,Medium
+FR-097,Data Export Tools,Add advanced data export capabilities,Stablet,Customer Support,Enterprise,Medium,Open,Feature,Product Manager,2024-04-06,Medium,Low,Critical
+FR-098,Custom Field Sharing,Enable sharing of custom fields,Stablet,Customer Interview,Enterprise,Medium,In Progress,Feature,Product Manager,2024-04-07,Medium,Low,High
+FR-099,Advanced API Documentation,Improve API documentation with tutorials,Stablet,Internal Team,Developer,High,Planned,Documentation,Technical Lead,2024-04-08,High,Medium,Medium
+FR-100,Data Import Tools,Add advanced data import capabilities,Stablet,Customer Support,Enterprise,Medium,Open,Feature,Product Manager,2024-04-09,Medium,Low,High
