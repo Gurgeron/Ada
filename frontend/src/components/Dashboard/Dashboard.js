@@ -163,7 +163,7 @@ const Dashboard = () => {
         {/* Middle Row - Charts */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <ChartComponent
-            title="Requests by Category"
+            title="Feature Request Categories"
             data={insights?.requests_by_category}
             type="pie"
           />

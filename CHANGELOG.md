@@ -66,3 +66,6 @@
 - Implement caching for generated podcasts
 - Add progress indicators for script and audio generation
 - Add analytics for podcast generation and usage
+
+## [Latest Changes]
+- Updated pie chart title from "Requests by Category" to "Feature Request Categories" for better clarity and professionalism
