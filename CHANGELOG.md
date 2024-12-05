@@ -8,6 +8,7 @@
   - Improving request trends with date-based analysis
   - Adding semantic similarity for request grouping
   - Implementing advanced data processing pipeline
+  - Fixed pain points percentage calculation to ensure proper distribution
 - Fixed backend server connectivity issues
   - Ensured proper server startup on port 3002
   - Verified API endpoints connectivity

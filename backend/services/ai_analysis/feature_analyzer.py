@@ -103,16 +103,22 @@ class FeatureAnalyzer:
                             'description': cluster['summary']
                         })
             
-            # Sort by impact score and return top 3
+            # Sort by impact score
             high_impact_clusters.sort(key=lambda x: x['impact_score'], reverse=True)
-            return [
-                {
-                    'name': cluster['theme'],
-                    'percentage': int(cluster['impact_score'] * 100),
-                    'description': cluster['description']
-                }
-                for cluster in high_impact_clusters[:3]
-            ]
+            
+            # Take top 3 and normalize percentages
+            top_clusters = high_impact_clusters[:3]
+            if top_clusters:
+                total_impact = sum(cluster['impact_score'] for cluster in top_clusters)
+                return [
+                    {
+                        'name': cluster['theme'],
+                        'percentage': int((cluster['impact_score'] / total_impact) * 100),
+                        'description': cluster['description']
+                    }
+                    for cluster in top_clusters
+                ]
+            return []
             
         except Exception as e:
             print(f"Error analyzing pain points: {str(e)}")
