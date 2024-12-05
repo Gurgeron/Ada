@@ -4,20 +4,54 @@ import ChartComponent from './ChartComponent';
 import PodcastCard from './PodcastCard';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { useInsights } from '../../context/InsightsContext';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3002';
+
+const LoadingMessages = [
+  "Brewing some insightful coffee...",
+  "Let me count these feature requests...",
+  "I'm discovering patterns in your data...",
+  "Connecting the dots for you...",
+  "Making your charts look pretty...",
+  "Reading through customer feedback...",
+  "Calculating priorities carefully...",
+  "Almost there, just adding some sparkle✨"
+];
 
 const Dashboard = () => {
   const [insights, setInsights] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [loadingMessage, setLoadingMessage] = useState(LoadingMessages[0]);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const contextId = queryParams.get('context_id');
+  const { cacheInsights, getCachedInsights } = useInsights();
+
+  useEffect(() => {
+    let messageInterval;
+    if (loading) {
+      let messageIndex = 0;
+      messageInterval = setInterval(() => {
+        messageIndex = (messageIndex + 1) % LoadingMessages.length;
+        setLoadingMessage(LoadingMessages[messageIndex]);
+      }, 2500);
+    }
+    return () => clearInterval(messageInterval);
+  }, [loading]);
 
   useEffect(() => {
     const fetchInsights = async () => {
       try {
+        // Check cache first
+        const cachedData = getCachedInsights(contextId);
+        if (cachedData) {
+          setInsights(cachedData);
+          setLoading(false);
+          return;
+        }
+
         const response = await axios.get(`${API_URL}/api/insights/fetch-insights/${contextId}`);
         
         // Get the feature data from the data endpoint
@@ -39,7 +73,9 @@ const Dashboard = () => {
           featureData: processedData
         };
         
-        console.log('Combined Data:', combinedData);
+        // Cache the data
+        cacheInsights(contextId, combinedData);
+        
         setInsights(combinedData);
         setLoading(false);
       } catch (err) {
@@ -52,7 +88,7 @@ const Dashboard = () => {
     if (contextId) {
       fetchInsights();
     }
-  }, [contextId]);
+  }, [contextId, cacheInsights, getCachedInsights]);
 
   if (!contextId) {
     return (
@@ -68,9 +104,15 @@ const Dashboard = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-white p-8 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#4c9085]"></div>
-          <p className="mt-4 text-[#B3B3B3]">Loading insights...</p>
+        <div className="text-center max-w-md mx-auto">
+          <div className="relative">
+            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#4c9085] mx-auto"></div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="h-12 w-12 rounded-full bg-[#4c9085]/10"></div>
+            </div>
+          </div>
+          <p className="mt-6 text-lg font-medium text-[#4c9085] animate-pulse">{loadingMessage}</p>
+          <p className="mt-2 text-sm text-[#B3B3B3]">This may take a minute as I analyze your data thoroughly</p>
         </div>
       </div>
     );

@@ -9,6 +9,10 @@
   - Adding semantic similarity for request grouping
   - Implementing advanced data processing pipeline
   - Fixed pain points percentage calculation to ensure proper distribution
+  - Added insights caching for improved performance
+    - Cache persists for 5 minutes
+    - Prevents unnecessary reloading
+    - Smart invalidation system
 - Fixed backend server connectivity issues
   - Ensured proper server startup on port 3002
   - Verified API endpoints connectivity
@@ -19,6 +23,10 @@
   - Improved button placement at bottom-right of cards
   - Consistent styling across all request types
   - Secure external linking with proper rel attributes
+- Improved loading experience
+  - Added personalized loading messages from Ada
+  - Enhanced loading animations
+  - Better user feedback during data processing
 
 ### Added
 - New Podcast Generation Feature (MVP)
