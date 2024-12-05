@@ -3,18 +3,28 @@
 ## [Latest]
 
 ### Added
+- Added predefined prompts for common questions
+- Added prompt suggestions UI with descriptions
+- Added click-to-ask functionality for prompts
+- Enhanced chat interface with suggested questions
 - Enhanced table with sticky header for vertical scrolling
 - Implemented insights API with mock data
 - Added dashboard with charts and metrics
 - Added proper error handling for insights endpoint
 
 ### Changed
+- Updated chat interface to show prompts initially
+- Improved prompt styling and interactions
+- Enhanced user onboarding experience
 - Updated table header to be sticky on vertical scroll only
 - Improved table scroll behavior for better usability
 - Enhanced table layout and structure
 - Updated app.py to register insights blueprint
 
 ### Fixed
+- Improved chat message formatting
+- Enhanced prompt handling and display
+- Fixed message scroll behavior
 - Fixed table header behavior to match Excel-like freeze panes
 - Improved horizontal scrolling to include all columns
 - Enhanced visual consistency of table header
