@@ -163,7 +163,7 @@ const Dashboard = () => {
               return priority === 'Critical';
             }).map((feature, index) => (
               <div key={index} className="p-3 bg-[#f0f9f8] rounded-lg border border-[#4c9085]/20">
-                <div className="flex justify-between items-start">
+                <div className="flex justify-between items-start mb-2">
                   <div>
                     <h4 className="font-medium text-gray-900">{feature.feature_title || feature['Feature Title']}</h4>
                     <p className="text-sm text-gray-600 mt-1">{feature.description || feature.Description}</p>
@@ -172,10 +172,23 @@ const Dashboard = () => {
                     {feature.status || feature.Status || 'No Status'}
                   </span>
                 </div>
-                <div className="mt-2 flex gap-4 text-sm text-[#4c9085]">
-                  <span>Impact: {feature.customer_impact || feature['Customer Impact'] || 'N/A'}</span>
-                  <span>•</span>
-                  <span>Customer: {feature.customer_type || feature['Customer Type'] || 'N/A'}</span>
+                <div className="flex justify-between items-center mt-2">
+                  <div className="flex gap-4 text-sm text-[#4c9085]">
+                    <span>Impact: {feature.customer_impact || feature['Customer Impact'] || 'N/A'}</span>
+                    <span>•</span>
+                    <span>Customer: {feature.customer_type || feature['Customer Type'] || 'N/A'}</span>
+                  </div>
+                  <a
+                    href={feature.jira_url || `https://your-jira-instance.atlassian.net/browse/${feature.jira_id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center text-sm text-[#4c9085] hover:text-[#3D7269] transition-colors duration-200"
+                  >
+                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                    Open in Jira
+                  </a>
                 </div>
               </div>
             ))}
