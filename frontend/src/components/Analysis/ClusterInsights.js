@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import BubbleChart from './BubbleChart';
 import { useClusterContext } from '../../context/ClusterContext';
@@ -29,6 +29,17 @@ const ClusterInsights = ({ contextId }) => {
     setError,
     clearCache 
   } = useClusterContext();
+
+  // Add state for tracking expanded clusters
+  const [expandedClusters, setExpandedClusters] = useState({});
+
+  // Toggle cluster expansion
+  const toggleCluster = (clusterId) => {
+    setExpandedClusters(prev => ({
+      ...prev,
+      [clusterId]: !prev[clusterId]
+    }));
+  };
 
   const fetchClusters = async (force = false) => {
     try {
@@ -123,15 +134,41 @@ const ClusterInsights = ({ contextId }) => {
       <BubbleChart clusters={clusterData} />
       
       {/* Detailed Cluster Information */}
-      <div className="grid gap-6">
+      <div className="grid gap-4">
         {clusterData.map((cluster, index) => (
-          <div key={`cluster-${index}`} className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
-            <div className="flex justify-between items-start mb-4">
-              <div>
-                <h3 className="text-xl font-semibold text-gray-800">{cluster.theme}</h3>
-                <p className="text-sm text-gray-600 mt-1">
-                  {cluster.size} feature requests
-                </p>
+          <div 
+            key={`cluster-${index}`} 
+            className="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-200"
+          >
+            {/* Cluster Header - Always Visible */}
+            <div 
+              onClick={() => toggleCluster(index)}
+              className="p-4 flex justify-between items-center cursor-pointer hover:bg-gray-50 transition-colors"
+            >
+              <div className="flex items-center space-x-3">
+                <div className={`transform transition-transform duration-200 ${expandedClusters[index] ? 'rotate-90' : ''}`}>
+                  <svg 
+                    width="20" 
+                    height="20" 
+                    viewBox="0 0 20 20" 
+                    fill="none" 
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path 
+                      d="M7.5 15L12.5 10L7.5 5" 
+                      stroke="#4c9085" 
+                      strokeWidth="2" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-800">{cluster.theme}</h3>
+                  <p className="text-sm text-gray-600">
+                    {cluster.size} feature requests
+                  </p>
+                </div>
               </div>
               {cluster.metadata && (
                 <div className="bg-[#4c9085] text-white px-3 py-1 rounded-full text-sm">
@@ -140,33 +177,40 @@ const ClusterInsights = ({ contextId }) => {
               )}
             </div>
 
-            {/* Feature List */}
-            <div className="mt-6">
-              <h4 className="text-md font-semibold text-gray-700 mb-3">Features in this cluster:</h4>
-              <div className="space-y-4">
-                {cluster.features && cluster.features.map((feature, featureIndex) => (
-                  <div 
-                    key={`feature-${index}-${featureIndex}`} 
-                    className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200"
-                  >
-                    <h5 className="font-medium text-[#4c9085]">
-                      {feature.feature['Feature Title']}
-                    </h5>
-                    <p className="text-sm text-gray-600 mt-2">
-                      {feature.feature['Description']}
-                    </p>
-                    <div className="flex gap-2 mt-3">
-                      <span className={`px-2 py-1 rounded-full text-xs ${
-                        getPriorityColor(feature.feature['Priority'])
-                      }`}>
-                        {feature.feature['Priority']}
-                      </span>
-                      <span className="px-2 py-1 bg-gray-200 text-gray-700 text-xs rounded-full">
-                        {feature.feature['Customer Type']}
-                      </span>
+            {/* Expandable Content */}
+            <div 
+              className={`transition-all duration-300 ${
+                expandedClusters[index] 
+                  ? 'max-h-[2000px] opacity-100' 
+                  : 'max-h-0 opacity-0 overflow-hidden'
+              }`}
+            >
+              <div className="p-6 border-t border-gray-100">
+                <div className="space-y-4">
+                  {cluster.features && cluster.features.map((feature, featureIndex) => (
+                    <div 
+                      key={`feature-${index}-${featureIndex}`} 
+                      className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                    >
+                      <h5 className="font-medium text-[#4c9085]">
+                        {feature.feature['Feature Title']}
+                      </h5>
+                      <p className="text-sm text-gray-600 mt-2">
+                        {feature.feature['Description']}
+                      </p>
+                      <div className="flex gap-2 mt-3">
+                        <span className={`px-2 py-1 rounded-full text-xs ${
+                          getPriorityColor(feature.feature['Priority'])
+                        }`}>
+                          {feature.feature['Priority']}
+                        </span>
+                        <span className="px-2 py-1 bg-gray-200 text-gray-700 text-xs rounded-full">
+                          {feature.feature['Customer Type']}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
