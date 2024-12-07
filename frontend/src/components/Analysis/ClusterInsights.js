@@ -181,12 +181,12 @@ const ClusterInsights = ({ contextId }) => {
             <div 
               className={`transition-all duration-300 ${
                 expandedClusters[index] 
-                  ? 'max-h-[2000px] opacity-100' 
+                  ? 'max-h-[500px] opacity-100' 
                   : 'max-h-0 opacity-0 overflow-hidden'
               }`}
             >
               <div className="p-6 border-t border-gray-100">
-                <div className="space-y-4">
+                <div className="space-y-4 overflow-y-auto max-h-[400px] pr-2 scrollbar-thin scrollbar-thumb-[#4c9085] scrollbar-track-gray-100">
                   {cluster.features && cluster.features.map((feature, featureIndex) => (
                     <div 
                       key={`feature-${index}-${featureIndex}`} 
@@ -216,6 +216,27 @@ const ClusterInsights = ({ contextId }) => {
           </div>
         ))}
       </div>
+
+      {/* Add custom scrollbar styles to the head of the document */}
+      <style jsx global>{`
+        .scrollbar-thin::-webkit-scrollbar {
+          width: 6px;
+        }
+        
+        .scrollbar-thin::-webkit-scrollbar-track {
+          background: #f1f1f1;
+          border-radius: 3px;
+        }
+        
+        .scrollbar-thin::-webkit-scrollbar-thumb {
+          background: #4c9085;
+          border-radius: 3px;
+        }
+        
+        .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+          background: #3d7269;
+        }
+      `}</style>
     </div>
   );
 };
