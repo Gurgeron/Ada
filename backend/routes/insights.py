@@ -4,6 +4,7 @@ from database import get_db
 from models.data import FeatureRequestData
 from services.ai_analysis import FeatureAnalyzer
 import traceback
+import json
 
 insights_bp = Blueprint('insights', __name__)
 
@@ -25,23 +26,41 @@ def fetch_insights(context_id):
         
         if not feature_requests:
             print(f"No data found for context {context_id}")
-            return jsonify({'error': 'No data found for this context'}), 404
+            return jsonify({
+                'error': 'No data found for this context',
+                'clusters': []
+            }), 200
         
         print(f"Found data record created at: {feature_requests.created_at}")
+        print(f"Number of features: {len(feature_requests.processed_data)}")
         
         if not feature_requests.processed_data:
             print("Processed data is empty")
-            return jsonify({'error': 'No processed data available'}), 404
+            return jsonify({
+                'error': 'No processed data available',
+                'clusters': []
+            }), 200
         
         # Use AI-powered analyzer to process the data
+        print("Starting feature analysis...")
         insights = feature_analyzer.analyze_features(feature_requests.processed_data)
-        print("=== AI-powered insights processing complete ===\n")
+        print("Feature analysis complete")
+        
+        # Log the insights structure
+        print("\n=== Insights Structure ===")
+        print("Keys in response:", list(insights.keys()))
+        print("Number of clusters:", len(insights.get('clusters', [])))
+        print("Sample cluster data:", json.dumps(insights.get('clusters', [])[0] if insights.get('clusters') else {}, indent=2))
+        print("=== End Insights Structure ===\n")
         
         return jsonify(insights)
         
     except Exception as e:
         print(f"Error processing insights: {str(e)}")
         print(f"Traceback: {traceback.format_exc()}")
-        return jsonify({'error': str(e)}), 500
+        return jsonify({
+            'error': str(e),
+            'clusters': []
+        }), 200
     finally:
         db.close()

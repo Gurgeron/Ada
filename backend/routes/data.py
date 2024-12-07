@@ -95,4 +95,9 @@ def get_feature_requests(context_id):
 
         return jsonify(feature_requests.to_dict())
     finally:
-        db.close() 
+        db.close()
+
+@data_bp.route('/data/data/<int:context_id>', methods=['GET'])
+def get_feature_requests_legacy(context_id):
+    """Legacy endpoint for backward compatibility"""
+    return get_feature_requests(context_id) 

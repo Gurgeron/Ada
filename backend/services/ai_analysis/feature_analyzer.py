@@ -3,12 +3,8 @@ from datetime import datetime
 import pandas as pd
 from .embeddings_service import EmbeddingsService
 from .clustering_service import ClusteringService
-from openai import OpenAI
-import os
-from dotenv import load_dotenv
-
-# Load environment variables
-load_dotenv()
+import numpy as np
+import traceback
 
 class FeatureAnalyzer:
     """Main service for analyzing feature requests using AI."""
@@ -17,57 +13,150 @@ class FeatureAnalyzer:
         """Initialize the feature analyzer with required services."""
         self.embeddings_service = EmbeddingsService()
         self.clustering_service = ClusteringService()
-        self.client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
-    
+
     def analyze_features(self, features: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Perform comprehensive analysis of feature requests."""
         try:
+            print("\n=== Starting Feature Analysis ===")
+            
+            if not features:
+                print("No features provided")
+                return self._empty_result()
+            
             # Convert to DataFrame for easier manipulation
             df = pd.DataFrame(features)
+            print(f"Processing {len(features)} features")
             
             # Generate embeddings
+            print("Generating embeddings...")
             embedded_data = self.embeddings_service.embed_features(features)
+            if not embedded_data['embedded_features']:
+                print("No embeddings generated")
+                return self._empty_result()
+            
+            print(f"Generated {len(embedded_data['embedded_features'])} embeddings")
             
             # Perform clustering
+            print("Performing clustering...")
             cluster_results = self.clustering_service.cluster_features(
                 embedded_data['embedded_features']
             )
             
-            # Analyze trends over time
-            temporal_analysis = self._analyze_temporal_patterns(df)
+            if not cluster_results['clusters']:
+                print("No clusters generated")
+                return self._empty_result()
             
-            # Identify pain points
-            pain_points = self._analyze_pain_points(df, cluster_results['clusters'])
+            print(f"Created {len(cluster_results['clusters'])} clusters")
             
-            # Get most engaged customers
-            customer_engagement = self._analyze_customer_engagement(df)
+            # Process clusters
+            clusters = []
+            for cluster in cluster_results['clusters']:
+                cluster_features = cluster['features']
+                if not cluster_features:
+                    continue
+                    
+                # Calculate cluster metadata
+                metadata = self._calculate_cluster_metadata(cluster_features)
+                
+                clusters.append({
+                    'id': cluster['id'],
+                    'theme': cluster['theme'],
+                    'size': len(cluster_features),
+                    'features': cluster_features,
+                    'metadata': metadata
+                })
             
-            return {
+            result = {
+                'clusters': clusters,
                 'most_common_requests': self._get_common_requests(cluster_results),
-                'top_pain_points': pain_points,
-                'most_engaged_customers': customer_engagement,
+                'top_pain_points': self._analyze_pain_points(df, clusters),
+                'most_engaged_customers': self._analyze_customer_engagement(df),
                 'requests_by_category': self._get_requests_by_category(df),
-                'trends_over_time': temporal_analysis['trends'],
+                'trends_over_time': self._analyze_temporal_patterns(df)['trends'],
                 'requests_by_customer_type': self._get_requests_by_customer_type(df),
-                'average_priority_score': self._calculate_priority_score(df),
-                'cluster_insights': self._get_cluster_insights(cluster_results)
+                'average_priority_score': self._calculate_priority_score(df)
             }
+            
+            print("\n=== Analysis Results ===")
+            print(f"Number of clusters: {len(result['clusters'])}")
+            print(f"Sample cluster theme: {result['clusters'][0]['theme'] if result['clusters'] else 'None'}")
+            print("=== Feature Analysis Complete ===\n")
+            
+            return result
             
         except Exception as e:
             print(f"Error in feature analysis: {str(e)}")
-            raise
-    
+            print(traceback.format_exc())
+            return self._empty_result()
+
+    def _calculate_cluster_metadata(self, features: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """Calculate metadata for a cluster."""
+        try:
+            total = len(features)
+            if total == 0:
+                return self._empty_metadata()
+                
+            priorities = {'Low': 0, 'Medium': 0, 'High': 0, 'Critical': 0}
+            customer_types = {}
+            
+            for feature in features:
+                # Count priorities
+                priority = feature['feature'].get('Priority', 'Low')
+                priorities[priority] = priorities.get(priority, 0) + 1
+                
+                # Count customer types
+                cust_type = feature['feature'].get('Customer Type', 'Unknown')
+                customer_types[cust_type] = customer_types.get(cust_type, 0) + 1
+            
+            # Calculate percentages
+            high_priority = (priorities['High'] + priorities['Critical'])
+            high_priority_percentage = (high_priority / total) * 100 if total > 0 else 0
+            
+            return {
+                'priorities': priorities,
+                'customer_types': customer_types,
+                'high_priority_percentage': high_priority_percentage
+            }
+            
+        except Exception as e:
+            print(f"Error calculating cluster metadata: {str(e)}")
+            return self._empty_metadata()
+
+    def _empty_metadata(self) -> Dict[str, Any]:
+        """Return empty metadata structure."""
+        return {
+            'priorities': {'Low': 0, 'Medium': 0, 'High': 0, 'Critical': 0},
+            'customer_types': {},
+            'high_priority_percentage': 0
+        }
+
+    def _empty_result(self) -> Dict[str, Any]:
+        """Return empty result structure."""
+        return {
+            'clusters': [],
+            'most_common_requests': [],
+            'top_pain_points': [],
+            'most_engaged_customers': [],
+            'requests_by_category': [],
+            'trends_over_time': [],
+            'requests_by_customer_type': [],
+            'average_priority_score': {'score': 0, 'description': 'No data available'}
+        }
+
     def _get_common_requests(self, cluster_results: Dict[str, Any]) -> List[Dict[str, Any]]:
         """Get most common request types based on clusters."""
         try:
+            if not cluster_results or 'clusters' not in cluster_results:
+                print("No clusters found in results")
+                return []
+
             common_requests = []
             for cluster in sorted(cluster_results['clusters'], 
                                 key=lambda x: x['size'], 
                                 reverse=True)[:3]:
                 common_requests.append({
                     'name': cluster['theme'],
-                    'count': cluster['size'],
-                    'summary': cluster['summary']
+                    'count': cluster['size']
                 })
             return common_requests
         except Exception as e:
@@ -77,6 +166,10 @@ class FeatureAnalyzer:
     def _analyze_pain_points(self, df: pd.DataFrame, clusters: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """Identify top pain points using clustering and priority analysis."""
         try:
+            if df.empty or not clusters:
+                print("No data available for pain points analysis")
+                return []
+
             # Combine priority and impact information
             df['impact_score'] = df.apply(
                 lambda row: self._calculate_impact_score(
@@ -97,10 +190,9 @@ class FeatureAnalyzer:
                     avg_impact = cluster_df['impact_score'].mean()
                     if avg_impact >= 0.7:  # High impact threshold
                         high_impact_clusters.append({
-                            'theme': cluster['theme'],
+                            'name': cluster['theme'],
                             'impact_score': avg_impact,
-                            'count': len(cluster_df),
-                            'description': cluster['summary']
+                            'count': len(cluster_df)
                         })
             
             # Sort by impact score
@@ -112,12 +204,13 @@ class FeatureAnalyzer:
                 total_impact = sum(cluster['impact_score'] for cluster in top_clusters)
                 return [
                     {
-                        'name': cluster['theme'],
-                        'percentage': int((cluster['impact_score'] / total_impact) * 100),
-                        'description': cluster['description']
+                        'name': cluster['name'],
+                        'percentage': int((cluster['impact_score'] / total_impact) * 100)
                     }
                     for cluster in top_clusters
                 ]
+            
+            print("No high-impact clusters found")
             return []
             
         except Exception as e:
