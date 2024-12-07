@@ -2,6 +2,14 @@
 
 ## [Unreleased] - 2024-01-XX
 ### In Development - AI-Powered Insights
+- Enhanced clustering analysis
+  - Improved semantic clustering to focus on feature content
+  - Added detailed cluster metadata analysis
+  - Added priority and impact distribution within clusters
+  - Added customer type distribution analysis
+  - Enhanced cluster visualization with interactive charts
+  - Added key insights for each cluster
+  - Improved cluster theme detection
 - Enhancing Dashboard with AI-powered analysis
   - Implementing semantic clustering for similar feature requests
   - Adding intelligent pain points analysis using OpenAI
@@ -42,6 +50,7 @@
 ### Technical Details
 - Frontend:
   - New `PodcastCard.js` component with React hooks for state management
+  - New `ClusterInsights.js` component for detailed cluster analysis
   - Integrated with axios for API calls
   - Added error handling and loading states
   - Added script toggle functionality
@@ -50,6 +59,8 @@
 
 - Backend:
   - New `podcast.py` route blueprint
+  - Enhanced clustering service with metadata analysis
+  - Improved semantic analysis using GPT-4
   - Integrated OpenAI GPT-4 for generating podcast scripts
   - Integrated OpenAI TTS for converting scripts to audio
   - Implemented file storage for generated podcasts
@@ -73,3 +84,156 @@
   - Added specific origin (http://localhost:3000)
   - Configured allowed methods and headers
   - Applied to all API routes
+
+## [2023-12-20] - Enhanced Cluster Visualization
+### Added
+- New BubbleChart component for visualizing feature request clusters
+- Interactive bubble visualization with Ada's color scheme
+- Tooltips showing cluster details on hover
+- Responsive layout that adapts to different screen sizes
+
+### Changed
+- Updated ClusterInsights component to include the bubble chart visualization
+- Improved cluster data presentation with cleaner UI
+- Reorganized cluster information display for better readability
+
+### Technical Details
+- Implemented using react-chartjs-2 bubble chart
+- Added smooth animations and transitions
+- Used Ada's color palette for consistent branding
+- Optimized rendering performance for large datasets
+
+## [2023-12-20] - Bubble Chart Improvements
+### Added
+- Implemented d3-force for non-overlapping bubble layout
+- Added force simulation for optimal bubble positioning
+- Improved bubble spacing with collision detection
+- Added smooth transitions between positions
+
+### Changed
+- Updated bubble chart to use d3 force-directed layout
+- Optimized bubble sizes and padding
+- Improved chart responsiveness
+- Enhanced visual clarity with better spacing
+
+### Technical Details
+- Integrated d3-force library for physics-based layout
+- Added force simulation with collision detection
+- Implemented center force for balanced distribution
+- Added padding between bubbles for better readability
+
+## [2023-12-20] - Major Bubble Chart Enhancement
+### Added
+- Completely rewrote bubble chart using pure D3.js
+- Interactive drag-and-drop functionality for bubbles
+- Dynamic labels that scale with bubble size
+- Improved legend with better visibility
+- Bubble size now accurately reflects data proportions
+
+### Changed
+- Switched from Chart.js to D3.js for better control
+- Enhanced force simulation parameters for optimal spacing
+- Improved bubble collision detection
+- Added interactive features and smooth animations
+- Implemented proper bounds checking to keep bubbles in view
+
+### Technical Details
+- Used D3 force simulation with custom parameters
+- Implemented SVG-based visualization
+- Added dynamic text scaling for better readability
+- Enhanced collision detection with proper padding
+- Added interactive drag behavior for user exploration
+
+## [2023-12-20] - Bubble Chart Layout Improvements
+### Changed
+- Removed labels from bubbles for cleaner visualization
+- Added dedicated legend area with white background
+- Improved legend formatting with wrapped text
+- Added hover tooltips for bubble information
+- Optimized space usage with separate chart and legend areas
+
+### Added
+- Text wrapping for long category names in legend
+- Hover tooltips showing category and request count
+- Clear separation between chart and legend areas
+- Better spacing for legend items
+
+### Technical Details
+- Reserved 200px width for legend area
+- Implemented text wrapping algorithm for long labels
+- Added SVG title elements for tooltips
+- Improved force simulation bounds to respect legend area
+
+## [2023-12-20] - Bubble Chart UX Improvements
+### Enhanced
+- Improved tooltip information to show cluster name, size, and priority percentage
+- Fixed legend text overlap issues with dynamic spacing
+- Added ellipsis for long category names in legend
+- Improved legend layout with two-line information display
+
+### Changed
+- Increased legend width to 250px for better readability
+- Implemented dynamic spacing between legend items
+- Added bullet separator between request count and priority
+- Truncated long category names with ellipsis
+
+### Technical Details
+- Added dynamic calculation of legend item spacing
+- Implemented text truncation for long category names
+- Enhanced tooltip formatting with multiple lines
+- Improved legend text layout and spacing
+
+## [2023-12-20] - Enhanced Bubble Chart Tooltips
+### Added
+- Custom HTML tooltip with improved formatting
+- Hover highlight effect on bubbles
+- Detailed information display on hover
+- Smooth tooltip positioning
+
+### Changed
+- Replaced SVG title with custom HTML tooltip
+- Added visual feedback on bubble hover
+- Improved tooltip content layout
+- Enhanced tooltip styling with shadow and border
+
+### Technical Details
+- Implemented D3 HTML tooltip
+- Added mouse position tracking for tooltip
+- Enhanced bubble interactivity
+- Added proper tooltip cleanup on unmount
+
+## [2023-12-20] - Bug Fixes and Improvements
+### Fixed
+- Updated cluster data fetching to use correct insights endpoint
+- Fixed React warning about non-boolean error attribute in file uploader
+- Improved error handling in cluster visualization
+
+### Changed
+- Refactored CustomFileUploader component to use inline styles
+- Updated API endpoint for cluster data retrieval
+- Improved error state handling in cluster visualization
+
+## [Latest]
+- Refined BubbleChart styling for a more subtle and elegant look
+  - Enhanced tooltip design with smoother transitions and improved typography
+  - More subtle hover effects and interactions
+  - Improved spacing and visual hierarchy
+  - Better color contrast and opacity balance
+- Implemented cluster data caching using session storage
+  - Added persistence between tab switches
+  - Improved loading performance for returning users
+  - Added error handling for storage operations
+  - Included lastUpdated timestamp tracking
+  - Added clearCache functionality
+- Updated ClusterInsights to use ClusterContext for data persistence
+  - Implemented caching between tab switches
+  - Added loading state management
+  - Improved error handling
+  - Optimized data fetching to prevent unnecessary API calls
+  - Added LoadingSpinner component integration
+- Improved clustering algorithm
+  - Enhanced embedding generation to use both title and description
+  - Added title weighting for better semantic understanding
+  - Adjusted cluster size determination to be more flexible
+  - Improved cluster quality with better silhouette score handling
+  - Fixed issue with small number of clusters

@@ -14,8 +14,14 @@ const UploaderWrapper = styled.div`
 `;
 
 const CustomFileUploader = ({ onFileChange, hasError }) => {
+  const uploaderStyles = {
+    border: hasError ? '2px solid #EF4444' : '1px solid #D4D4D4',
+    borderRadius: '0.5rem',
+    padding: '0.25rem'
+  };
+
   return (
-    <UploaderWrapper $hasError={hasError}>
+    <div style={uploaderStyles}>
       <FileUploader
         handleChange={onFileChange}
         name="file"
@@ -24,7 +30,7 @@ const CustomFileUploader = ({ onFileChange, hasError }) => {
         label="Drag and drop your file here or click to browse"
         hoverTitle="Drop here"
       />
-    </UploaderWrapper>
+    </div>
   );
 };
 

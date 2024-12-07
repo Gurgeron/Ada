@@ -31,3 +31,6 @@ yarn-error.log*
 # Database
 *.sqlite3
 *.db
+
+# Data files
+AdaBigCSV.csv

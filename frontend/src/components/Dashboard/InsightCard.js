@@ -2,7 +2,13 @@ import React from 'react';
 
 const InsightCard = ({ title, data, type }) => {
   const renderContent = () => {
-    if (!data) return <p className="text-[#B3B3B3]">No data available</p>;
+    if (!data || data.length === 0) {
+      return (
+        <div className="flex items-center justify-center h-32">
+          <p className="text-[#B3B3B3] text-sm">No data available</p>
+        </div>
+      );
+    }
 
     switch (type) {
       case 'list':
@@ -63,7 +69,11 @@ const InsightCard = ({ title, data, type }) => {
         );
 
       default:
-        return <p className="text-[#B3B3B3]">Invalid card type</p>;
+        return (
+          <div className="flex items-center justify-center h-32">
+            <p className="text-[#B3B3B3] text-sm">Invalid card type</p>
+          </div>
+        );
     }
   };
 

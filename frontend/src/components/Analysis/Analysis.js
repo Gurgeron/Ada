@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import FeatureTable from './FeatureTable';
 import AdaChat from '../Ada/AdaChat';
 import Dashboard from '../Dashboard/Dashboard';
+import ClusterInsights from './ClusterInsights';
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3002';
@@ -15,7 +16,7 @@ const Analysis = () => {
   const [columns, setColumns] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [activeTab, setActiveTab] = useState('dashboard'); // Changed default to 'dashboard'
+  const [activeTab, setActiveTab] = useState('dashboard');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -257,7 +258,7 @@ const Analysis = () => {
           </div>
           <p className="text-[#B3B3B3] mt-2">Your Feature Request Analysis Assistant</p>
           
-          {/* Tabs - Reordered */}
+          {/* Tabs */}
           <div className="flex space-x-6 mt-6">
             <button
               onClick={() => setActiveTab('dashboard')}
@@ -268,6 +269,16 @@ const Analysis = () => {
               }`}
             >
               Dashboard
+            </button>
+            <button
+              onClick={() => setActiveTab('clusters')}
+              className={`pb-3 px-1 font-medium transition-colors relative ${
+                activeTab === 'clusters'
+                  ? 'text-[#4c9085] border-b-2 border-[#4c9085]'
+                  : 'text-gray-500 hover:text-[#4c9085]'
+              }`}
+            >
+              Clusters
             </button>
             <button
               onClick={() => setActiveTab('table')}
@@ -290,6 +301,8 @@ const Analysis = () => {
           <div className="lg:col-span-2">
             {activeTab === 'dashboard' ? (
               <Dashboard contextId={contextId} />
+            ) : activeTab === 'clusters' ? (
+              <ClusterInsights contextId={contextId} />
             ) : (
               <FeatureTable data={featureData} columns={columns} />
             )}

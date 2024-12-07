@@ -2,16 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Chart as ChartJS } from 'chart.js/auto';
 import { Bar, Doughnut, Line } from 'react-chartjs-2';
+import ClusterInsights from './ClusterInsights';
+import InsightCard from '../Dashboard/InsightCard';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3002';
-
-const InsightCard = ({ title, value, subtitle, className = '' }) => (
-  <div className={`bg-white rounded-lg shadow-md p-6 ${className}`}>
-    <h3 className="text-lg font-semibold text-gray-700 mb-2">{title}</h3>
-    <p className="text-3xl font-bold text-[#4c9085] mb-1">{value}</p>
-    {subtitle && <p className="text-sm text-gray-500">{subtitle}</p>}
-  </div>
-);
 
 const Dashboard = ({ contextId }) => {
   const [insights, setInsights] = useState(null);
@@ -21,8 +15,10 @@ const Dashboard = ({ contextId }) => {
   useEffect(() => {
     const fetchInsights = async () => {
       try {
+        console.log('Fetching insights for context:', contextId);
         const response = await axios.get(`${API_URL}/api/insights/fetch-insights/${contextId}`);
-        setInsights(response.data.insights);
+        console.log('Received insights:', response.data);
+        setInsights(response.data);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching insights:', error);
@@ -66,7 +62,13 @@ const Dashboard = ({ contextId }) => {
     );
   }
 
-  const { summary, priorities, statuses, products, customer_types, trends } = insights;
+  console.log('Rendering insights:', {
+    mostCommon: insights.most_common_requests,
+    painPoints: insights.top_pain_points,
+    customers: insights.most_engaged_customers
+  });
+
+  const { summary, priorities, statuses, products, customer_types, trends, clusters } = insights;
 
   // Prepare chart data
   const priorityChartData = {
@@ -99,28 +101,28 @@ const Dashboard = ({ contextId }) => {
 
   return (
     <div className="p-6 space-y-6">
-      {/* Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Top Insights Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <InsightCard
-          title="Total Requests"
-          value={summary.total_requests}
-          subtitle="Feature requests tracked"
+          title="Most Common Requests"
+          data={insights.most_common_requests || []}
+          type="list"
         />
         <InsightCard
-          title="Completion Rate"
-          value={`${summary.completion_rate.toFixed(1)}%`}
-          subtitle="Requests completed"
+          title="Top Pain Points"
+          data={insights.top_pain_points || []}
+          type="percentage"
         />
         <InsightCard
-          title="Active Products"
-          value={Object.keys(products).length}
-          subtitle="Products with requests"
+          title="Most Engaged Customers"
+          data={insights.most_engaged_customers || []}
+          type="list"
         />
-        <InsightCard
-          title="Customer Segments"
-          value={Object.keys(customer_types).length}
-          subtitle="Unique customer types"
-        />
+      </div>
+
+      {/* Cluster Insights */}
+      <div className="bg-white rounded-lg shadow-md p-6">
+        <ClusterInsights clusters={insights.clusters || []} />
       </div>
 
       {/* Charts */}
