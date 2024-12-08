@@ -36,39 +36,61 @@ const KMeansPlot = ({ clusters, width = 800, height = 400 }) => {
 
     tooltipRef.current = tooltip;
 
-    // Prepare data points
+    // Prepare and validate data points
     const points = clusters.flatMap(cluster => 
-      cluster.features.map(feature => ({
-        ...feature,
-        cluster_id: cluster.id,
-        cluster_theme: cluster.theme,
-        coordinates: feature.coordinates || [0, 0] // Fallback if no coordinates
-      }))
+      cluster.features
+        .filter(feature => feature.coordinates && Array.isArray(feature.coordinates) && feature.coordinates.length === 2)
+        .map(feature => ({
+          ...feature,
+          cluster_id: cluster.id,
+          cluster_theme: cluster.theme,
+          x: feature.coordinates[0],
+          y: feature.coordinates[1]
+        }))
     );
 
-    // Color scale
+    if (points.length === 0) {
+      svg.append("text")
+        .attr("x", width / 2)
+        .attr("y", height / 2)
+        .attr("text-anchor", "middle")
+        .style("fill", "#666")
+        .text("No valid coordinate data available");
+      return;
+    }
+
+    // Color scale with more distinctive colors
     const colors = [
-      'rgba(76, 144, 133, 0.7)',
-      'rgba(61, 114, 105, 0.7)',
-      'rgba(43, 43, 43, 0.7)',
-      'rgba(179, 179, 179, 0.7)',
-      'rgba(212, 212, 212, 0.7)'
+      'rgba(76, 144, 133, 0.85)',    // Teal
+      'rgba(241, 90, 90, 0.85)',     // Coral Red
+      'rgba(124, 77, 255, 0.85)',    // Purple
+      'rgba(251, 177, 60, 0.85)',    // Orange
+      'rgba(52, 152, 219, 0.85)',    // Blue
+      'rgba(155, 89, 182, 0.85)',    // Violet
+      'rgba(46, 204, 113, 0.85)',    // Emerald
+      'rgba(230, 126, 34, 0.85)',    // Carrot Orange
+      'rgba(52, 73, 94, 0.85)',      // Wet Asphalt
+      'rgba(192, 57, 43, 0.85)',     // Pomegranate
     ];
 
     const colorScale = d3.scaleOrdinal()
       .domain(clusters.map(c => c.id))
       .range(colors);
 
-    // Create scales
-    const xExtent = d3.extent(points, d => d.coordinates[0]);
-    const yExtent = d3.extent(points, d => d.coordinates[1]);
+    // Create scales using 2D coordinates
+    const xExtent = d3.extent(points, d => d.x);
+    const yExtent = d3.extent(points, d => d.y);
+
+    // Add padding to the scales
+    const xPadding = (xExtent[1] - xExtent[0]) * 0.1;
+    const yPadding = (yExtent[1] - yExtent[0]) * 0.1;
 
     const xScale = d3.scaleLinear()
-      .domain([xExtent[0] - 1, xExtent[1] + 1])
+      .domain([xExtent[0] - xPadding, xExtent[1] + xPadding])
       .range([50, width - 50]);
 
     const yScale = d3.scaleLinear()
-      .domain([yExtent[0] - 1, yExtent[1] + 1])
+      .domain([yExtent[0] - yPadding, yExtent[1] + yPadding])
       .range([height - 50, 50]);
 
     // Add zoom behavior
@@ -83,22 +105,50 @@ const KMeansPlot = ({ clusters, width = 800, height = 400 }) => {
     // Create main group for zooming
     const g = svg.append("g");
 
-    // Add points
+    // Add grid lines
+    const xGrid = g.append("g")
+      .attr("class", "grid")
+      .attr("transform", `translate(0,${height - 40})`);
+    
+    const yGrid = g.append("g")
+      .attr("class", "grid")
+      .attr("transform", "translate(40,0)");
+
+    xGrid.call(d3.axisBottom(xScale)
+      .ticks(10)
+      .tickSize(-height + 90)
+      .tickFormat("")
+    ).style("stroke-opacity", 0.1);
+
+    yGrid.call(d3.axisLeft(yScale)
+      .ticks(10)
+      .tickSize(-width + 90)
+      .tickFormat("")
+    ).style("stroke-opacity", 0.1);
+
+    // Add points with transition
     g.selectAll("circle.point")
       .data(points)
-      .join("circle")
-      .attr("class", "point")
-      .attr("cx", d => xScale(d.coordinates[0]))
-      .attr("cy", d => yScale(d.coordinates[1]))
-      .attr("r", 5)
-      .style("fill", d => colorScale(d.cluster_id))
-      .style("stroke", d => d3.color(colorScale(d.cluster_id)).darker())
-      .style("stroke-width", 1)
-      .style("cursor", "pointer")
+      .join(
+        enter => enter.append("circle")
+          .attr("class", "point")
+          .attr("cx", d => xScale(d.x))
+          .attr("cy", d => yScale(d.y))
+          .attr("r", 0)
+          .style("fill", d => colorScale(d.cluster_id))
+          .style("stroke", d => d3.color(colorScale(d.cluster_id)).darker(0.5))
+          .style("stroke-width", 1.5)
+          .style("cursor", "pointer")
+          .call(enter => enter.transition()
+            .duration(800)
+            .attr("r", 6)
+          )
+      )
       .on("mouseover", (event, d) => {
         const point = d3.select(event.currentTarget);
-        point.attr("r", 7)
-            .style("stroke-width", 2);
+        point.attr("r", 8)
+            .style("stroke-width", 2.5)
+            .style("filter", "brightness(1.1)");
 
         tooltip.html(`
           <div style="color: #2B2B2B; font-weight: 500; margin-bottom: 6px;">
@@ -109,6 +159,9 @@ const KMeansPlot = ({ clusters, width = 800, height = 400 }) => {
           </div>
           <div style="color: #4c9085; margin-top: 4px;">
             Cluster: ${d.cluster_theme}
+          </div>
+          <div style="color: #666; margin-top: 2px;">
+            Priority: ${d.feature['Priority']}
           </div>
         `)
         .style("visibility", "visible")
@@ -123,27 +176,45 @@ const KMeansPlot = ({ clusters, width = 800, height = 400 }) => {
       })
       .on("mouseout", (event) => {
         const point = d3.select(event.currentTarget);
-        point.attr("r", 5)
-            .style("stroke-width", 1);
+        point.attr("r", 6)
+            .style("stroke-width", 1.5)
+            .style("filter", "none");
 
         tooltip
           .style("opacity", "0")
           .style("visibility", "hidden");
       });
 
-    // Add cluster centroids
+    // Filter clusters with valid centroids
+    const validClusters = clusters.filter(cluster => 
+      cluster.centroid && Array.isArray(cluster.centroid) && cluster.centroid.length === 2
+    );
+
+    // Add cluster centroids with transition
     g.selectAll("circle.centroid")
-      .data(clusters)
-      .join("circle")
-      .attr("class", "centroid")
-      .attr("cx", d => xScale(d.centroid[0]))
-      .attr("cy", d => yScale(d.centroid[1]))
-      .attr("r", 8)
-      .style("fill", d => colorScale(d.id))
-      .style("stroke", "white")
-      .style("stroke-width", 2)
-      .style("cursor", "pointer")
+      .data(validClusters)
+      .join(
+        enter => enter.append("circle")
+          .attr("class", "centroid")
+          .attr("cx", d => xScale(d.centroid[0]))
+          .attr("cy", d => yScale(d.centroid[1]))
+          .attr("r", 0)
+          .style("fill", d => colorScale(d.id))
+          .style("stroke", "white")
+          .style("stroke-width", 3)
+          .style("filter", "drop-shadow(0 2px 3px rgba(0,0,0,0.2))")
+          .style("cursor", "pointer")
+          .call(enter => enter.transition()
+            .duration(800)
+            .attr("r", 10)
+          )
+      )
       .on("mouseover", (event, d) => {
+        const centroid = d3.select(event.currentTarget);
+        centroid.attr("r", 12)
+               .style("stroke-width", 4)
+               .style("filter", "drop-shadow(0 3px 5px rgba(0,0,0,0.3))");
+
         tooltip.html(`
           <div style="color: #2B2B2B; font-weight: 500; margin-bottom: 6px;">
             ${d.theme}
@@ -153,6 +224,9 @@ const KMeansPlot = ({ clusters, width = 800, height = 400 }) => {
           </div>
           <div style="color: #4c9085; margin-top: 4px;">
             ${d.size} features
+          </div>
+          <div style="color: #666; margin-top: 2px;">
+            ${Math.round(d.metadata?.high_priority_percentage || 0)}% High Priority
           </div>
         `)
         .style("visibility", "visible")
@@ -165,23 +239,40 @@ const KMeansPlot = ({ clusters, width = 800, height = 400 }) => {
           .style("left", (event.pageX + 10) + "px")
           .style("top", (event.pageY - 10) + "px");
       })
-      .on("mouseout", () => {
+      .on("mouseout", (event) => {
+        const centroid = d3.select(event.currentTarget);
+        centroid.attr("r", 10)
+               .style("stroke-width", 3)
+               .style("filter", "drop-shadow(0 2px 3px rgba(0,0,0,0.2))");
+
         tooltip
           .style("opacity", "0")
           .style("visibility", "hidden");
       });
 
-    // Add axes
-    const xAxis = d3.axisBottom(xScale);
-    const yAxis = d3.axisLeft(yScale);
+    // Add legend
+    const legend = svg.append("g")
+      .attr("class", "legend")
+      .attr("transform", `translate(${width - 160}, 20)`);
 
-    svg.append("g")
-      .attr("transform", `translate(0,${height - 40})`)
-      .call(xAxis);
+    clusters.forEach((cluster, i) => {
+      const legendItem = legend.append("g")
+        .attr("transform", `translate(0, ${i * 28})`);  // Increased spacing
 
-    svg.append("g")
-      .attr("transform", "translate(40,0)")
-      .call(yAxis);
+      legendItem.append("circle")
+        .attr("r", 7)  // Slightly larger legend dots
+        .attr("fill", colorScale(cluster.id))
+        .style("stroke", d3.color(colorScale(cluster.id)).darker(0.5))
+        .style("stroke-width", 1.5);
+
+      legendItem.append("text")
+        .attr("x", 18)
+        .attr("y", 4)
+        .style("font-size", "13px")  // Slightly larger text
+        .style("font-weight", "500")
+        .style("fill", "#444")
+        .text(`${cluster.theme.substring(0, 15)}${cluster.theme.length > 15 ? '...' : ''}`);
+    });
 
     // Cleanup
     return () => {
@@ -190,9 +281,9 @@ const KMeansPlot = ({ clusters, width = 800, height = 400 }) => {
   }, [clusters, width, height]);
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
+    <div className="bg-white rounded-lg p-6">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-xl font-semibold text-[#3D7269]">K-means Clustering Visualization</h3>
+        <h3 className="text-xl font-semibold text-[#3D7269]">Feature Request Distribution</h3>
         <div className="text-sm text-gray-500">
           Hover over points to see details
         </div>
