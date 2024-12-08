@@ -223,47 +223,68 @@ const ClusterInsights = ({ contextId }) => {
             key={`cluster-${index}`} 
             className="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-200"
           >
-            <div className="flex justify-between items-start mb-4">
-              <div>
-                <h3 className="text-xl font-semibold text-gray-800">{cluster.theme}</h3>
-                <p className="text-sm text-gray-600 mt-1">
-                  {cluster.size} feature requests
-                </p>
-              </div>
-              {cluster.metadata && (
-                <div className="bg-[#4c9085] text-white px-3 py-1 rounded-full text-sm">
-                  {Math.round(cluster.metadata.high_priority_percentage || 0)}% High Priority
+            {/* Cluster Header - Clickable */}
+            <div 
+              onClick={() => toggleCluster(cluster.id)}
+              className="p-4 cursor-pointer hover:bg-gray-50 transition-colors"
+            >
+              <div className="flex justify-between items-center">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-xl font-semibold text-gray-800">{cluster.theme}</h3>
+                    <svg 
+                      className={`w-5 h-5 text-gray-500 transform transition-transform ${expandedClusters[cluster.id] ? 'rotate-180' : ''}`} 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                  <p className="text-sm text-gray-600 mt-1">
+                    {cluster.size} feature requests
+                  </p>
                 </div>
-              )}
+                {cluster.metadata && (
+                  <div className="bg-[#4c9085] text-white px-3 py-1 rounded-full text-sm">
+                    {Math.round(cluster.metadata.high_priority_percentage || 0)}% High Priority
+                  </div>
+                )}
+              </div>
             </div>
 
-            {/* Feature List */}
-            <div className="mt-6">
-              <h4 className="text-md font-semibold text-gray-700 mb-3">Features in this cluster:</h4>
-              <div className="space-y-4">
-                {cluster.features && cluster.features.map((feature, featureIndex) => (
-                  <div 
-                    key={`feature-${index}-${featureIndex}`} 
-                    className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200"
-                  >
-                    <h5 className="font-medium text-[#4c9085]">
-                      {feature.feature['Feature Title']}
-                    </h5>
-                    <p className="text-sm text-gray-600 mt-2">
-                      {feature.feature['Description']}
-                    </p>
-                    <div className="flex gap-2 mt-3">
-                      <span className={`px-2 py-1 rounded-full text-xs ${
-                        getPriorityColor(feature.feature['Priority'])
-                      }`}>
-                        {feature.feature['Priority']}
-                      </span>
-                      <span className="px-2 py-1 bg-gray-200 text-gray-700 text-xs rounded-full">
-                        {feature.feature['Customer Type']}
-                      </span>
+            {/* Expandable Feature List */}
+            <div 
+              className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                expandedClusters[cluster.id] ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
+              }`}
+            >
+              <div className="p-4 border-t border-gray-100">
+                <div className="space-y-4">
+                  {cluster.features && cluster.features.map((feature, featureIndex) => (
+                    <div 
+                      key={`feature-${index}-${featureIndex}`} 
+                      className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                    >
+                      <h5 className="font-medium text-[#4c9085]">
+                        {feature.feature['Feature Title']}
+                      </h5>
+                      <p className="text-sm text-gray-600 mt-2">
+                        {feature.feature['Description']}
+                      </p>
+                      <div className="flex gap-2 mt-3">
+                        <span className={`px-2 py-1 rounded-full text-xs ${
+                          getPriorityColor(feature.feature['Priority'])
+                        }`}>
+                          {feature.feature['Priority']}
+                        </span>
+                        <span className="px-2 py-1 bg-gray-200 text-gray-700 text-xs rounded-full">
+                          {feature.feature['Customer Type']}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>

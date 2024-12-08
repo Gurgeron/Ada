@@ -284,3 +284,9 @@
   - Enhanced stroke and highlight effects
   - Improved color contrast and visibility
   - Added darker stroke variations for depth
+- Made cluster list expandable:
+  - Added collapsible sections for each cluster
+  - Implemented smooth expand/collapse animations
+  - Added dropdown arrow indicators
+  - Improved cluster header styling
+  - Enhanced interaction feedback
