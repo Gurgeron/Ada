@@ -237,3 +237,50 @@
   - Adjusted cluster size determination to be more flexible
   - Improved cluster quality with better silhouette score handling
   - Fixed issue with small number of clusters
+- Improved clustering algorithm to create more meaningful groups:
+  - Adjusted distance threshold calculation to be more lenient
+  - Changed clustering method from ward to average linkage
+  - Switched to cosine similarity for better text comparison
+  - Added minimum threshold to prevent too many small clusters
+- Adjusted clustering algorithm to create broader, more general groups:
+  - Increased distance threshold multiplier for more inclusive clusters
+  - Raised minimum threshold percentile to ensure fewer clusters
+  - Added maximum clusters constraint for consistency
+  - Enhanced fallback threshold for more stable grouping
+- Further generalized clustering algorithm to create fewer, broader groups:
+  - Reduced maximum number of clusters from 10 to 7
+  - Increased distance threshold multiplier to 2.5 for even more inclusive clusters
+  - Raised minimum threshold to 85th percentile
+  - Added minimum cluster size requirement (at least 10% of total points)
+  - Enhanced fallback threshold to 90th percentile for maximum stability
+- Enhanced Dendrogram visualization:
+  - Fixed text overflow issues with truncation
+  - Added tooltips to show full text on hover
+  - Increased right margin for better text display
+  - Adjusted layout sizing for better readability
+  - Added overflow control to container
+- Enhanced dendrogram visualization readability:
+  - Increased font sizes throughout (14-17px)
+  - Added font weight distinctions for hierarchy
+  - Enlarged node circles and hover states
+  - Improved text truncation with longer limits
+  - Added distinct colors for main clusters
+  - Fixed text overflow issues with proper margins
+- Centered dendrogram visualization:
+  - Balanced left and right margins
+  - Added container centering styles
+  - Adjusted layout sizing for better balance
+  - Improved SVG positioning
+  - Added flex centering to container
+- Expanded dendrogram visualization size:
+  - Reduced margins for more usable space
+  - Increased visualization width to 85% of container
+  - Increased container height to 450px
+  - Adjusted centering offset for better balance
+  - Optimized spacing for larger visualization
+- Synchronized visualization color schemes:
+  - Updated bubble chart colors to match dendrogram
+  - Implemented consistent color mapping by theme
+  - Enhanced stroke and highlight effects
+  - Improved color contrast and visibility
+  - Added darker stroke variations for depth

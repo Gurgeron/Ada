@@ -38,21 +38,30 @@ const BubbleChart = ({ clusters }) => {
       .style("opacity", "0")
       .style("z-index", "1000");
 
-    // Color scales
+    // Color scales with matching dendrogram colors
     const colors = [
-      'rgba(76, 144, 133, 0.7)',  // Primary teal
-      'rgba(61, 114, 105, 0.7)',  // Darker teal
-      'rgba(43, 43, 43, 0.7)',    // Dark gray
-      'rgba(179, 179, 179, 0.7)', // Light gray
-      'rgba(212, 212, 212, 0.7)'  // Lighter gray
+      '#4c9085',  // Teal
+      '#F15A5A',  // Coral Red
+      '#7C4DFF',  // Purple
+      '#FBB13C',  // Orange
+      '#3498DB',  // Blue
+      '#9B59B6',  // Violet
+      '#2ECC71',  // Emerald
+      '#E67E22',  // Carrot Orange
+      '#34495E',  // Wet Asphalt
+      '#C0392B',  // Pomegranate
     ];
+
+    const colorScale = d3.scaleOrdinal()
+      .domain(clusters.map(c => c.theme))
+      .range(colors);
 
     // Create nodes for force simulation
     const nodes = clusters.map((cluster, index) => ({
       id: index,
       r: Math.sqrt((cluster.size / Math.max(...clusters.map(c => c.size))) * 5000),
       cluster,
-      color: colors[index % colors.length]
+      color: colorScale(cluster.theme)
     }));
 
     // Create force simulation
@@ -78,8 +87,8 @@ const BubbleChart = ({ clusters }) => {
     node.append("circle")
       .attr("r", d => d.r)
       .style("fill", d => d.color)
-      .style("stroke", d => d.color.replace("0.7", "1"))
-      .style("stroke-width", 1)
+      .style("stroke", d => d3.color(d.color).darker(0.2))
+      .style("stroke-width", 1.5)
       .style("cursor", "pointer")
       .style("transition", "all 0.2s ease-in-out")
       .on("mouseover", function(event, d) {
@@ -103,7 +112,7 @@ const BubbleChart = ({ clusters }) => {
         d3.select(this)
           .style("stroke-opacity", "0.8")
           .style("stroke", "#2B2B2B")
-          .style("stroke-width", "1.5");
+          .style("stroke-width", "2");
       })
       .on("mousemove", function(event) {
         tooltip
@@ -118,7 +127,7 @@ const BubbleChart = ({ clusters }) => {
         // Remove highlight
         d3.select(this)
           .style("stroke-opacity", "1")
-          .style("stroke", d => d.color.replace("0.7", "1"))
+          .style("stroke", d => d.color)
           .style("stroke-width", "1");
       });
 
