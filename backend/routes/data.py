@@ -41,9 +41,9 @@ def upload_file():
 
         # Process file
         print("⚙️ Processing file...")
-        processed_data, file_type = FileProcessor.process_file(file)
-        print(f"✅ File processed successfully. Type: {file_type}")
-        print(f"📊 Processed {len(processed_data)} records")
+        result = FileProcessor.process_file(file)
+        print(f"✅ File processed successfully. Type: {result['file_type']}")
+        print(f"📊 Processed {len(result['processed_data'])} records")
 
         # Save to database
         print("💾 Saving to database...")
@@ -52,8 +52,9 @@ def upload_file():
             feature_request = FeatureRequestData(
                 context_id=int(context_id),
                 original_filename=secure_filename(file.filename),
-                processed_data=processed_data,
-                file_type=file_type
+                raw_data=result['raw_data'],
+                processed_data=result['processed_data'],
+                file_type=result['file_type']
             )
             
             db.add(feature_request)

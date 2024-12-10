@@ -37,6 +37,7 @@ const AdaChat = ({ contextId }) => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showPrompts, setShowPrompts] = useState(true);
+  const [useRawData, setUseRawData] = useState(false);
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -58,7 +59,8 @@ const AdaChat = ({ contextId }) => {
     try {
       const response = await axios.post(`${API_URL}/api/ada/chat`, {
         query: text,
-        context_id: contextId
+        context_id: contextId,
+        use_raw_data: useRawData
       });
 
       setMessages(prev => [...prev, { role: 'assistant', content: response.data.response }]);
@@ -85,9 +87,22 @@ const AdaChat = ({ contextId }) => {
   return (
     <div className="flex flex-col h-[calc(100vh-2rem)] max-h-[800px] bg-white rounded-lg shadow-lg mx-4 my-2">
       {/* Header */}
-      <div className="flex items-center p-4 border-b">
+      <div className="flex items-center justify-between p-4 border-b">
         <div>
           <h2 className="text-xl font-semibold text-[#4c9085]">Ada</h2>
+        </div>
+        <div className="flex items-center space-x-2">
+          <span className="text-sm text-gray-500">Data Mode:</span>
+          <button
+            onClick={() => setUseRawData(!useRawData)}
+            className={`px-3 py-1 text-xs rounded-full transition-colors ${
+              useRawData
+                ? 'bg-[#4c9085] text-white'
+                : 'bg-gray-100 text-gray-600'
+            }`}
+          >
+            {useRawData ? 'Raw' : 'Processed'}
+          </button>
         </div>
       </div>
 
@@ -119,7 +134,7 @@ const AdaChat = ({ contextId }) => {
             </div>
           </div>
         )}
-        
+
         {messages.map((message, index) => (
           <div
             key={index}

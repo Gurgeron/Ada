@@ -5,6 +5,7 @@ from database import get_db
 from models.wizard import ProductContext
 from models.data import FeatureRequestData
 import json
+import traceback
 
 ada_bp = Blueprint('ada', __name__)
 
@@ -98,6 +99,7 @@ def chat():
         data = request.get_json()
         query = data.get('query')
         context_id = data.get('context_id')
+        use_raw_data = data.get('use_raw_data', False)  # Toggle flag
 
         if not query or not context_id:
             return jsonify({'error': 'Missing query or context_id'}), 400
@@ -123,24 +125,29 @@ def chat():
             'personas': context.user_personas
         }
 
-        # Format feature data as a readable string
+        # Format feature data based on toggle
         try:
-            if isinstance(feature_data.processed_data, str):
-                processed_data = json.loads(feature_data.processed_data)
+            if use_raw_data and feature_data.raw_data:
+                print("Using raw CSV data for Ada")
+                feature_data_str = f"Raw Feature Requests Data (CSV):\n{feature_data.raw_data}"
             else:
-                processed_data = feature_data.processed_data
+                print("Using processed data for Ada")
+                if isinstance(feature_data.processed_data, str):
+                    processed_data = json.loads(feature_data.processed_data)
+                else:
+                    processed_data = feature_data.processed_data
 
-            feature_data_str = "Feature Requests:\n"
-            for idx, item in enumerate(processed_data, 1):
-                feature_data_str += f"\n{idx}. {item.get('Feature Title', 'Untitled')}:\n"
-                feature_data_str += f"   Description: {item.get('Description', 'No description')}\n"
-                feature_data_str += f"   Priority: {item.get('Priority', 'Not set')}\n"
-                feature_data_str += f"   Status: {item.get('Status', 'Not set')}\n"
-                feature_data_str += f"   Type: {item.get('Type', 'Not set')}\n"
+                feature_data_str = "Feature Requests:\n"
+                for idx, item in enumerate(processed_data, 1):
+                    feature_data_str += f"\n{idx}. {item.get('Feature Title', 'Untitled')}:\n"
+                    # Include all available fields
+                    for key, value in item.items():
+                        feature_data_str += f"   {key}: {value}\n"
                 
         except Exception as e:
             print(f"Error formatting feature data: {str(e)}")
-            feature_data_str = str(feature_data.processed_data)
+            print(f"Traceback: {traceback.format_exc()}")
+            return jsonify({'error': f'Error formatting data: {str(e)}'}), 500
 
         # Create the conversation with context
         conversation = [
@@ -172,7 +179,8 @@ def chat():
                 answer = response.choices[0].message.content
                 return jsonify({
                     'response': answer,
-                    'context': context_info
+                    'context': context_info,
+                    'data_format': 'raw' if use_raw_data else 'processed'
                 })
             else:
                 print("Invalid OpenAI response structure:", response)
@@ -183,8 +191,7 @@ def chat():
 
         except Exception as e:
             print(f"OpenAI API Error: {str(e)}")
-            import traceback
-            traceback.print_exc()
+            print(f"Traceback: {traceback.format_exc()}")
             return jsonify({
                 'error': 'Unable to process request with OpenAI',
                 'details': str(e)
@@ -192,8 +199,7 @@ def chat():
 
     except Exception as e:
         print(f"General Error: {str(e)}")
-        import traceback
-        traceback.print_exc()
+        print(f"Traceback: {traceback.format_exc()}")
         return jsonify({'error': str(e)}), 500
 
 # Add error handling middleware

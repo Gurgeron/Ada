@@ -48,16 +48,33 @@ class FileProcessor:
             return False, f"Error validating file: {str(e)}"
 
     @staticmethod
-    def process_file(file) -> Tuple[List[Dict[str, Any]], str]:
+    def get_raw_data(file) -> str:
+        """Get raw content of the file"""
+        try:
+            file.seek(0)
+            content = file.read()
+            if isinstance(content, bytes):
+                content = content.decode('utf-8')
+            return content
+        except Exception as e:
+            print(f"Error reading raw file: {str(e)}")
+            print(traceback.format_exc())
+            raise FileValidationError(f"Error reading raw file: {str(e)}")
+
+    @staticmethod
+    def process_file(file) -> Tuple[Dict[str, Any], str]:
         """Process and normalize the uploaded file"""
         try:
             filename = file.filename.lower()
             file_type = 'csv' if filename.endswith('.csv') else 'excel'
 
-            # Save the current position of the file pointer
+            # Get raw content first
+            raw_data = FileProcessor.get_raw_data(file)
+            
+            # Reset file pointer for processed data
             file.seek(0)
             
-            # Read file
+            # Read file for processing
             try:
                 if file_type == 'csv':
                     df = pd.read_csv(file)
@@ -75,7 +92,11 @@ class FileProcessor:
             processed_data = df.to_dict('records')
             print(f"Processed {len(processed_data)} records")
 
-            return processed_data, file_type
+            return {
+                'raw_data': raw_data,
+                'processed_data': processed_data,
+                'file_type': file_type
+            }
 
         except Exception as e:
             print(f"Processing error: {str(e)}")

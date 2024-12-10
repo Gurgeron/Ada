@@ -46,6 +46,11 @@
   - Integrated OpenAI TTS for audio generation
   - Added script display functionality
   - Moved PodcastCard to top of dashboard for better visibility
+- Data mode toggle in Ada chat interface
+  - Users can now switch between raw and processed data views
+  - Toggle button added to Ada's header
+  - Visual feedback shows current mode (Raw/Processed)
+  - Default mode is "Processed" for backward compatibility
 
 ### Technical Details
 - Frontend:
