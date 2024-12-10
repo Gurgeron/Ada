@@ -5,11 +5,35 @@ from models.data import FeatureRequestData
 from services.ai_analysis import FeatureAnalyzer
 import traceback
 import json
+from functools import lru_cache
 
 insights_bp = Blueprint('insights', __name__)
 
 # Initialize the feature analyzer
 feature_analyzer = FeatureAnalyzer()
+
+# Cache for insights with TTL of 1 hour
+insights_cache = {}
+
+def get_cached_insights(context_id, processed_data):
+    """Get insights from cache or generate new ones"""
+    cache_key = f"{context_id}_{hash(str(processed_data))}"
+    
+    # Check if we have valid cached insights
+    if cache_key in insights_cache:
+        cached_time, cached_insights = insights_cache[cache_key]
+        # Cache valid for 1 hour
+        if (datetime.utcnow() - cached_time).total_seconds() < 3600:
+            print("Using cached insights")
+            return cached_insights
+    
+    # Generate new insights
+    print("Generating new insights")
+    insights = feature_analyzer.analyze_features(processed_data)
+    
+    # Cache the results
+    insights_cache[cache_key] = (datetime.utcnow(), insights)
+    return insights
 
 @insights_bp.route('/fetch-insights/<context_id>')
 def fetch_insights(context_id):
@@ -32,7 +56,6 @@ def fetch_insights(context_id):
             }), 200
         
         print(f"Found data record created at: {feature_requests.created_at}")
-        print(f"Number of features: {len(feature_requests.processed_data)}")
         
         if not feature_requests.processed_data:
             print("Processed data is empty")
@@ -41,20 +64,37 @@ def fetch_insights(context_id):
                 'clusters': []
             }), 200
         
-        # Use AI-powered analyzer to process the data
-        print("Starting feature analysis...")
-        insights = feature_analyzer.analyze_features(feature_requests.processed_data)
-        print("Feature analysis complete")
-        
-        # Log the insights structure
-        print("\n=== Insights Structure ===")
-        print("Keys in response:", list(insights.keys()))
-        print("Number of clusters:", len(insights.get('clusters', [])))
-        print("Sample cluster data:", json.dumps(insights.get('clusters', [])[0] if insights.get('clusters') else {}, indent=2))
-        print("=== End Insights Structure ===\n")
-        
-        return jsonify(insights)
-        
+        try:
+            # Get insights from cache or generate new ones
+            insights = get_cached_insights(context_id, feature_requests.processed_data)
+            
+            if not insights or not isinstance(insights, dict):
+                print("Invalid insights format")
+                return jsonify({
+                    'error': 'Invalid insights format',
+                    'clusters': []
+                }), 200
+            
+            # Log the insights structure
+            print("\n=== Insights Structure ===")
+            print("Keys in response:", list(insights.keys()))
+            clusters = insights.get('clusters', [])
+            print("Number of clusters:", len(clusters))
+            if clusters:
+                print("Sample cluster data:", json.dumps(clusters[0] if clusters else {}, indent=2))
+            print("=== End Insights Structure ===\n")
+            
+            return jsonify(insights)
+            
+        except Exception as analysis_error:
+            print(f"Error analyzing data: {str(analysis_error)}")
+            print(f"Traceback: {traceback.format_exc()}")
+            return jsonify({
+                'error': 'Error analyzing data',
+                'details': str(analysis_error),
+                'clusters': []
+            }), 200
+            
     except Exception as e:
         print(f"Error processing insights: {str(e)}")
         print(f"Traceback: {traceback.format_exc()}")

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import { useClusterContext } from '../../context/ClusterContext';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3002';
 
@@ -39,6 +40,7 @@ const AdaChat = ({ contextId }) => {
   const [showPrompts, setShowPrompts] = useState(true);
   const [useRawData, setUseRawData] = useState(false);
   const messagesEndRef = useRef(null);
+  const { clusterData, isLoading: isClustersLoading, lastUpdated } = useClusterContext();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -60,7 +62,8 @@ const AdaChat = ({ contextId }) => {
       const response = await axios.post(`${API_URL}/api/ada/chat`, {
         query: text,
         context_id: contextId,
-        use_raw_data: useRawData
+        use_raw_data: useRawData,
+        clusters_ready: clusterData && clusterData.length > 0 && lastUpdated
       });
 
       setMessages(prev => [...prev, { role: 'assistant', content: response.data.response }]);
@@ -90,6 +93,13 @@ const AdaChat = ({ contextId }) => {
       <div className="flex items-center justify-between p-4 border-b">
         <div>
           <h2 className="text-xl font-semibold text-[#4c9085]">Ada</h2>
+          {isClustersLoading ? (
+            <p className="text-xs text-gray-500 mt-1">Analyzing clusters...</p>
+          ) : lastUpdated ? (
+            <p className="text-xs text-gray-500 mt-1">
+              Clusters ready ({new Date(lastUpdated).toLocaleTimeString()})
+            </p>
+          ) : null}
         </div>
         <div className="flex items-center space-x-2">
           <span className="text-sm text-gray-500">Data Mode:</span>

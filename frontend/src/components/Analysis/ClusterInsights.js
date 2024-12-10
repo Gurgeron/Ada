@@ -56,7 +56,8 @@ const ClusterInsights = ({ contextId }) => {
     setClusterData, 
     setIsLoading, 
     setError,
-    clearCache 
+    clearCache,
+    lastUpdated 
   } = useClusterContext();
 
   const [expandedClusters, setExpandedClusters] = useState({});
@@ -107,8 +108,8 @@ const ClusterInsights = ({ contextId }) => {
     let isMounted = true;
 
     const loadClusters = async () => {
-      if (contextId) {
-        clearCache();
+      // Only fetch if we don't have data or if it's stale
+      if (contextId && (!clusterData || !lastUpdated)) {
         if (isMounted) {
           await fetchClusters();
         }
@@ -120,7 +121,7 @@ const ClusterInsights = ({ contextId }) => {
     return () => {
       isMounted = false;
     };
-  }, [contextId]);
+  }, [contextId, clusterData, lastUpdated]);
 
   const handleRefresh = () => {
     clearCache();
@@ -175,7 +176,14 @@ const ClusterInsights = ({ contextId }) => {
   return (
     <div className="p-6 space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-semibold text-[#3D7269]">Cluster Analysis</h2>
+        <div>
+          <h2 className="text-2xl font-semibold text-[#3D7269]">Cluster Analysis</h2>
+          {lastUpdated && (
+            <p className="text-sm text-gray-500">
+              Last updated: {new Date(lastUpdated).toLocaleTimeString()}
+            </p>
+          )}
+        </div>
         <button 
           onClick={handleRefresh}
           className="px-4 py-2 bg-[#4c9085] text-white rounded-md hover:bg-[#3d7269] transition-colors"
