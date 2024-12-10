@@ -31,6 +31,11 @@ yarn-error.log*
 # Database
 *.sqlite3
 *.db
+backend/feature_insights.db
+
+# Generated files
+backend/static/audio/*.mp3
+backend/temp_uploads/
 
 # Data files
 AdaBigCSV.csv
